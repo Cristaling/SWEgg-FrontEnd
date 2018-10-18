@@ -1,0 +1,14 @@
+<div id="sidebar">
+    <div class="app-user">
+        <img src="../../../../assets/images/user-default-image.jpeg" style="" class="app-user-photo">
+        <span class="app-user-name mb5">
+            Firstname Lastname
+        </span>
+    </div>
+    <mat-nav-list>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/dashboard']">
+            <mat-icon class="sidenav-icon">dashboard</mat-icon>
+            {{ 'Dashboard' | translate }}
+        </a>
+    </mat-nav-list>
+</div>

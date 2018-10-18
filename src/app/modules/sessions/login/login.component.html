@@ -1,0 +1,47 @@
+<div class="login-page">
+    <div class="content">
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <div class="text-center">
+                <h2 class="">LOGIN</h2>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Email" formControlName="username">
+                    </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="loginForm.controls['username'].touched && !loginForm.controls['username'].valid">Email
+                        is required !
+                    </small>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput type="password" placeholder="Password" formControlName="password">
+                    </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid">
+                        Password is required !
+                    </small>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column" style="margin: 20px 0 30px 0">
+                <div fxFlex>
+                    <mat-checkbox color="primary">Remember Me</mat-checkbox>
+                </div>
+                <div fxFlex fxLayoutAlign="end">
+                    <a style="cursor: pointer">Forgot Password</a>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <button type="submit" mat-raised-button color="primary" class="w-100" [disabled]="!loginForm.valid">
+                        Login
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
