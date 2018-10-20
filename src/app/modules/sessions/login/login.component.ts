@@ -14,7 +14,7 @@ import {takeUntil} from 'rxjs/internal/operators';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-    private navigateToOtherComponent: Subject<any>;  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
 
     loginForm: FormGroup;
 
