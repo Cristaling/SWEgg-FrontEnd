@@ -6,6 +6,7 @@ import {AuthService} from '../../../core/authentication/auth.service';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/internal/operators';
+import {ProfileService} from '../../../shared/services/profile.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         private router: Router,
         private loginService: LoginService,
         private authService: AuthService,
-        private notificationService: NotificationsService
+        private notificationService: NotificationsService,
+        private profileService: ProfileService
     ) {
     }
 
@@ -47,7 +49,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         const values = this.loginForm.value;
         this.loginService.loginUserHttp(values.username, values.password).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.authService.setToken(response.token);
-            this.router.navigate(['/dashboard']);
+            this.profileService.getProfile(values.username).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(userResponse => {
+                this.authService.setCurrentUser(userResponse);
+                this.router.navigate(['/dashboard']);
+
+            });
         }, (error) => {
             if (error.status === 401) {
                 this.notificationService.showPopupMessage('User and password are incorrect !', 'OK');

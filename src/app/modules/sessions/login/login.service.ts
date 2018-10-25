@@ -15,11 +15,11 @@ export class LoginService implements OnInit {
 
     /**
      * Request to login
-     * @param {string} username
+     * @param email
      * @param {string} password
      * @returns {Observable<any>} 401 unauthorized if credentials are invalid, token if is valid
      */
-    loginUserHttp(username: string, password: string): Observable<any> {
-        return this.httpClient.post(urls.loginUserUrl, {username, password});
+    loginUserHttp(email: string, password: string): Observable<any> {
+        return this.httpClient.post(urls.loginUserUrl, {email, password});
     }
 }
