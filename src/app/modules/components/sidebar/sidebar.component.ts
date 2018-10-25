@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../core/authentication/auth.service';
+import {JsonUserData} from '../../../shared/models/JsonUserData';
 
 @Component({
     selector: 'app-sidebar',
@@ -7,11 +9,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
     showMenu: string = '';
+    currentUser: JsonUserData;
 
-    constructor() {
+    constructor(private authService: AuthService) {
     }
 
     ngOnInit() {
+        this.currentUser = this.authService.getCurrentUser();
     }
 
     addExpandClass(element: any) {

@@ -1,3 +1,4 @@
 export const urls = {
-    loginUserUrl: ['api', 'security', 'login'].join('/')
+    loginUserUrl: ['api', 'security', 'login'].join('/'),
+    getProfileUrl: ['api', 'user', 'profile'].join('/')
 };

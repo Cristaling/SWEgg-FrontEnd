@@ -1,18 +1,19 @@
-import { LayoutModule } from '@angular/cdk/layout';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {LayoutModule} from '@angular/cdk/layout';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {AuthService} from './core/authentication/auth.service';
 import {NotificationsService} from './shared/services/notifications.service';
-import {MatSnackBarModule} from '@angular/material';
 import {SharedModule} from './shared/shared.module';
+import {JwtInterceptor} from './core/interceptors/JwtInterceptor';
+import {ProfileService} from './shared/services/profile.service';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     // for development
@@ -42,7 +43,17 @@ export const createTranslateLoader = (http: HttpClient) => {
             }
         })
     ],
-    providers: [AuthService, NotificationsService],
+    providers: [
+        AuthService,
+        NotificationsService,
+        ProfileService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
