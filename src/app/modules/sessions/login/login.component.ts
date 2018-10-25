@@ -54,7 +54,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             }
         });
     }
-
+    onRegister(){
+        this.router.navigate(['/register']);
+    }
     ngOnDestroy() {
         this.navigateToOtherComponent.next();
         this.navigateToOtherComponent.complete();

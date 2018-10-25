@@ -1,0 +1,82 @@
+<div class="register-page">
+    <div class="content">
+        <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+            <div class="text-center">
+                <h2 class="">REGISTER</h2>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Email *" formControlName="email">
+                    </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['email'].touched && !registerForm.controls['email'].valid">Email
+                        is required !
+                    </small>
+                </div>
+            </div>
+
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput type="password" placeholder="Password *" formControlName="password">
+                    </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['password'].touched && !registerForm.controls['password'].valid">
+                        Password is required !
+                    </small>
+                </div>
+            </div>
+
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="First name *" formControlName="firstName">
+                    </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['firstName'].touched && !registerForm.controls['firstName'].valid">First name
+                        is required !
+                    </small>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Last name *" formControlName="lastName">
+                    </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['lastName'].touched && !registerForm.controls['lastName'].valid">Last name
+                        is required !
+                    </small>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <!--<mat-form-field class="w-100">-->
+                        <!--<input matInput="" type="date" placeholder="Birth day" formControlName="birthDate">-->
+                    <!--</mat-form-field>-->
+                    <mat-form-field class="w-100">
+                        <input matInput [matDatepicker]="picker"  formControlName="birthDate" placeholder="Choose a date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlexFill>
+                <mat-form-field class="w-100">
+                    <input matInput placeholder="Town" formControlName="town">
+                </mat-form-field>
+
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <button type="submit" mat-raised-button color="primary" class="w-100" [disabled]="!registerForm.valid">
+                        Register
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
