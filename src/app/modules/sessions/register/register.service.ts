@@ -23,6 +23,6 @@ export class RegisterService {
                 'town': town,
 
             };
-        return this.httpClient.post('http://localhost:8080/api/register', registerModel);
+        return this.httpClient.post(urls.registerUserUrl, registerModel);
     }
 }
