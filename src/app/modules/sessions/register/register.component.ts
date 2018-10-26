@@ -66,12 +66,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     onRegister() {
         const register = this.registerForm.value;
         this.registerService.registerUserHttp(register.email, register.password, register.firstName, register.lastName, register.birthDate, register.town).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+            this.notificationService.showPopupMessage('Your account was successfully created !', 'OK');
             this.router.navigate(['/login']);
         }, (error) => {
             if (error.status === 409) {
                 this.notificationService.showPopupMessage('Email already exists', 'FAIL');
             }
         });
+    }
+
+    backToLogin() {
+        this.router.navigate(['/login']);
     }
 
     ngOnDestroy() {

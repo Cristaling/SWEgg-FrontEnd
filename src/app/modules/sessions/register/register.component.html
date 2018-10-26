@@ -1,8 +1,11 @@
 <div class="register-page">
     <div class="content">
         <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
-            <div class="text-center">
-                <h2 class="">REGISTER</h2>
+            <div style="display: inline-block; width: 100%">
+                <span (click)="backToLogin()" style="cursor:pointer"><mat-icon>arrow_back</mat-icon></span>
+                <div class="text-center">
+                    <h2 class="">REGISTER</h2>
+                </div>
             </div>
             <div fxFlex fxLayout="row" fxLayout.lt-md="column">
                 <div fxFlexFill>

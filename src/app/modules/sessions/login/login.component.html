@@ -39,10 +39,10 @@
                     <button type="submit" mat-raised-button color="primary" class="w-100" [disabled]="!loginForm.valid">
                         Login
                     </button>
-                    <button  type="button" mat-raised-button color="default" class="w-100"  (click)="onRegister()">
-                        Register
-                    </button>
                 </div>
+            </div>
+            <div fxFlex fxLayoutAlign="center">
+                <small style="margin-top:30px;" (click)="onRegister()">Not registered ? <b style="color: #1d355b; cursor: pointer">Create an account</b></small>
             </div>
         </form>
     </div>
