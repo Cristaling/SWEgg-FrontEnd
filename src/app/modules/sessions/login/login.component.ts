@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from './login.service';
 import {AuthService} from '../../../core/authentication/auth.service';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/internal/operators';
 import {ProfileService} from '../../../shared/services/profile.service';
+import {takeUntil} from 'rxjs/operators';
 
 
 @Component({
@@ -24,11 +24,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         private loginService: LoginService,
         private authService: AuthService,
         private notificationService: NotificationsService,
-        private profileService: ProfileService
+        private profileService: ProfileService,
+        private activatedRoute: ActivatedRoute
     ) {
     }
 
     ngOnInit() {
+        this.authService.logout();
         this.initForms();
     }
 
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
      */
     initForms(): any {
         this.loginForm = new FormGroup({
-            username: new FormControl('', Validators.required),
+            username: new FormControl('', [Validators.required, Validators.email]),
             password: new FormControl('', Validators.required)
         });
     }
@@ -61,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
     }
     onRegister(){
-        this.router.navigate(['/register']);
+        this.router.navigate(['../register'], {relativeTo: this.activatedRoute});
     }
     ngOnDestroy() {
         this.navigateToOtherComponent.next();

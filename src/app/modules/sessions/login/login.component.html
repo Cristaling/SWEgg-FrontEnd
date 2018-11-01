@@ -10,8 +10,12 @@
                         <input matInput placeholder="Email" formControlName="username">
                     </mat-form-field>
                     <small class="alert-danger"
-                           *ngIf="loginForm.controls['username'].touched && !loginForm.controls['username'].valid">Email
+                           *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('required')">Email
                         is required !
+                    </small>
+                    <small class="alert-danger"
+                           *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('email')">Email
+                        is invalid !
                     </small>
                 </div>
             </div>

@@ -13,8 +13,12 @@
                         <input matInput placeholder="Email *" formControlName="email">
                     </mat-form-field>
                     <small class="alert-danger"
-                           *ngIf="registerForm.controls['email'].touched && !registerForm.controls['email'].valid">Email
+                           *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].hasError('required')">Email
                         is required !
+                    </small>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].hasError('email')">Email
+                        is invalid !
                     </small>
                 </div>
             </div>
@@ -27,6 +31,22 @@
                     <small class="alert-danger"
                            *ngIf="registerForm.controls['password'].touched && !registerForm.controls['password'].valid">
                         Password is required !
+                    </small>
+                </div>
+            </div>
+
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput type="password" placeholder="Confirm password *" formControlName="confirmPassword">
+                    </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['confirmPassword'].touched && !registerForm.controls['confirmPassword'].valid">
+                        Please confirm your password !
+                    </small>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.hasError('invalidConfirm')">
+                        Passwords do not match !
                     </small>
                 </div>
             </div>
@@ -63,6 +83,9 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
+                    <small class="alert-danger"
+                           *ngIf="registerForm.controls['birthDate'].touched && !registerForm.controls['birthDate'].valid">Date is invalid !
+                    </small>
                 </div>
             </div>
 

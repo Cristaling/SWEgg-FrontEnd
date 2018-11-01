@@ -33,7 +33,7 @@ export class TopnavComponent implements OnInit {
 
     onLoggedout() {
         this.authService.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/sessions/login']);
     }
 
     changeLang(language: string) {
