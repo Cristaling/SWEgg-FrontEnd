@@ -10,5 +10,10 @@
             <mat-icon class="sidenav-icon">dashboard</mat-icon>
             {{ 'Dashboard' | translate }}
         </a>
+
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/jobs']">
+            <mat-icon class="sidenav-icon">work</mat-icon>
+            Jobs
+        </a>
     </mat-nav-list>
 </div>
