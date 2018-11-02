@@ -1,5 +1,8 @@
+const baseEndpoint = 'api';
+
 export const urls = {
-    loginUserUrl: ['api', 'security', 'login'].join('/'),
-    getProfileUrl: ['api', 'user', 'profile'].join('/'),
-    registerUserUrl: ['api', 'register'].join('/')
+    loginUserUrl: [baseEndpoint, 'security', 'login'].join('/'),
+    getProfileUrl: [baseEndpoint, 'user', 'profile'].join('/'),
+    registerUserUrl: [baseEndpoint, 'register'].join('/'),
+    changePasswordUrl: [baseEndpoint, 'security', 'password'].join('/')
 };

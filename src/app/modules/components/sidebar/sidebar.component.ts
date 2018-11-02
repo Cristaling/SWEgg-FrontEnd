@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../core/authentication/auth.service';
 import {JsonUserData} from '../../../shared/models/JsonUserData';
+import {NotificationsService} from '../../../shared/services/notifications.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -11,11 +12,16 @@ export class SidebarComponent implements OnInit {
     showMenu: string = '';
     currentUser: JsonUserData;
 
-    constructor(private authService: AuthService) {
+    constructor(
+        private authService: AuthService,
+        private notificationService: NotificationsService) {
     }
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
+        this.notificationService.userDataChangedEvent.subscribe(data => {
+            this.currentUser = data;
+        });
     }
 
     addExpandClass(element: any) {
