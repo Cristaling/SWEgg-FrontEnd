@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {UserProfileComponent} from './user-profile.component';
 import {UserProfileRoutingModule} from './user-profile-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import {UserProfileService} from './user-profile.service';
 
 @NgModule({
     imports: [
@@ -10,7 +11,8 @@ import {SharedModule} from '../../shared/shared.module';
         SharedModule,
         UserProfileRoutingModule
     ],
-    declarations: [UserProfileComponent]
+    declarations: [UserProfileComponent],
+    providers: [UserProfileService]
 })
 export class UserProfileModule {
 }
