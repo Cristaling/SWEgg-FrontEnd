@@ -2,7 +2,7 @@ import {NotificationsService} from './services/notifications.service';
 import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
-    MatCardModule, MatDatepickerModule,
+    MatCardModule, MatDatepickerModule, MatDialogModule,
     MatDividerModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule,
     MatSidenavModule,
     MatSnackBarModule,
@@ -11,6 +11,7 @@ import {
     MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
     imports: [
@@ -30,7 +31,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatTooltipModule,
         MatSnackBarModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        FlexLayoutModule,
+        MatDialogModule
     ],
     exports: [
         MatSnackBarModule,
@@ -49,7 +52,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatTooltipModule,
         MatSnackBarModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        FlexLayoutModule,
+        MatDialogModule
     ],
     providers: [NotificationsService]
 })
