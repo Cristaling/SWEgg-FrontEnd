@@ -35,6 +35,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             jobDescription: new FormControl('', Validators.required),
             isPrivate: new FormControl(''),
         });
+        this.jobCreateForm.patchValue({'jobType': 'SINGLE'});
     }
 
 
@@ -59,7 +60,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             }
         }, (error) => {
             if (error.status === 401) {
-                this.notificationService.showPopupMessage('User and password are incorrect !', 'OK');
+                this.notificationService.showPopupMessage('An error occurred !', 'OK');
             }
         });
     }
