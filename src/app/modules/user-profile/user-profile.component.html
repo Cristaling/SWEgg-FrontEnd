@@ -61,10 +61,14 @@
                                     <input matInput placeholder="Email *" formControlName="email">
                                 </mat-form-field>
                             </div>
-                            <small class="text-danger"
-                                   *ngIf="profileForm.controls['email'].touched && !profileForm.controls['email'].valid">
-                                Email is invalid !
-                            </small>
+                        </div>
+
+                        <div class="" style="border-top: 1px dotted darkgrey;border-bottom: 1px dotted darkgrey;padding:10px;margin-bottom: 5px">
+                            <small style="color:grey">Profile picture</small><br><br>
+                            <input type="file" style="display: none" #fileInput (change)="onFileChanged($event)">
+                            <button mat-raised-button class="mat-primary" type="button" (click)="fileInput.click()" style="margin-bottom: 20px">Pick logo image</button>
+                            <img [src]="localUrl" *ngIf="localUrl && validSelectedFile;else imageNotSelected" alt="Please select an image" style="margin-left:10px;max-height: 50px">
+                            <ng-template #imageNotSelected>Please select a logo image !</ng-template>
                         </div>
 
                         <div fxFlex fxLayout="row" fxLayout.lt-md="column">

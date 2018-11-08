@@ -6,6 +6,7 @@ import {JsonUserData} from '../models/JsonUserData';
 @Injectable()
 export class NotificationsService {
     userDataChangedEvent: Subject<JsonUserData> = new Subject<JsonUserData>();
+    updateProfileImageEvent: Subject<any> = new Subject<any>();
 
     constructor(private snackBar: MatSnackBar) {
     }

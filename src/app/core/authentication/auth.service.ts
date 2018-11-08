@@ -15,6 +15,7 @@ export class AuthService {
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('current_user');
+        localStorage.removeItem('profile_image');
     }
 
     setCurrentUser(userResponse: JsonUserData) {
@@ -25,5 +26,13 @@ export class AuthService {
         const currentUserJson = localStorage.getItem('current_user');
         const currentUser = JSON.parse(currentUserJson);
         return currentUser;
+    }
+
+    saveProfilePicture(picture) {
+        localStorage.setItem('profile_image', 'data:image/png;base64,' + picture);
+    }
+
+    getProfilePicture() {
+        return localStorage.getItem('profile_image');
     }
 }

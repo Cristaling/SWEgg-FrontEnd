@@ -12,30 +12,23 @@ import {UserProfileService} from '../../user-profile/user-profile.service';
 export class SidebarComponent implements OnInit {
     showMenu: string = '';
     currentUser: JsonUserData;
-    profilePicture: any;
-    private readonly imageType: string = 'data:image/png;base64,';
+    profilePicture: string;
 
     constructor(
         private authService: AuthService,
         private notificationService: NotificationsService,
-        private profileService: UserProfileService
     ) {
     }
 
     ngOnInit() {
+        this.profilePicture = this.authService.getProfilePicture();
         this.currentUser = this.authService.getCurrentUser();
         this.notificationService.userDataChangedEvent.subscribe(data => {
             this.currentUser = data;
         });
-        this.profileService.getProfilePicture(this.currentUser.email).subscribe(response => {
-            if (response == null) {
-                this.profilePicture = '../../../../assets/images/user-default-image.jpeg';
-            } else {
-                console.log('sdsds');
-                this.profilePicture = this.imageType + response;
-            }
+        this.notificationService.updateProfileImageEvent.subscribe(data => {
+            this.profilePicture = this.authService.getProfilePicture();
         });
-
     }
 
     addExpandClass(element: any) {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {JsonUserData} from '../../shared/models/JsonUserData';
 import {urls} from '../../shared/config/urls';
 import {Observable} from 'rxjs';
@@ -12,7 +12,7 @@ export class UserProfileService {
      * Change user data profile
      */
     changeUserDataHttp(userData: JsonUserData): Observable<any> {
-        return this.httpClient.post(urls.getProfileUrl, userData);
+        return this.httpClient.put(urls.userUrl, userData);
     }
 
     /**
@@ -26,12 +26,12 @@ export class UserProfileService {
         return this.httpClient.post(urls.changePasswordUrl, passwordJson);
     }
 
-    uploadeProfilePicture() {
+    postProfileImage(file : File, email: string): Observable<any> {
 
-    }
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('email', email);
 
-    getProfilePicture(email: string): Observable<any> {
-        const params = new HttpParams().set('email', email);
-        return this.httpClient.get(urls.profilePictureUrl, {params: params, responseType: 'text'});
+        return this.httpClient.patch(urls.userUrl, formData, {responseType: 'text'});
     }
 }

@@ -1,4 +1,3 @@
-import {NotificationsService} from './services/notifications.service';
 import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
@@ -50,8 +49,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule
-    ],
-    providers: [NotificationsService]
+    ]
 })
 export class SharedModule {
 

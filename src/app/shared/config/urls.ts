@@ -5,5 +5,6 @@ export const urls = {
     getProfileUrl: [baseEndpoint, 'user', 'profile'].join('/'),
     registerUserUrl: [baseEndpoint, 'register'].join('/'),
     changePasswordUrl: [baseEndpoint, 'security', 'password'].join('/'),
-    profilePictureUrl: [baseEndpoint, 'user', 'profile-picture'].join('/')
+    profilePictureUrl: [baseEndpoint, 'user', 'profile-picture'].join('/'),
+    userUrl: [baseEndpoint, 'user/'].join('/')
 };
