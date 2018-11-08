@@ -7,6 +7,7 @@ import {NavComponent} from '../nav/nav.component';
 import {TopnavComponent} from '../components/topnav/topnav.component';
 import {SidebarComponent} from '../components/sidebar/sidebar.component';
 import {SharedModule} from '../../shared/shared.module';
+import {UserProfileService} from '../user-profile/user-profile.service';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {SharedModule} from '../../shared/shared.module';
         SharedModule,
         TranslateModule
     ],
-    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent]
+    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent],
+    providers: [UserProfileService]
 })
 export class LayoutModule {
 }

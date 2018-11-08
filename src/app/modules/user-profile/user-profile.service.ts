@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {JsonUserData} from '../../shared/models/JsonUserData';
 import {urls} from '../../shared/config/urls';
 import {Observable} from 'rxjs';
@@ -24,5 +24,14 @@ export class UserProfileService {
             'newPassword': newPassword
         };
         return this.httpClient.post(urls.changePasswordUrl, passwordJson);
+    }
+
+    uploadeProfilePicture() {
+
+    }
+
+    getProfilePicture(email: string): Observable<any> {
+        const params = new HttpParams().set('email', email);
+        return this.httpClient.get(urls.profilePictureUrl, {params: params, responseType: 'text'});
     }
 }
