@@ -7,11 +7,6 @@ export interface JsonUserData {
     /**
      *
      */
-    role?: string;
-
-    /**
-     *
-     */
     firstName?: string;
 
     /**
@@ -28,5 +23,11 @@ export interface JsonUserData {
      *
      */
     town?: string;
+
+    /**
+     *
+     */
+    profile?: string;
+
 }
 

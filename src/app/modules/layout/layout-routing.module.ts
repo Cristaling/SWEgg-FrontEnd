@@ -20,6 +20,10 @@ const routes: Routes = [
                 path: 'jobs',
                 loadChildren: '../app-jobs/app-jobs.module#AppJobsModule'
             },
+            {
+                path: 'user-profile',
+                loadChildren: '../user-profile/user-profile.module#UserProfileModule'
+            },
         ]
     }
 ];

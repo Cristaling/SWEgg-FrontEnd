@@ -18,5 +18,14 @@ export class ProfileService {
         return this.httpClient.get(urls.getProfileUrl, {params: params});
     }
 
+    /**
+     * Get profile picture
+     * @param {string} email of user
+     * @returns {Observable<any>}
+     */
+    getProfilePicture(email: string): Observable<any> {
+        const params = new HttpParams().set('email', email);
+        return this.httpClient.get(urls.profilePictureUrl, {params: params, responseType: 'text'});
+    }
 
 }
