@@ -56,11 +56,16 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             if (jobStatus === 'INVITED') {
                 this.notificationService.showPopupMessage('Not implemented!', 'OK');
             } else {
+                this.notificationService.showPopupMessage('Your job was saved successfully !', 'OK');
                 this.router.navigate(['..'], {relativeTo: this.activatedRoute});
             }
         }, (error) => {
             if (error.status === 401) {
                 this.notificationService.showPopupMessage('An error occurred !', 'OK');
+            }
+            if (error.status === 400) {
+                this.notificationService.showPopupMessage('You have an existent job published !', 'OK');
+                this.router.navigate(['..'], {relativeTo: this.activatedRoute});
             }
         });
     }
