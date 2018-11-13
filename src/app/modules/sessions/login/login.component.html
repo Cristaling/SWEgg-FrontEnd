@@ -9,11 +9,11 @@
                     <mat-form-field class="w-100">
                         <input matInput placeholder="Email" formControlName="username">
                     </mat-form-field>
-                    <small class="alert-danger"
+                    <small class="text-danger"
                            *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('required')">Email
                         is required !
                     </small>
-                    <small class="alert-danger"
+                    <small class="text-danger"
                            *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('email')">Email
                         is invalid !
                     </small>
@@ -24,7 +24,7 @@
                     <mat-form-field class="w-100">
                         <input matInput type="password" placeholder="Password" formControlName="password">
                     </mat-form-field>
-                    <small class="alert-danger"
+                    <small class="text-danger"
                            *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid">
                         Password is required !
                     </small>

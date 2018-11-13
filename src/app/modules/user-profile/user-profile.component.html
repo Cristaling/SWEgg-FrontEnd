@@ -1,0 +1,141 @@
+<mat-card class="mt20">
+
+    <mat-card-content>
+        <mat-tab-group>
+            <mat-tab label="Profile settings">
+                <div class="mt20 col-md-10">
+                    <form [formGroup]="profileForm" (ngSubmit)="onChangeUserData()">
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill class="">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="First name" formControlName="firstName">
+                                </mat-form-field>
+                            </div>
+                            <small class="text-danger"
+                                   *ngIf="profileForm.controls['firstName'].touched && !profileForm.controls['firstName'].valid">
+                                First name is required !
+                            </small>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill class="">
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Last name" formControlName="lastName">
+                                </mat-form-field>
+                            </div>
+                            <small class="text-danger"
+                                   *ngIf="profileForm.controls['lastName'].touched && !profileForm.controls['lastName'].valid">
+                                First name is required !
+                            </small>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <mat-form-field class="w-100">
+                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <small class="text-danger"
+                                   *ngIf="profileForm.controls['birthDate'].touched && profileForm.controls['birthDate'].hasError('invalidDate')">
+                                Date is invalid !
+                            </small>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Town" formControlName="town">
+                                </mat-form-field>
+                            </div>
+                            <small class="text-danger"
+                                   *ngIf="profileForm.controls['town'].touched && !profileForm.controls['town'].valid">
+                                Town is invalid !
+                            </small>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <mat-form-field class="w-100">
+                                    <input matInput placeholder="Email *" formControlName="email">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="" style="border-top: 1px dotted darkgrey;border-bottom: 1px dotted darkgrey;padding:10px;margin-bottom: 5px">
+                            <small style="color:grey">Profile picture</small><br><br>
+                            <input type="file" style="display: none" #fileInput (change)="onFileChanged($event)">
+                            <button mat-raised-button class="mat-primary" type="button" (click)="fileInput.click()" style="margin-bottom: 20px">Pick logo image</button>
+                            <img [src]="localUrl" *ngIf="localUrl && validSelectedFile;else imageNotSelected" alt="Please select an image" style="margin-left:10px;max-height: 50px">
+                            <ng-template #imageNotSelected>Please select a logo image !</ng-template>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <button type="submit" mat-raised-button color="primary" class="w-100"
+                                        [disabled]="!profileForm.valid">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Security settings">
+                <div class="mt20 col-md-10">
+                    <form [formGroup]="securityForm" (ngSubmit)="onChangeSecurity()">
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill class="">
+                                <mat-form-field class="w-100">
+                                    <input matInput type="password" placeholder="Current password *"
+                                           formControlName="currentPassword">
+                                </mat-form-field>
+                            </div>
+                            <small class="text-danger"
+                                   *ngIf="securityForm.controls['currentPassword'].touched && !securityForm.controls['currentPassword'].valid">
+                                Current password is required !
+                            </small>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <mat-form-field class="w-100">
+                                    <input matInput type="password" placeholder="New password *"
+                                           formControlName="password">
+                                </mat-form-field>
+                            </div>
+                            <small class="text-danger"
+                                   *ngIf="securityForm.controls['password'].touched && !securityForm.controls['password'].valid">
+                                New password is required !
+                            </small>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <mat-form-field class="w-100">
+                                    <input matInput type="password" placeholder="Confirm password *"
+                                           formControlName="confirmPassword">
+                                </mat-form-field>
+                            </div>
+                            <small class="text-danger"
+                                   *ngIf="securityForm.controls['confirmPassword'].touched && securityForm.hasError('invalidConfirm')">
+                                Passwords do not match !
+                            </small>
+                        </div>
+
+                        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <button type="submit" mat-raised-button color="primary" class="w-100"
+                                        [disabled]="!securityForm.valid">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

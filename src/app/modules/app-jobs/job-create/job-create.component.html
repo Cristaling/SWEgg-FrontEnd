@@ -1,0 +1,59 @@
+<div style="display: inline-block" >
+    <button mat-mini-fab color="primary" style="float: left; margin-right: 20px" (click)="backToJobs()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 style="float: left" class="mb-20">Add job</h2>
+</div>
+
+<div style="width: 500px;">
+    <form class="job-create-form" [formGroup]="jobCreateForm" (ngSubmit)="onJobCreate()">
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div class="mb10" fxFlexFill>
+                <label>Job type<b class="text-danger">*</b></label>
+                <div class="wid">
+                    <input class="form-control" formControlName="jobType">
+                </div>
+                <small class="text-danger"
+                       *ngIf="jobCreateForm.controls['jobType'].touched && jobCreateForm.controls['jobType'].hasError('required')">
+                    Type
+                    is required !
+                </small>
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div class="mb10" fxFlexFill>
+                <label>Job title<b class="text-danger">*</b></label>
+                <input class="form-control" formControlName="jobTitle">
+                <small class="text-danger"
+                       *ngIf="jobCreateForm.controls['jobTitle'].touched && jobCreateForm.controls['jobTitle'].hasError('required')">
+                    Title
+                    is required !
+                </small>
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div class="mb10" fxFlexFill>
+                <label>Job description<b class="text-danger">*</b></label>
+                <textarea class="form-control" rows="5" formControlName="jobDescription"></textarea>
+                <small class="text-danger"
+                       *ngIf="jobCreateForm.controls['jobDescription'].touched && jobCreateForm.controls['jobDescription'].hasError('required')">
+                    Description
+                    is required !
+                </small>
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill class="mb10">
+                <mat-checkbox formControlName="isPrivate"></mat-checkbox>
+                <label style="margin-left: 10px;">Private</label>
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!jobCreateForm.valid">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -7,6 +7,7 @@ import {NotificationsService} from '../../../shared/services/notifications.servi
 import {Subject} from 'rxjs';
 import {ProfileService} from '../../../shared/services/profile.service';
 import {takeUntil} from 'rxjs/operators';
+import {JsonUserData} from '../../../shared/models/JsonUserData';
 
 
 @Component({
@@ -51,10 +52,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         const values = this.loginForm.value;
         this.loginService.loginUserHttp(values.username, values.password).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.authService.setToken(response.token);
-            this.profileService.getProfile(values.username).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(userResponse => {
-                this.authService.setCurrentUser(userResponse);
-                this.router.navigate(['/dashboard']);
-
+            this.profileService.getProfile(values.username).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((userResponse: JsonUserData) => {
+                this.profileService.getProfilePicture(userResponse.email).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(picture => {
+                    this.authService.saveProfilePicture(picture);
+                    this.authService.setCurrentUser(userResponse);
+                    this.router.navigate(['/dashboard']);
+                }, error1 => {
+                    this.authService.setCurrentUser(userResponse);
+                    this.router.navigate(['/dashboard']);
+                });
             });
         }, (error) => {
             if (error.status === 401) {

@@ -1,4 +1,3 @@
-import {NotificationsService} from './services/notifications.service';
 import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
@@ -56,7 +55,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         FlexLayoutModule,
         MatDialogModule
     ],
-    providers: [NotificationsService]
+    providers: [MatNativeDateModule]
 })
 export class SharedModule {
 

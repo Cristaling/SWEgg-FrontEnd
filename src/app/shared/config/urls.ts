@@ -1,5 +1,11 @@
+const baseEndpoint = 'api';
+
 export const urls = {
-    loginUserUrl: ['api', 'security', 'login'].join('/'),
-    getProfileUrl: ['api', 'user', 'profile'].join('/'),
-    registerUserUrl: ['api', 'register'].join('/')
+    loginUserUrl: [baseEndpoint, 'security', 'login'].join('/'),
+    getProfileUrl: [baseEndpoint, 'user', 'profile'].join('/'),
+    registerUserUrl: [baseEndpoint, 'register'].join('/'),
+    jobCreateUrl: ['api', 'job'].join('/'),
+    changePasswordUrl: [baseEndpoint, 'security', 'password'].join('/'),
+    profilePictureUrl: [baseEndpoint, 'user', 'profile-picture'].join('/'),
+    userUrl: [baseEndpoint, 'user/'].join('/')
 };
