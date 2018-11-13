@@ -1,63 +1,48 @@
 import {Injectable} from '@angular/core';
 import {JsonJobSummary} from '../../shared/models/JsonJobSummary';
 import {JsonJob} from '../../shared/models/JsonJob';
+import {HttpClient} from '@angular/common/http';
+import {urls} from '../../shared/config/urls';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AppJobsService {
-    jobsMock: JsonJobSummary[] = [
-        {
-            memberName: 'Ivanov Alexandru',
-            title: 'Title1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. '
-        },
-        {
-            memberName: 'Test test',
-            title: 'Title2',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. '
-        },
-        {
-            memberName: 'Test test',
-            title: 'Title3',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. '
-        },
-        {
-            memberName: 'Test test',
-            title: 'Title4',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. '
-        },
-        {
-            memberName: 'Test test',
-            title: 'Title5',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. ' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. '
-        },
-        {
-            memberName: 'Test test',
-            title: 'Title5',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. '
-        },
-        {
-            memberName: 'Test test',
-            title: 'Title5',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
-                ' Vestibulum eleifend diam metus, in luctus diam accumsan consectetur. '
-        }
-    ];
 
-    constructor() {
+    constructor(private httpClient: HttpClient) {
     }
 
-    public getJobsHttp(): JsonJobSummary[] {
-        return this.jobsMock;
+    /**
+     * Creates a job
+     * @param {string} jobType
+     * @param {string} jobStatus
+     * @param {string} title
+     * @param {string} description
+     * @returns {Observable<any>}
+     */
+    createJobHttp(jobType: string, jobStatus: string, title: string, description: string): Observable<any> {
+        const jobAddRequest: JsonJob = {
+            'jobType': jobType,
+            'jobStatus': jobStatus,
+            'title': title,
+            'description': description
+        };
+        return this.httpClient.post(urls.jobUrl, jobAddRequest);
     }
 
-    public getJobHttp(uuid: string): JsonJob {
-        return this.jobsMock[0];
+    /**
+     * Get all summaries for jobs
+     * @returns {Observable<any>}
+     */
+    public getJobsHttp(): Observable<any> {
+        return this.httpClient.get(urls.getJobSummaries);
+    }
+
+    /**
+     * Get one job
+     * @param {string} uuid
+     * @returns {JsonJob}
+     */
+    public getJobHttp(uuid: string): Observable<any> {
+        return this.httpClient.get(urls.jobUrl);
     }
 }

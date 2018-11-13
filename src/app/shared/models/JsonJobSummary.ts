@@ -7,7 +7,12 @@ export interface JsonJobSummary {
     /**
      *
      */
-    memberName?: string;
+    ownerEmail?: string;
+
+    /**
+     *
+     */
+    ownerName?: string;
 
     /**
      *

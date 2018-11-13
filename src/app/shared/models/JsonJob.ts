@@ -1,3 +1,5 @@
+import {JsonUser} from './JsonUser';
+
 export interface JsonJob {
     /**
      *
@@ -7,10 +9,26 @@ export interface JsonJob {
     /**
      *
      */
-    image?: string;
+    user?: JsonUser;
 
     /**
      *
      */
+    jobType?: string;
+
+    /**
+     *
+     */
+    jobStatus?: string;
+
+    /**
+     *
+     */
+    title?: string;
+
+    /**
+     *
+     */
+    description?: string;
 
 }

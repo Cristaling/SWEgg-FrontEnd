@@ -22,7 +22,10 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.allJobs = this.jobsService.getJobsHttp();
+        this.jobsService.getJobsHttp().subscribe(jobsSummaries => {
+            this.allJobs = jobsSummaries;
+            console.log(this.allJobs);
+        });
     }
 
     onCreateJob() {
