@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {JobCreateService} from './job-create.service';
 import {NotificationsService} from '../../../shared/services/notifications.service';
+import {JobType} from '../../../shared/models/JobType';
 
 @Component({
     selector: 'app-job-create',
@@ -15,6 +16,9 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
     private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
     jobCreateForm: FormGroup;
+    selectedJobType: string;
+
+    jobTypes: JobType[];
 
     constructor(
         private router: Router,
@@ -34,6 +38,10 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             jobTitle: new FormControl('', Validators.required),
             jobDescription: new FormControl('', Validators.required),
             isPrivate: new FormControl(''),
+        });
+        this.jobCreateService.getJobTypesHttp().pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+            this.jobTypes = response;
+            return response.data;
         });
     }
 
@@ -59,7 +67,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             }
         }, (error) => {
             if (error.status === 401) {
-                this.notificationService.showPopupMessage('User and password are incorrect !', 'OK');
+                this.notificationService.showPopupMessage('Something went wrong !', 'OK');
             }
         });
     }
