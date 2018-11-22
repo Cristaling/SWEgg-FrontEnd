@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {JsonJobSummary} from '../../../shared/models/JsonJobSummary';
+import {JsonJobSummary} from '../../models/JsonJobSummary';
 import {MatDialog} from '@angular/material';
-import {JsonJob} from '../../../shared/models/JsonJob';
-import {AppJobsService} from '../app-jobs.service';
+import {JsonJob} from '../../models/JsonJob';
+import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 
 @Component({
     selector: 'app-app-job',

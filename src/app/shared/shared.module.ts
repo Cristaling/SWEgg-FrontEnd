@@ -11,6 +11,8 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {AppJobComponent} from './modules/app-job/app-job.component';
+import {AppJobModule} from './modules/app-job/app-job/app-job.module';
 
 @NgModule({
     imports: [
@@ -32,7 +34,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatDialogModule
+        MatDialogModule,
+        // AppJobModule,
     ],
     exports: [
         MatSnackBarModule,
@@ -53,8 +56,10 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatDialogModule
+        MatDialogModule,
+        // AppJobModule
     ],
+
     providers: [MatNativeDateModule]
 })
 export class SharedModule {

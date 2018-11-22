@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {JsonJobSummary} from '../../shared/models/JsonJobSummary';
 import {JsonJob} from '../../shared/models/JsonJob';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {urls} from '../../shared/config/urls';
 import {Observable} from 'rxjs';
 
@@ -44,5 +44,11 @@ export class AppJobsService {
      */
     public getJobHttp(uuid: string): Observable<any> {
         return this.httpClient.get(urls.jobUrl);
+    }
+
+
+    public getUserJobsHttp(email: string): Observable<any> {
+        const params = new HttpParams().set('email', email);
+        return this.httpClient.get(urls.getUserJobSummaries, {params : params});
     }
 }
