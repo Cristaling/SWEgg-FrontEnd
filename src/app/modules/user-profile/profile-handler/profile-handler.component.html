@@ -1,0 +1,6 @@
+<div *ngIf="currentUser.email === profileEmail" >
+    <app-user-profile></app-user-profile>
+</div>
+<div *ngIf="currentUser.email !== profileEmail" >
+    <app-profile-page [userEmail]="profileEmail"></app-profile-page>
+</div>
