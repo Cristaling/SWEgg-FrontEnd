@@ -16,7 +16,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
     private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
     jobCreateForm: FormGroup;
-    selectedJobType: string;
+    jobTypeSelected: JobType;
 
     jobTypes: JobType[];
 
@@ -34,7 +34,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
     initForms(): any {
         this.jobCreateForm = new FormGroup({
-            jobType: new FormControl('', Validators.required),
+            jobTypeSelected: new FormControl(''),
             jobTitle: new FormControl('', Validators.required),
             jobDescription: new FormControl('', Validators.required),
             isPrivate: new FormControl(''),
@@ -58,7 +58,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     onJobCreate() {
         const values = this.jobCreateForm.value;
         const jobStatus = values.isPrivate ? 'INVITED' : 'OPEN';
-        this.jobCreateService.createJobHttp(values.jobType, jobStatus, values.jobTitle, values.jobDescription)
+        this.jobCreateService.createJobHttp(this.jobTypeSelected.value.toLocaleUpperCase(), jobStatus, values.jobTitle, values.jobDescription)
             .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             if (jobStatus === 'INVITED') {
                 this.notificationService.showPopupMessage('Not implemented!', 'OK');

@@ -4,7 +4,7 @@
     <div fxFlex fxLayout="row" fxLayout.lt-md="column">
         <div fxFlexFill>
             <mat-form-field class="w-100">
-                <mat-select placeholder="Job Type" [(ngModel)]="selectedJobType" [ngModelOptions]="{standalone: true}">
+                <mat-select placeholder="Job Type" [(ngModel)]="jobTypeSelected" [ngModelOptions]="{standalone: true}">
                     <mat-option *ngFor="let jobType of jobTypes" [value]="jobType">
                         {{jobType.value}}
                     </mat-option>
