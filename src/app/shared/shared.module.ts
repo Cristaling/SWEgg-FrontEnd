@@ -1,3 +1,4 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
@@ -29,7 +30,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatTooltipModule,
         MatSnackBarModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        FlexLayoutModule
     ],
     exports: [
         MatSnackBarModule,
@@ -48,7 +50,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatTooltipModule,
         MatSnackBarModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        FlexLayoutModule
     ]
 })
 export class SharedModule {
