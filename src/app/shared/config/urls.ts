@@ -9,7 +9,7 @@ export const urls = {
 
     jobUrl: ['api', 'job'].join('/'),
     getJobSummaries: ['api', 'job', 'summaries'].join('/'),
-    getUserJobSummaries: ['api', 'job', 'all'].join('/'),
+    getUserRelatedJobSummaries: ['api', 'job', 'related'].join('/'),
 
     userUrl: [baseEndpoint, 'user/'].join('/')
 };
