@@ -4,6 +4,8 @@ import {UserProfileComponent} from './user-profile.component';
 import {UserProfileRoutingModule} from './user-profile-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {UserProfileService} from './user-profile.service';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ProfileHandlerComponent } from './profile-handler/profile-handler.component';
 
 @NgModule({
     imports: [
@@ -11,7 +13,7 @@ import {UserProfileService} from './user-profile.service';
         SharedModule,
         UserProfileRoutingModule
     ],
-    declarations: [UserProfileComponent],
+    declarations: [UserProfileComponent, ProfilePageComponent, ProfileHandlerComponent],
     providers: [UserProfileService]
 })
 export class UserProfileModule {

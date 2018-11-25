@@ -3,6 +3,11 @@ import {JsonJobSummary} from '../../models/JsonJobSummary';
 import {MatDialog} from '@angular/material';
 import {JsonJob} from '../../models/JsonJob';
 import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
+import {JsonJob} from '../../../shared/models/JsonJob';
+import {AppJobsService} from '../app-jobs.service';
+import {urls} from '../../../shared/config/urls';
+import {ProfileService} from '../../../shared/services/profile.service';
+import {AuthService} from '../../../core/authentication/auth.service';
 
 @Component({
     selector: 'app-app-job',
@@ -18,7 +23,9 @@ export class AppJobComponent implements OnInit {
     selectedJob: JsonJobSummary;
 
     constructor(private dialogBox: MatDialog,
-                private jobService: AppJobsService) {
+                private jobService: AppJobsService,
+                private profileService: ProfileService,
+                private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -46,6 +53,10 @@ export class AppJobComponent implements OnInit {
         this.dialogBox.open(this.jobModal, {
             width: '400px'
         });
+    }
+
+    getProfilePicture(email: string) {
+        return this.authService.getProfilePicture(email);
     }
 
     closeDialog() {

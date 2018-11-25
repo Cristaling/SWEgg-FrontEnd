@@ -1,4 +1,5 @@
 import {JsonUserData} from '../../shared/models/JsonUserData';
+import {urls} from '../../shared/config/urls';
 
 export class AuthService {
     constructor() {
@@ -10,6 +11,10 @@ export class AuthService {
 
     setToken(token: string) {
         localStorage.setItem('token', token);
+    }
+
+    getToken() {
+        return localStorage.getItem('token');
     }
 
     logout() {
@@ -32,7 +37,7 @@ export class AuthService {
         localStorage.setItem('profile_image', 'data:image/png;base64,' + picture);
     }
 
-    getProfilePicture() {
-        return localStorage.getItem('profile_image');
+    getProfilePicture(email) {
+        return `${urls.profilePictureUrl}?email=${email}&token=${this.getToken()}`;
     }
 }

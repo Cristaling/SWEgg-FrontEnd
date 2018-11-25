@@ -1,8 +1,9 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
     MatCardModule, MatDatepickerModule, MatDialogModule,
-    MatDividerModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule,
+    MatDividerModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressSpinnerModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatTableModule,
@@ -13,6 +14,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppJobComponent} from './modules/app-job/app-job.component';
 import {AppJobModule} from './modules/app-job/app-job/app-job.module';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import {ScrollingModule} from '@angular/cdk-experimental/scrolling';
 
 @NgModule({
     imports: [
@@ -35,6 +39,8 @@ import {AppJobModule} from './modules/app-job/app-job/app-job.module';
         MatNativeDateModule,
         FlexLayoutModule,
         MatDialogModule,
+        InfiniteScrollModule,
+        MatProgressSpinnerModule
         // AppJobModule,
     ],
     exports: [
@@ -57,9 +63,9 @@ import {AppJobModule} from './modules/app-job/app-job/app-job.module';
         MatNativeDateModule,
         FlexLayoutModule,
         MatDialogModule,
-        // AppJobModule
+        InfiniteScrollModule,
+        MatProgressSpinnerModule
     ],
-
     providers: [MatNativeDateModule]
 })
 export class SharedModule {

@@ -4,10 +4,12 @@ import {Observable} from 'rxjs';
 import {JsonUserData} from '../models/JsonUserData';
 import {urls} from '../config/urls';
 import {map} from 'rxjs/operators';
+import {AuthService} from '../../core/authentication/auth.service';
 
 @Injectable()
 export class ProfileService {
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient,
+                private authService: AuthService) {
     }
 
     /**
@@ -24,8 +26,8 @@ export class ProfileService {
      * @returns {Observable<any>}
      */
     getProfilePicture(email: string): Observable<any> {
-        const params = new HttpParams().set('email', email);
-        return this.httpClient.get(urls.profilePictureUrl, {params: params, responseType: 'text'});
+        const params = new HttpParams().set('email', email).set('token', this.authService.getToken());
+        return this.httpClient.get(urls.profilePictureUrl, {params: params});
     }
 
 }

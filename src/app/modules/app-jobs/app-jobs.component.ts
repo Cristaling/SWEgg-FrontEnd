@@ -13,7 +13,11 @@ import {AppJobsService} from './app-jobs.service';
 export class AppJobsComponent implements OnInit, OnDestroy {
     private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
 
-    allJobs: JsonJobSummary[];
+    currentPage = 0;
+    countPage = 8;
+    allJobs: JsonJobSummary[] = [];
+
+    finished = false;
 
     constructor(
         private router: Router,
@@ -22,10 +26,7 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.jobsService.getJobsHttp().subscribe(jobsSummaries => {
-            this.allJobs = jobsSummaries;
-            console.log(this.allJobs);
-        });
+        this.getJobs();
     }
 
     onCreateJob() {
@@ -37,4 +38,20 @@ export class AppJobsComponent implements OnInit, OnDestroy {
         this.navigateToOtherComponent.complete();
     }
 
+    getJobs() {
+        if (this.finished) {
+            return;
+        }
+        this.jobsService.getJobsHttp(this.currentPage, this.countPage).subscribe(jobsSummaries => {
+            if (jobsSummaries.length === 0 || jobsSummaries.length < this.countPage) {
+                this.finished = true;
+            }
+            this.allJobs.push.apply(this.allJobs, jobsSummaries);
+            this.currentPage += 1;
+        });
+    }
+
+    onScroll() {
+       this.getJobs();
+    }
 }
