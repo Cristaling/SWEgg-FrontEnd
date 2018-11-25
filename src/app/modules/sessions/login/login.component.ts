@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from './login.service';
@@ -53,14 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginService.loginUserHttp(values.username, values.password).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.authService.setToken(response.token);
             this.profileService.getProfile(values.username).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((userResponse: JsonUserData) => {
-                this.profileService.getProfilePicture(userResponse.email).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(picture => {
-                    this.authService.saveProfilePicture(picture);
-                    this.authService.setCurrentUser(userResponse);
-                    this.router.navigate(['/dashboard']);
-                }, error1 => {
-                    this.authService.setCurrentUser(userResponse);
-                    this.router.navigate(['/dashboard']);
-                });
+                this.authService.setCurrentUser(userResponse);
+                this.router.navigate(['/dashboard']);
             });
         }, (error) => {
             if (error.status === 401) {

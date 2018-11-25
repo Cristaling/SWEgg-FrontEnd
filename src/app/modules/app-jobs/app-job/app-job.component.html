@@ -1,9 +1,9 @@
-<mat-card style="height: auto; cursor:pointer; vertical-align: center; float:left;" class="hover-mat-card" (click)="onJobClick(job)">
-    <mat-card-header>
+<mat-card class="hover-mat-card job-card" (click)="onJobClick(job)">
+    <mat-card-header style="overflow:hidden;display: flex;align-items: center;">
         <img mat-card-avatar [matTooltip]="job.ownerName" class="header-user-image"
-             src="https://forum.bubble.is/uploads/default/original/3X/2/0/20d5d1a39bd75c04a76f5644ce692980ecb8e687.png">
-        <mat-card-title style="text-align: center">{{displayTitle(job.title)}}</mat-card-title>
-        <mat-card-subtitle style="font-size: 13px;text-align: justify">{{displayDescription(job.description)}}
+             [src]="getProfilePicture(job.ownerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
+        <mat-card-title style="text-align: center;">{{displayTitle(job.title)}}</mat-card-title>
+        <mat-card-subtitle style="font-size: 13px;text-align: justify;">{{displayDescription(job.description)}}
         </mat-card-subtitle>
     </mat-card-header>
 </mat-card>
@@ -12,15 +12,11 @@
     <mat-card>
         <mat-card-header>
             <img mat-card-avatar
-                 src="https://forum.bubble.is/uploads/default/original/3X/2/0/20d5d1a39bd75c04a76f5644ce692980ecb8e687.png">
+                 [src]="getProfilePicture(selectedJob.ownerEmail)">
             <mat-card-title>
                 <h3 class="m-0">{{selectedJob.title}}</h3>
             </mat-card-title>
-            <mat-card-subtitle style="font-size: 13px;text-align: justify">by {{selectedJob.ownerName}}</mat-card-subtitle>
-            <div style="font-size: 11px" fxFlex fxLayoutAlign="end">
-                <mat-icon class="nav-icon">location_on</mat-icon>
-                Cluj-Napoca
-            </div>
+            <mat-card-subtitle style="font-size: 13px;">by {{selectedJob.ownerName}}</mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content style="font-size: 13px;text-align: justify">{{selectedJob.description}}</mat-card-content>

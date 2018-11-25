@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
     MatCardModule, MatDatepickerModule, MatDialogModule,
-    MatDividerModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule,
+    MatDividerModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressSpinnerModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatTableModule,
@@ -11,6 +11,9 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import {ScrollingModule} from '@angular/cdk-experimental/scrolling';
 
 @NgModule({
     imports: [
@@ -32,7 +35,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatDialogModule
+        MatDialogModule,
+        InfiniteScrollModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         MatSnackBarModule,
@@ -53,7 +58,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatDialogModule
+        MatDialogModule,
+        InfiniteScrollModule,
+        MatProgressSpinnerModule
     ],
     providers: [MatNativeDateModule]
 })

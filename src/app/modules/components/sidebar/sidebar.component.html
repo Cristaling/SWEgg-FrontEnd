@@ -1,6 +1,9 @@
 <div id="sidebar">
     <div class="app-user">
-        <img src="{{profilePicture}}" style="" class="app-user-photo" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
+        <img id="profileImg" src="{{getProfileImage(currentUser.email)}}"
+             class="app-user-photo"
+             onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
+             #profileImg>
         <span class="app-user-name mb5">
             {{currentUser.firstName}} {{currentUser.lastName}}
         </span>

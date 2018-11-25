@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../core/authentication/auth.service';
 import {JsonUserData} from '../../../shared/models/JsonUserData';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {UserProfileService} from '../../user-profile/user-profile.service';
+import {ProfileService} from '../../../shared/services/profile.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-sidebar',
@@ -12,22 +14,22 @@ import {UserProfileService} from '../../user-profile/user-profile.service';
 export class SidebarComponent implements OnInit {
     showMenu: string = '';
     currentUser: JsonUserData;
-    profilePicture: string;
 
     constructor(
         private authService: AuthService,
         private notificationService: NotificationsService,
+        private profileService: ProfileService,
     ) {
     }
 
     ngOnInit() {
-        this.profilePicture = this.authService.getProfilePicture();
         this.currentUser = this.authService.getCurrentUser();
+        this.profileService.getProfilePicture(this.currentUser.email).subscribe(photo => {
+        })
         this.notificationService.userDataChangedEvent.subscribe(data => {
             this.currentUser = data;
         });
         this.notificationService.updateProfileImageEvent.subscribe(data => {
-            this.profilePicture = this.authService.getProfilePicture();
         });
     }
 
@@ -37,5 +39,9 @@ export class SidebarComponent implements OnInit {
         } else {
             this.showMenu = element;
         }
+    }
+
+    getProfileImage(email: string) {
+        return this.authService.getProfilePicture(email);
     }
 }
