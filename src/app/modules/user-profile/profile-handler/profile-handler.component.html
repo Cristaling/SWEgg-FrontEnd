@@ -4,7 +4,7 @@
         <mat-tab-group>
 
             <mat-tab label="Profile">
-                <div *ngIf="currentUser.email === profileEmail" >
+                <div *ngIf="currentUser.email === profileEmail || profileEmail == undefined" >
                     <app-profile-edit-page></app-profile-edit-page>
                 </div>
                 <div *ngIf="currentUser.email !== profileEmail" >
