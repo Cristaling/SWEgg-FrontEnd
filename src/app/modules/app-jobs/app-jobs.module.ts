@@ -6,7 +6,8 @@ import {AppJobsRoutingModule} from './app-jobs-routing.module';
 import {AppJobsComponent} from './app-jobs.component';
 import {SharedModule} from '../../shared/shared.module';
 import { JobCreateComponent } from './job-create/job-create.component';
-import {JobCreateService} from './job-create/job-create.service';
+import { AppJobComponent } from './app-job/app-job.component';
+import {AppJobsService} from './app-jobs.service';
 
 @NgModule({
     imports: [
@@ -15,8 +16,8 @@ import {JobCreateService} from './job-create/job-create.service';
         AppJobsRoutingModule,
         MatCheckboxModule
     ],
-    declarations: [AppJobsComponent, JobCreateComponent],
-    providers: [JobCreateService]
+    declarations: [AppJobsComponent, JobCreateComponent, AppJobComponent],
+    providers: [AppJobsService]
 })
 export class AppJobsModule {
 }

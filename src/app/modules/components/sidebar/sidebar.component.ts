@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../core/authentication/auth.service';
 import {JsonUserData} from '../../../shared/models/JsonUserData';
 import {NotificationsService} from '../../../shared/services/notifications.service';
-import {UserProfileService} from '../../user-profile/user-profile.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -12,7 +11,7 @@ import {UserProfileService} from '../../user-profile/user-profile.service';
 export class SidebarComponent implements OnInit {
     showMenu: string = '';
     currentUser: JsonUserData;
-    profilePicture: string;
+    profileImage;
 
     constructor(
         private authService: AuthService,
@@ -21,13 +20,13 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.profilePicture = this.authService.getProfilePicture();
         this.currentUser = this.authService.getCurrentUser();
+        this.profileImage = this.authService.getProfilePicture(this.currentUser.email);
         this.notificationService.userDataChangedEvent.subscribe(data => {
             this.currentUser = data;
         });
         this.notificationService.updateProfileImageEvent.subscribe(data => {
-            this.profilePicture = this.authService.getProfilePicture();
+           this.profileImage = `data:image/jpeg;base64,${data}`;
         });
     }
 
@@ -37,5 +36,9 @@ export class SidebarComponent implements OnInit {
         } else {
             this.showMenu = element;
         }
+    }
+
+    getProfileImage(email: string) {
+        return this.authService.getProfilePicture(email);
     }
 }

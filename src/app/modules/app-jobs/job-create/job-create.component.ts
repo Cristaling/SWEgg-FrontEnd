@@ -3,8 +3,8 @@ import {Subject} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
-import {JobCreateService} from './job-create.service';
 import {NotificationsService} from '../../../shared/services/notifications.service';
+import {AppJobsService} from '../app-jobs.service';
 
 @Component({
     selector: 'app-job-create',
@@ -18,7 +18,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
-        private jobCreateService: JobCreateService,
+        private jobCreateService: AppJobsService,
         private activatedRoute: ActivatedRoute,
         private notificationService: NotificationsService
     ) {

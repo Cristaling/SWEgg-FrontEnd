@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileHandlerComponent implements OnInit {
 
     currentUser: JsonUserData;
-    profileEmail: String;
+    profileEmail: string;
 
     constructor(private authService: AuthService,
         private route: ActivatedRoute) { }

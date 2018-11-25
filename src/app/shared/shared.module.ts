@@ -4,8 +4,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
-    MatCardModule, MatDatepickerModule,
-    MatDividerModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule,
+    MatCardModule, MatDatepickerModule, MatDialogModule,
+    MatDividerModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressSpinnerModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatTableModule,
@@ -16,6 +16,9 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AbilitySelectorComponent } from './helpers/ability-selector/ability-selector.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import {ScrollingModule} from '@angular/cdk-experimental/scrolling'
 
 @NgModule({
     imports: [
@@ -39,7 +42,10 @@ import { AbilitySelectorComponent } from './helpers/ability-selector/ability-sel
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatChipsModule
+        MatChipsModule,
+        MatDialogModule,
+        InfiniteScrollModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         CommonModule,
@@ -63,10 +69,13 @@ import { AbilitySelectorComponent } from './helpers/ability-selector/ability-sel
         MatNativeDateModule,
         FlexLayoutModule,
         MatChipsModule,
-        AbilitySelectorComponent
+        AbilitySelectorComponent,
+        MatDialogModule,
+        InfiniteScrollModule,
+        MatProgressSpinnerModule
     ],
     declarations: [AbilitySelectorComponent],
-    providers: [AbilitySelectorService]
+    providers: [AbilitySelectorService, MatNativeDateModule]
 })
 export class SharedModule {
 
