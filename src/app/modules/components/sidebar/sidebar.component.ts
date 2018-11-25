@@ -24,8 +24,6 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
-        this.profileService.getProfilePicture(this.currentUser.email).subscribe(photo => {
-        })
         this.notificationService.userDataChangedEvent.subscribe(data => {
             this.currentUser = data;
         });
