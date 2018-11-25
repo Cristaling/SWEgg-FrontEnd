@@ -1,6 +1,6 @@
 <div id="sidebar">
     <div class="app-user">
-        <img id="profileImg" src="{{getProfileImage(currentUser.email)}}"
+        <img *ngIf="profileImage !== ''" id="profileImg" [src]="profileImage"
              class="app-user-photo"
              onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
              #profileImg>

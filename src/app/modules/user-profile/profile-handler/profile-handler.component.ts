@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileHandlerComponent implements OnInit {
 
     currentUser: JsonUserData;
-    profileEmail: String;
+    profileEmail: string;
 
     constructor(private authService: AuthService,
         private route: ActivatedRoute) { }
@@ -25,9 +25,6 @@ export class ProfileHandlerComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             this.profileEmail = params.get('email');
         });
-        console.log(this.currentUser.email);
-        console.log(this.profileEmail);
-        console.log(this.currentUser.email === this.profileEmail);
     }
 
 }
