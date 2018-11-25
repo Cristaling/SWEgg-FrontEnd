@@ -1,3 +1,5 @@
+import { AbilitySelectorService } from './helpers/ability-selector/ability-selector.service';
+import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgModule} from '@angular/core';
 import {
@@ -8,12 +10,17 @@ import {
     MatSnackBarModule,
     MatTableModule,
     MatTabsModule, MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule,
+    MatAutocompleteModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AbilitySelectorComponent } from './helpers/ability-selector/ability-selector.component';
 
 @NgModule({
     imports: [
+        CommonModule,
+        MatAutocompleteModule,
         MatSnackBarModule,
         MatDividerModule,
         MatCardModule,
@@ -31,9 +38,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        MatChipsModule
     ],
     exports: [
+        CommonModule,
+        MatAutocompleteModule,
         MatSnackBarModule,
         MatDividerModule,
         MatCardModule,
@@ -51,8 +61,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        FlexLayoutModule
-    ]
+        FlexLayoutModule,
+        MatChipsModule,
+        AbilitySelectorComponent
+    ],
+    declarations: [AbilitySelectorComponent],
+    providers: [AbilitySelectorService]
 })
 export class SharedModule {
 

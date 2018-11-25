@@ -1,4 +1,8 @@
+import { EndorsementsService } from './endorsements.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { startWith, map, takeUntil } from 'rxjs/operators';
+import { pipe, Subject } from 'rxjs';
+import { NotificationsService } from 'src/app/shared/services/notifications.service';
 
 @Component({
   selector: 'app-endorsements',
@@ -7,9 +11,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EndorsementsComponent implements OnInit {
 
-    @Input() userEmail: string;
+    private navigateToOtherComponent: Subject<any> = new Subject();
 
-    constructor() { }
+    @Input() userEmail: string;
+    abilitiesToAdd: string[] = [];
+
+    constructor(private endorsementsService: EndorsementsService,
+        private notificationService: NotificationsService) { }
 
     ngOnInit() {
         this.loadUserEndorsements();
@@ -17,6 +25,14 @@ export class EndorsementsComponent implements OnInit {
 
     loadUserEndorsements() {
 
+    }
+
+    addAbilities() {
+        this.endorsementsService.addAbilitiesHttp(this.abilitiesToAdd)
+            .pipe(takeUntil(this.navigateToOtherComponent))
+            .subscribe(response => {
+                this.notificationService.showPopupMessage('Password was successfully changed !', 'OK');
+            });
     }
 
 }

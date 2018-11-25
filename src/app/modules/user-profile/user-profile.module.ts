@@ -1,3 +1,4 @@
+import { EndorsementsService } from './endorsements/endorsements.service';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {UserProfileComponent} from './user-profile.component';
@@ -16,8 +17,13 @@ import { PasswordEditPageComponent } from './password-edit-page/password-edit-pa
         SharedModule,
         UserProfileRoutingModule
     ],
-    declarations: [UserProfileComponent, ProfilePageComponent, ProfileHandlerComponent, EndorsementsComponent, ProfileEditPageComponent, PasswordEditPageComponent],
-    providers: [UserProfileService]
+    declarations: [UserProfileComponent,
+        ProfilePageComponent,
+        ProfileHandlerComponent,
+        EndorsementsComponent,
+        ProfileEditPageComponent,
+        PasswordEditPageComponent],
+    providers: [UserProfileService, EndorsementsService]
 })
 export class UserProfileModule {
 }

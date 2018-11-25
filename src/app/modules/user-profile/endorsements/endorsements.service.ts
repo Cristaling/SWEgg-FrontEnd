@@ -19,4 +19,11 @@ export class EndorsementsService {
         return this.httpClient.get(urls.endorsementsUrl, {params: params});
     }
 
+    /**
+     * Add abilities
+     */
+    addAbilitiesHttp(abilities: string[]): Observable<any> {
+        return this.httpClient.post(urls.addAbilitiesUrl, abilities);
+    }
+
 }

@@ -8,5 +8,7 @@ export const urls = {
     changePasswordUrl: [baseEndpoint, 'security', 'password'].join('/'),
     profilePictureUrl: [baseEndpoint, 'user', 'profile-picture'].join('/'),
     userUrl: [baseEndpoint, 'user/'].join('/'),
-    endorsementsUrl: [baseEndpoint, 'ability'].join('/'),
+    abilitiesUrl: [baseEndpoint, 'ability'].join('/'),
+    addAbilitiesUrl: [baseEndpoint, 'ability', 'add'].join('/'),
+    endorsementsUrl: [baseEndpoint, 'ability', 'endorsements'].join('/'),
 };
