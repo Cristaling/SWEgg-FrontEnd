@@ -1,49 +1,34 @@
-<mat-card class="mt20">
+<div *ngIf="user" class="mt20 col-md-12">
 
-    <mat-card-content>
-        <mat-tab-group>
-            <mat-tab label="Profile">
-                <div *ngIf="user" class="mt20 col-md-12">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="25px">
 
-                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="25px">
+        <div>
+            <img src="{{profilePicture}}" class="user-photo" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
+        </div>
 
-                        <div>
-                            <img src="{{profilePicture}}" class="user-photo" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
-                        </div>
+        <div fxLayout="column">
 
-                        <div fxLayout="column">
+            <h1>
+                {{user.firstName}} {{user.lastName}}
+            </h1>
 
-                            <h1>
-                                {{user.firstName}} {{user.lastName}}
-                            </h1>
+            <label class="mt10">Email</label>
+            <span>
+                {{user.email}}
+            </span>
 
-                            <label class="mt10">Email</label>
-                            <span>
-                                {{user.email}}
-                            </span>
+            <label class="mt10">Birth Day</label>
+            <span>
+                {{user.birthDate | date:'dd-MM-yyyy'}}
+            </span>
 
-                            <label class="mt10">Birth Day</label>
-                            <span>
-                                {{user.birthDate | date:'dd-MM-yyyy'}}
-                            </span>
+            <label class="mt10">Town</label>
+            <span>
+                {{user.town}}
+            </span>
 
-                            <label class="mt10">Town</label>
-                            <span>
-                                {{user.town}}
-                            </span>
+        </div>
 
-                        </div>
+    </div>
 
-                    </div>
-
-                </div>
-            </mat-tab>
-
-            <mat-tab label="Abilities">
-                <div class="mt20 col-md-12">
-                    <app-endorsements></app-endorsements>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
-    </mat-card-content>
-</mat-card>
+</div>

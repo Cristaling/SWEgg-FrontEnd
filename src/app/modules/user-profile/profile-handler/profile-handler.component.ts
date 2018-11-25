@@ -25,9 +25,6 @@ export class ProfileHandlerComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             this.profileEmail = params.get('email');
         });
-        console.log(this.currentUser.email);
-        console.log(this.profileEmail);
-        console.log(this.currentUser.email === this.profileEmail);
     }
 
 }

@@ -7,6 +7,7 @@ import {UserProfileService} from './user-profile.service';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileHandlerComponent } from './profile-handler/profile-handler.component';
 import { EndorsementsComponent } from './endorsements/endorsements.component';
+import { ProfileEditPageComponent } from './profile-edit-page/profile-edit-page.component';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import { EndorsementsComponent } from './endorsements/endorsements.component';
         SharedModule,
         UserProfileRoutingModule
     ],
-    declarations: [UserProfileComponent, ProfilePageComponent, ProfileHandlerComponent, EndorsementsComponent],
+    declarations: [UserProfileComponent, ProfilePageComponent, ProfileHandlerComponent, EndorsementsComponent, ProfileEditPageComponent],
     providers: [UserProfileService]
 })
 export class UserProfileModule {
