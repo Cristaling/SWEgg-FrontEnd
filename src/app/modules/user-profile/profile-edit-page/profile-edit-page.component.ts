@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { JsonUserData } from 'src/app/shared/models/JsonUserData';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/authentication/auth.service';
@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './profile-edit-page.component.html',
   styleUrls: ['./profile-edit-page.component.scss']
 })
-export class ProfileEditPageComponent implements OnInit {
+export class ProfileEditPageComponent implements OnInit, OnDestroy {
 
     private navigateToOtherComponent: Subject<any> = new Subject();
 
@@ -109,6 +109,11 @@ export class ProfileEditPageComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
         this.selectedFile = event.target.files[0];
         this.validSelectedFile = ImageValidator.validateImageFile(this.selectedFile);
+    }
+
+    ngOnDestroy(): void {
+        this.navigateToOtherComponent.next();
+        this.navigateToOtherComponent.complete();
     }
 
 }
