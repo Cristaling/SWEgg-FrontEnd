@@ -11,7 +11,6 @@ import {
     MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {ScrollingModule} from '@angular/cdk-experimental/scrolling';
