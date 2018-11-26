@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { urls } from '../../config/urls';
+import { urls } from '../config/urls';
 
 @Injectable()
 export class AbilitySelectorService {

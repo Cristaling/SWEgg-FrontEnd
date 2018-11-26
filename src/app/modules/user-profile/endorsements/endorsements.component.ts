@@ -31,7 +31,7 @@ export class EndorsementsComponent implements OnInit {
         this.endorsementsService.addAbilitiesHttp(this.abilitiesToAdd)
             .pipe(takeUntil(this.navigateToOtherComponent))
             .subscribe(response => {
-                this.notificationService.showPopupMessage('Password was successfully changed !', 'OK');
+                this.notificationService.showPopupMessage('Testing was successfull!', 'OK');
             });
     }
 

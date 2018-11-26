@@ -1,4 +1,3 @@
-import { AbilitySelectorService } from './helpers/ability-selector/ability-selector.service';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgModule} from '@angular/core';
@@ -15,10 +14,11 @@ import {
     MatAutocompleteModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { AbilitySelectorComponent } from './helpers/ability-selector/ability-selector.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {ScrollingModule} from '@angular/cdk-experimental/scrolling'
+import { AbilitySelectorComponent } from './components/ability-selector/ability-selector.component';
+import { AbilitySelectorService } from './services/ability-selector.service';
 
 @NgModule({
     imports: [

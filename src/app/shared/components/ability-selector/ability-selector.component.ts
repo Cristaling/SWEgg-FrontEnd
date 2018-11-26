@@ -5,7 +5,7 @@ import {MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete} from '
 import { CommonModule } from '@angular/common';
 import { startWith, map, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { AbilitySelectorService } from './ability-selector.service';
+import { AbilitySelectorService } from '../../services/ability-selector.service';
 
 @Component({
   selector: 'app-ability-selector',
@@ -32,7 +32,6 @@ export class AbilitySelectorComponent implements OnInit {
         this.filteredAbilities = this.abilityCtrl.valueChanges.pipe(
             startWith(null),
             map((ability: string | null) => ability ? this._filter(ability) : this.abilities.slice()));
-        this.loadAbilities();
     }
 
     ngOnInit() {
@@ -43,7 +42,6 @@ export class AbilitySelectorComponent implements OnInit {
         this.abilitySelectorService.getAbilitiesHttp()
             .pipe(takeUntil(this.navigateToOtherComponent))
             .subscribe(response => {
-                console.log(response);
                 this.abilities = response;
             });
     }
@@ -67,8 +65,8 @@ export class AbilitySelectorComponent implements OnInit {
         }
     }
 
-    remove(fruit: string): void {
-        const index = this.selectedAbilities.indexOf(fruit);
+    remove(ability: string): void {
+        const index = this.selectedAbilities.indexOf(ability);
 
         if (index >= 0) {
             this.selectedAbilities.splice(index, 1);
