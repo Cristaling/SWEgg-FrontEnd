@@ -7,9 +7,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { StatModule } from '../../shared/modules/stat/stat.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import {SharedModule} from '../../shared/shared.module';
+import {AppJobsService} from '../app-jobs/app-jobs.service';
+import {AppJobsModule} from '../app-jobs/app-jobs.module';
+import {AppJobModule} from '../../shared/modules/app-job/app-job/app-job.module';
 
 @NgModule({
     imports: [
+        SharedModule,
         CommonModule,
         DashboardRoutingModule,
         MatGridListModule,
@@ -19,8 +24,11 @@ import { DashboardComponent } from './dashboard.component';
         MatCardModule,
         MatTableModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        AppJobModule
     ],
-    declarations: [DashboardComponent]
+    declarations: [DashboardComponent],
+    providers: [AppJobsService]
 })
-export class DashboardModule {}
+export class DashboardModule {
+}

@@ -46,4 +46,10 @@ export class AppJobsService {
     public getJobHttp(uuid: string): Observable<any> {
         return this.httpClient.get(urls.jobUrl);
     }
+
+
+    public getUserJobsHttp(email: string): Observable<any> {
+        const params = new HttpParams().set('email', email);
+        return this.httpClient.get(urls.getUserRelatedJobSummaries, {params : params});
+    }
 }
