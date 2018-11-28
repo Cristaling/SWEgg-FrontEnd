@@ -7,7 +7,7 @@ import { ProfileHandlerComponent } from './profile-handler/profile-handler.compo
 const routes: Routes = [
     {
         path: '',
-        component: UserProfileComponent,
+        component: ProfileHandlerComponent,
     },
     {
         path: ':email',

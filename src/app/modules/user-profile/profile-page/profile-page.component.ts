@@ -34,7 +34,7 @@ export class ProfilePageComponent implements OnInit {
         }, (error) => {
         });
     }
-    
+
     getProfilePicture(email: string) {
         return this.authService.getProfilePicture(email);
     }
