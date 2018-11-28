@@ -1,10 +1,7 @@
-import {ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../core/authentication/auth.service';
 import {JsonUserData} from '../../../shared/models/JsonUserData';
 import {NotificationsService} from '../../../shared/services/notifications.service';
-import {UserProfileService} from '../../user-profile/user-profile.service';
-import {ProfileService} from '../../../shared/services/profile.service';
-import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-sidebar',
@@ -14,20 +11,22 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class SidebarComponent implements OnInit {
     showMenu: string = '';
     currentUser: JsonUserData;
+    profileImage;
 
     constructor(
         private authService: AuthService,
         private notificationService: NotificationsService,
-        private profileService: ProfileService,
     ) {
     }
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
+        this.profileImage = this.authService.getProfilePicture(this.currentUser.email);
         this.notificationService.userDataChangedEvent.subscribe(data => {
             this.currentUser = data;
         });
         this.notificationService.updateProfileImageEvent.subscribe(data => {
+           this.profileImage = `data:image/jpeg;base64,${data}`;
         });
     }
 

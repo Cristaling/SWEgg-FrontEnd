@@ -8,7 +8,7 @@
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="25px">
 
                         <div>
-                            <img src="{{profilePicture}}" class="user-photo" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
+                            <img [src]="getProfilePicture(userEmail)" class="user-photo" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
                         </div>
 
                         <div fxLayout="column">

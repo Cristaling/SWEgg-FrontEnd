@@ -8,6 +8,7 @@ import {AppJobsService} from '../app-jobs.service';
 import {urls} from '../../../shared/config/urls';
 import {ProfileService} from '../../../shared/services/profile.service';
 import {AuthService} from '../../../core/authentication/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-app-job',
@@ -25,7 +26,8 @@ export class AppJobComponent implements OnInit {
     constructor(private dialogBox: MatDialog,
                 private jobService: AppJobsService,
                 private profileService: ProfileService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -57,6 +59,11 @@ export class AppJobComponent implements OnInit {
 
     getProfilePicture(email: string) {
         return this.authService.getProfilePicture(email);
+    }
+
+    goToProfile(email: string) {
+        this.router.navigate([`/user-profile/${email}`]);
+        this.closeDialog();
     }
 
     closeDialog() {

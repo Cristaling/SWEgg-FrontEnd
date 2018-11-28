@@ -84,7 +84,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 if (this.selectedFile && this.validSelectedFile) {
                     this.userProfileService.postProfileImage(this.selectedFile, this.currentUser.email).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(image => {
                         this.notificationService.showPopupMessage('Profile data was updated successfully !', 'OK');
-                        this.notificationService.updateProfileImageEvent.next();
+                        this.notificationService.updateProfileImageEvent.next(image);
                     }, error1 =>
                         this.notificationService.showPopupMessage('An error occured on saving image !', 'OK'));
                 } else {

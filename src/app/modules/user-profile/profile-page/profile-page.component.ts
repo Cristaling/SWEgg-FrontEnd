@@ -33,13 +33,10 @@ export class ProfilePageComponent implements OnInit {
             this.user = userResponse;
         }, (error) => {
         });
-
-        this.profileService.getProfilePicture(this.userEmail)
-        .pipe(takeUntil(this.navigateToOtherComponent))
-        .subscribe(picture => {
-            this.profilePicture = picture;
-        }, (error) => {
-        });
+    }
+    
+    getProfilePicture(email: string) {
+        return this.authService.getProfilePicture(email);
     }
 
 }

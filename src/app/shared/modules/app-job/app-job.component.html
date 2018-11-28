@@ -1,7 +1,8 @@
 <mat-card class="hover-mat-card job-card" (click)="onJobClick(job)">
     <mat-card-header style="overflow:hidden;display: flex;align-items: center;">
         <img mat-card-avatar [matTooltip]="job.ownerName" class="header-user-image"
-             [src]="getProfilePicture(job.ownerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
+             [src]="getProfilePicture(job.ownerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
+            (click)="goToProfile(job.ownerEmail)">
         <mat-card-title style="text-align: center;">{{displayTitle(job.title)}}</mat-card-title>
         <mat-card-subtitle style="font-size: 13px;text-align: justify;">{{displayDescription(job.description)}}
         </mat-card-subtitle>
@@ -12,7 +13,7 @@
     <mat-card>
         <mat-card-header>
             <img mat-card-avatar
-                 [src]="getProfilePicture(selectedJob.ownerEmail)">
+                 [src]="getProfilePicture(selectedJob.ownerEmail)" (click)="goToProfile(selectedJob.ownerEmail)">
             <mat-card-title>
                 <h3 class="m-0">{{selectedJob.title}}</h3>
             </mat-card-title>

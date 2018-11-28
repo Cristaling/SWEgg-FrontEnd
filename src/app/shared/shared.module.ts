@@ -16,7 +16,6 @@ import {AppJobComponent} from './modules/app-job/app-job.component';
 import {AppJobModule} from './modules/app-job/app-job/app-job.module';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
-import {ScrollingModule} from '@angular/cdk-experimental/scrolling';
 
 @NgModule({
     imports: [
