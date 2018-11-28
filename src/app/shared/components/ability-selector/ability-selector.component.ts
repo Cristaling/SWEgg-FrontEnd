@@ -81,7 +81,7 @@ export class AbilitySelectorComponent implements OnInit {
 
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
-        return this.abilities.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+        return this.abilities.filter(ability => ability.toLowerCase().indexOf(filterValue) === 0);
     }
 
 }
