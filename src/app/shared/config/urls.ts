@@ -14,6 +14,5 @@ export const urls = {
     getJobSummaries: ['api', 'job', 'summaries'].join('/'),
     getUserRelatedJobSummaries: ['api', 'job', 'related'].join('/'),
 
-    userUrl: [baseEndpoint, 'user/'].join('/')
 
 };
