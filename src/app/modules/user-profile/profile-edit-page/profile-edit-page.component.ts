@@ -84,7 +84,7 @@ export class ProfileEditPageComponent implements OnInit, OnDestroy {
                         .subscribe(image => {
                             this.notificationService.showPopupMessage('Profile data was updated successfully !', 'OK');
                             this.authService.saveProfilePicture(image);
-                            this.notificationService.updateProfileImageEvent.next();
+                            this.notificationService.updateProfileImageEvent.next(image);
                         }, error1 =>
                             this.notificationService.showPopupMessage('An error occured on saving image !', 'OK')
                         );
