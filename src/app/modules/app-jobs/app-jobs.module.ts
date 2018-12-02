@@ -9,6 +9,8 @@ import {JobCreateComponent} from './job-create/job-create.component';
 import {JobCreateService} from './job-create/job-create.service';
 import {MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
+import {AppJobsService} from './app-jobs.service';
+import {AppJobModule} from '../../shared/modules/app-job/app-job/app-job.module';
 
 @NgModule({
     imports: [
@@ -16,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
         SharedModule,
         AppJobsRoutingModule,
         MatCheckboxModule,
+        AppJobModule,
         MatDialogModule,
         MatInputModule,
         MatFormFieldModule,
@@ -25,8 +28,11 @@ import {MatSelectModule} from '@angular/material/select';
         AppJobsComponent,
         JobCreateComponent
     ],
-    providers: [JobCreateService],
-    entryComponents: [JobCreateComponent]
+    providers: [
+        JobCreateService,
+        AppJobsService
+    ],
+    entryComponents: [JobCreateComponent],
 })
 export class AppJobsModule {
 }

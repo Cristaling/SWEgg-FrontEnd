@@ -3,9 +3,9 @@ import {Subject} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
-import {JobCreateService} from './job-create.service';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {JobType} from '../../../shared/models/JobType';
+import {JobCreateService} from './job-create.service';
 
 @Component({
     selector: 'app-job-create',

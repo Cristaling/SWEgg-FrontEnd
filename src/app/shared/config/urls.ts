@@ -8,5 +8,13 @@ export const urls = {
     jobTypesUrl: ['api', 'job', 'types'].join('/'),
     changePasswordUrl: [baseEndpoint, 'security', 'password'].join('/'),
     profilePictureUrl: [baseEndpoint, 'user', 'profile-picture'].join('/'),
-    userUrl: [baseEndpoint, 'user/'].join('/')
+    userUrl: [baseEndpoint, 'user/'].join('/'),
+    abilitiesUrl: [baseEndpoint, 'ability'].join('/'),
+    addAbilitiesUrl: [baseEndpoint, 'ability', 'add'].join('/'),
+    endorsementsUrl: [baseEndpoint, 'ability', 'endorsements'].join('/'),
+    jobUrl: ['api', 'job'].join('/'),
+    getJobSummaries: ['api', 'job', 'summaries'].join('/'),
+    getUserRelatedJobSummaries: ['api', 'job', 'related'].join('/'),
+
+
 };

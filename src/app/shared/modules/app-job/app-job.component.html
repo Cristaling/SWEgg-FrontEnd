@@ -1,0 +1,37 @@
+<mat-card class="hover-mat-card job-card" (click)="onJobClick(job)">
+    <mat-card-header style="overflow:hidden;display: flex;align-items: center;">
+        <img mat-card-avatar [matTooltip]="job.ownerName" class="header-user-image"
+             [src]="getProfilePicture(job.ownerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
+            (click)="goToProfile(job.ownerEmail)">
+        <mat-card-title style="text-align: center;">{{displayTitle(job.title)}}</mat-card-title>
+        <mat-card-subtitle style="font-size: 13px;text-align: justify;">{{displayDescription(job.description)}}
+        </mat-card-subtitle>
+    </mat-card-header>
+</mat-card>
+
+<ng-template #jobModal>
+    <mat-card>
+        <mat-card-header>
+            <img mat-card-avatar
+                 [src]="getProfilePicture(selectedJob.ownerEmail)" (click)="goToProfile(selectedJob.ownerEmail)">
+            <mat-card-title>
+                <h3 class="m-0">{{selectedJob.title}}</h3>
+            </mat-card-title>
+            <mat-card-subtitle style="font-size: 13px;">by {{selectedJob.ownerName}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content style="font-size: 13px;text-align: justify">{{selectedJob.description}}</mat-card-content>
+        <mat-card-actions>
+            <div fxFlex fxLayoutAlign="center">
+                <button mat-button>
+                    <mat-icon class="nav-icon">send</mat-icon>
+                    Apply
+                </button>
+                <button mat-button (click)="closeDialog()">
+                    <mat-icon class="nav-icon">cancel</mat-icon>
+                    Close
+                </button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</ng-template>

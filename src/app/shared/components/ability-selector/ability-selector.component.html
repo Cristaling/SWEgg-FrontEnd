@@ -1,0 +1,24 @@
+<mat-form-field class="col-md-12">
+    <mat-chip-list #chipList>
+        <mat-chip
+            *ngFor="let ability of selectedAbilities"
+            [removable]="true"
+            (removed)="remove(ability)">
+            {{ability}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input
+            placeholder="Add abilities..."
+            #abilityInput
+            [formControl]="abilityCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let ability of filteredAbilities | async" [value]="ability">
+            {{ability}}
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

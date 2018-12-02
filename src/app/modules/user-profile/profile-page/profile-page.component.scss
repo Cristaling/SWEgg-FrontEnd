@@ -1,0 +1,38 @@
+.user-photo {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    margin: 20px;
+
+    object-fit: cover;
+    object-position: center right;
+}
+
+.user-data {
+    float: left;
+    vertical-align: center;
+}
+
+.user-name {
+    display: block;
+    font-size: 2.00em;
+    font-weight: 300;
+    color: rgba(0, 0, 0, .96);
+    margin-left: -2px;
+}
+
+.user-email {
+    display: block;
+    font-size: 1.50em;
+    font-weight: 150;
+    color: rgba(0, 0, 0, .96);
+    margin-left: -2px;
+}
+
+.user-birth {
+    display: block;
+    font-size: 0.50em;
+    font-weight: 150;
+    color: rgba(0, 0, 0, .96);
+    margin-left: -2px;
+}
