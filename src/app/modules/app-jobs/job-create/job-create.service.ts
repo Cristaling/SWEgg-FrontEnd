@@ -13,23 +13,4 @@ export class JobCreateService implements OnInit {
 
     ngOnInit(): void {
     }
-
-    /**
-     * Request to create Job
-     * @param jobType,jobStatus,title,description
-     * @returns {Observable<any>}
-     */
-    createJobHttp(jobType: string, jobStatus: string, title: string, description: string): Observable<any> {
-        const jobAddRequest = {
-            'jobType': jobType,
-            'jobStatus': jobStatus,
-            'title': title,
-            'description': description
-        };
-        return this.httpClient.post(urls.jobCreateUrl, jobAddRequest);
-    }
-
-    getJobTypesHttp(): Observable<any> {
-        return this.httpClient.get(urls.jobTypesUrl);
-    }
 }

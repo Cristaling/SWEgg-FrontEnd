@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {JobType} from '../../../shared/models/JobType';
-import {JobCreateService} from './job-create.service';
+import {AppJobsService} from '../app-jobs.service';
 
 @Component({
     selector: 'app-job-create',
@@ -22,7 +22,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
-        private jobCreateService: JobCreateService,
+        private appJobsService: AppJobsService,
         private activatedRoute: ActivatedRoute,
         private notificationService: NotificationsService
     ) {
@@ -39,7 +39,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             jobDescription: new FormControl('', Validators.required),
             isPrivate: new FormControl(''),
         });
-        this.jobCreateService.getJobTypesHttp().pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+        this.appJobsService.getJobTypesHttp().pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.jobTypes = response;
             return response.data;
         });
@@ -58,7 +58,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     onJobCreate() {
         const values = this.jobCreateForm.value;
         const jobStatus = values.isPrivate ? 'INVITED' : 'OPEN';
-        this.jobCreateService.createJobHttp(this.jobTypeSelected.value.toLocaleUpperCase(), jobStatus, values.jobTitle, values.jobDescription)
+        this.appJobsService.createJobHttp(this.jobTypeSelected.value.toLocaleUpperCase(), jobStatus, values.jobTitle, values.jobDescription)
             .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             if (jobStatus === 'INVITED') {
                 this.notificationService.showPopupMessage('Not implemented!', 'OK');
