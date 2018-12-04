@@ -16,7 +16,7 @@
                 <app-endorsements></app-endorsements>
             </mat-tab>
 
-            <mat-tab label="Password" *ngIf="currentUser.email === profileEmail">
+            <mat-tab label="Password" *ngIf="currentUser.email === profileEmail || !profileEmail">
                 <app-password-edit-page></app-password-edit-page>
             </mat-tab>
 
