@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -6,6 +6,7 @@ import {takeUntil} from 'rxjs/operators';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {JobType} from '../../../shared/models/JobType';
 import {AppJobsService} from '../app-jobs.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
     selector: 'app-job-create',
@@ -19,12 +20,14 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     jobTypeSelected: JobType;
 
     jobTypes: JobType[];
+    selectedAbilities: string[] = [];
 
     constructor(
         private router: Router,
         private appJobsService: AppJobsService,
         private activatedRoute: ActivatedRoute,
-        private notificationService: NotificationsService
+        private notificationService: NotificationsService,
+        private dialogRef: MatDialogRef<JobCreateComponent>
     ) {
     }
 
@@ -58,7 +61,11 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     onJobCreate() {
         const values = this.jobCreateForm.value;
         const jobStatus = values.isPrivate ? 'INVITED' : 'OPEN';
-        this.appJobsService.createJobHttp(this.jobTypeSelected.value.toLocaleUpperCase(), jobStatus, values.jobTitle, values.jobDescription)
+        this.appJobsService.createJobHttp(this.jobTypeSelected.value.toLocaleUpperCase(),
+            jobStatus,
+            values.jobTitle,
+            values.jobDescription,
+            this.selectedAbilities)
             .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             if (jobStatus === 'INVITED') {
                 this.notificationService.showPopupMessage('Not implemented!', 'OK');
@@ -66,6 +73,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
                 this.notificationService.showPopupMessage('Your job was saved successfully !', 'OK');
                 this.router.navigate(['..'], {relativeTo: this.activatedRoute});
             }
+            this.dialogRef.close();
         }, (error) => {
             if (error.status === 401) {
                 this.notificationService.showPopupMessage('An error occurred !', 'OK');

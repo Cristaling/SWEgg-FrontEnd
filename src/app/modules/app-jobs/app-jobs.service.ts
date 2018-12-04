@@ -17,14 +17,16 @@ export class AppJobsService {
      * @param {string} jobStatus
      * @param {string} title
      * @param {string} description
+     * @param abilities
      * @returns {Observable<any>}
      */
-    createJobHttp(jobType: string, jobStatus: string, title: string, description: string): Observable<any> {
+    createJobHttp(jobType: string, jobStatus: string, title: string, description: string, abilities: string[]): Observable<any> {
         const jobAddRequest: JsonJob = {
             'jobType': jobType,
             'jobStatus': jobStatus,
             'title': title,
-            'description': description
+            'description': description,
+            'abilities': abilities
         };
         return this.httpClient.post(urls.jobUrl, jobAddRequest);
     }

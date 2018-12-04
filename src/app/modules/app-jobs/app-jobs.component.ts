@@ -20,6 +20,7 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     allJobs: JsonJobSummary[] = [];
 
     finished = false;
+    dialogRef: any;
 
     constructor(
         private router: Router,
@@ -39,7 +40,7 @@ export class AppJobsComponent implements OnInit, OnDestroy {
         dialogConfig.disableClose = false;
         dialogConfig.autoFocus = true;
 
-        this.dialog.open(JobCreateComponent, dialogConfig);
+        this.dialogRef = this.dialog.open(JobCreateComponent, dialogConfig);
     }
 
     ngOnDestroy() {

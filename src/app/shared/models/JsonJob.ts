@@ -31,4 +31,9 @@ export interface JsonJob {
      */
     description?: string;
 
+    /**
+     *
+     */
+    abilities?: string[];
+
 }
