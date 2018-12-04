@@ -4,6 +4,8 @@ import {startWith, map, takeUntil, take} from 'rxjs/operators';
 import { pipe, Subject } from 'rxjs';
 import { NotificationsService } from 'src/app/shared/services/notifications.service';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {JsonUserData} from '../../../shared/models/JsonUserData';
+import {AuthService} from '../../../core/authentication/auth.service';
 
 @Component({
   selector: 'app-endorsements',
@@ -18,10 +20,14 @@ export class EndorsementsComponent implements OnInit {
     abilitiesToAdd: string[] = [];
     endorsements: any;
 
+    currentUser: JsonUserData;
+
     constructor(private endorsementsService: EndorsementsService,
-        private notificationService: NotificationsService) { }
+        private notificationService: NotificationsService,
+        private authService: AuthService) { }
 
     ngOnInit() {
+        this.currentUser = this.authService.getCurrentUser();
         this.loadUserEndorsements();
     }
 

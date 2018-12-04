@@ -1,6 +1,6 @@
 <div class="mt20 col-md-12">
     <div fxLayout="column">
-        <div fxLayout="row">
+        <div *ngIf="userEmail === currentUser.email" fxLayout="row">
             <app-ability-selector
                 fxFlex="90"
                 [selectedAbilities]="abilitiesToAdd">
