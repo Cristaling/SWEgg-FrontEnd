@@ -23,7 +23,9 @@ export class ProfilePageComponent implements OnInit {
         private profileService: ProfileService) { }
 
     ngOnInit() {
-        this.loadUserData();
+        if (this.userEmail) {
+            this.loadUserData();
+        }
     }
 
     loadUserData() {

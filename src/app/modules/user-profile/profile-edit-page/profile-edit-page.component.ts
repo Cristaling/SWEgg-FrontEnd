@@ -49,18 +49,17 @@ export class ProfileEditPageComponent implements OnInit, OnDestroy {
     }
 
     showProfileData() {
-        const user: JsonUserData = this.authService.getCurrentUser();
         let date = null;
-        if (user.birthDate != null) {
-            date = user.birthDate.toString().split('T')[0];
+        if (this.currentUser.birthDate != null) {
+            date = this.currentUser.birthDate.toString().split('T')[0];
         }
-        this.profileForm.patchValue({'firstName': user.firstName});
-        this.profileForm.patchValue({'lastName': user.lastName});
+        this.profileForm.patchValue({'firstName': this.currentUser.firstName});
+        this.profileForm.patchValue({'lastName': this.currentUser.lastName});
         if (date != null) {
             this.profileForm.patchValue({'birthDate': new Date(date)});
         }
-        this.profileForm.patchValue({'town': user.town});
-        this.profileForm.patchValue({'email': user.email});
+        this.profileForm.patchValue({'town': this.currentUser.town});
+        this.profileForm.patchValue({'email': this.currentUser.email});
     }
 
     onChangeUserData() {
