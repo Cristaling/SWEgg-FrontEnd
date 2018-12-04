@@ -1,11 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {JobCreateComponent} from './job-create/job-create.component';
 import {ProfileService} from '../../shared/services/profile.service';
 import {JsonJobSummary} from '../../shared/models/JsonJobSummary';
 import {AppJobsService} from './app-jobs.service';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
+import {ArrayHelper} from '../../shared/helpers/array-helper';
 
 @Component({
   selector: 'app-app-jobs',
@@ -21,6 +24,8 @@ export class AppJobsComponent implements OnInit, OnDestroy {
 
     finished = false;
     dialogRef: any;
+    filteredTitleOptions: Observable<string[]>;
+    controlSearchTitle = new FormControl();
 
     constructor(
         private router: Router,
@@ -30,6 +35,11 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.filteredTitleOptions = this.controlSearchTitle.valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this._filter(value))
+            );
         this.getJobs();
     }
 
@@ -63,5 +73,23 @@ export class AppJobsComponent implements OnInit, OnDestroy {
 
     onScroll() {
        this.getJobs();
+    }
+
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return ArrayHelper.removeDuplicates(this.allJobs.filter(job => job.title.toLowerCase().includes(filterValue)).map(job => job.title));
+    }
+
+    filterJobsByTitle(option: string) {
+        this.allJobs = this.allJobs.filter(job => job.title.startsWith(option));
+        this.finished = true;
+    }
+
+    removeFilters() {
+        this.controlSearchTitle.setValue('');
+        this.currentPage = 0;
+        this.finished = false;
+        this.getJobs();
     }
 }

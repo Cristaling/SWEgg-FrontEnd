@@ -47,7 +47,8 @@ import { AbilitySelectorService } from './services/ability-selector.service';
         InfiniteScrollModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatChipsModule
         // AppJobModule,
     ],
     exports: [
@@ -77,7 +78,8 @@ import { AbilitySelectorService } from './services/ability-selector.service';
         InfiniteScrollModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatChipsModule
     ],
     declarations: [AbilitySelectorComponent],
     providers: [AbilitySelectorService, MatNativeDateModule]

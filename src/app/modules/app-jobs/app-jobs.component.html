@@ -1,10 +1,27 @@
-<h3 class="mb10">Jobs</h3>
+<h3 class="mb20">Jobs</h3>
 
-<div class="w-100 mb10" style="display:flex;justify-content: flex-end;" >
-    <button mat-raised-button color="accent" (click)="onCreateJob()">
-        <mat-icon>add</mat-icon>
-        Add job
-    </button>
+<div fxLayout="row">
+    <form fxLayoutAlign="flex-start">
+        <mat-form-field class="">
+            <input type="text" placeholder="Search by title" matInput [formControl]="controlSearchTitle" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredTitleOptions | async" [value]="option" (click)="filterJobsByTitle(option)">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-chip-list class="ml10" fxLayoutAlign="center center">
+             <mat-chip style="cursor: pointer" (click)="removeFilters()">Remove filters</mat-chip>
+        </mat-chip-list>
+    </form>
+
+    <div fxFlex></div>
+    <div class="mb10">
+        <button mat-raised-button color="accent" (click)="onCreateJob()">
+            <mat-icon>add</mat-icon>
+            Add job
+        </button>
+    </div>
 </div>
 <mat-divider></mat-divider>
 
