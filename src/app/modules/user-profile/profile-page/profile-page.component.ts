@@ -29,6 +29,7 @@ export class ProfilePageComponent implements OnInit {
     }
 
     loadUserData() {
+        this.profilePicture = this.getProfilePicture(this.userEmail);
         this.profileService.getProfile(this.userEmail)
         .pipe(takeUntil(this.navigateToOtherComponent))
         .subscribe((userResponse: JsonUserData) => {
