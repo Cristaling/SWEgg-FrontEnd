@@ -23,7 +23,7 @@
         <mat-card-content style="font-size: 13px;text-align: justify">{{selectedJob.description}}</mat-card-content>
         <mat-card-actions>
             <div fxFlex fxLayoutAlign="center">
-                <button mat-button>
+                <button *ngIf="currentUser.email !== selectedJob.ownerEmail" mat-button>
                     <mat-icon class="nav-icon">send</mat-icon>
                     Apply
                 </button>

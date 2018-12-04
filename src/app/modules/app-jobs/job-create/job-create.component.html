@@ -1,52 +1,44 @@
-<div class="dialog">
 <h2 mat-dialog-title>Create a Job</h2>
 <form class="job-create-form" [formGroup]="jobCreateForm" (ngSubmit)="onJobCreate()">
-    <div fxFlex fxLayout="row" fxLayout.lt-md="column">
-        <div fxFlexFill>
-            <mat-form-field class="w-100">
-                <mat-select placeholder="Job Type" [(ngModel)]="jobTypeSelected" [ngModelOptions]="{standalone: true}">
-                    <mat-option *ngFor="let jobType of jobTypes" [value]="jobType">
-                        {{jobType.value}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
 
-        </div>
-        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
-            <div class="mb10" fxFlexFill>
-                <label>Job title<b class="text-danger">*</b></label>
-                <input class="form-control" formControlName="jobTitle">
-                <small class="text-danger"
-                       *ngIf="jobCreateForm.controls['jobTitle'].touched && jobCreateForm.controls['jobTitle'].hasError('required')">
-                    Title
-                    is required !
-                </small>
-            </div>
-        </div>
+    <mat-form-field class="w-100">
+        <mat-select placeholder="Job Type" [(ngModel)]="jobTypeSelected" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let jobType of jobTypes" [value]="jobType">
+                {{jobType.value}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <div class="mb10">
+        <label>Job title<b class="text-danger">*</b></label>
+        <input class="form-control" formControlName="jobTitle">
+        <small class="text-danger"
+               *ngIf="jobCreateForm.controls['jobTitle'].touched && jobCreateForm.controls['jobTitle'].hasError('required')">
+            Title
+            is required !
+        </small>
     </div>
-        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
-            <div class="mb10" fxFlexFill>
-                <label>Job description<b class="text-danger">*</b></label>
-                <textarea class="form-control" rows="5" formControlName="jobDescription"></textarea>
-                <small class="text-danger"
-                       *ngIf="jobCreateForm.controls['jobDescription'].touched && jobCreateForm.controls['jobDescription'].hasError('required')">
-                    Description
-                    is required !
-                </small>
-            </div>
-        </div>
-        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
-            <div fxFlexFill class="mb10">
-                <mat-checkbox formControlName="isPrivate"></mat-checkbox>
-                <label style="margin-left: 10px;">Private</label>
-            </div>
-        </div>
-        <div fxFlex fxLayout="row" fxLayout.lt-md="column">
-            <div fxFlexFill>
-                <button mat-raised-button color="primary" type="submit" [disabled]="!jobCreateForm.valid">
-                    Submit
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
+
+    <div class="mb10">
+        <label>Job description<b class="text-danger">*</b></label>
+        <textarea class="form-control" rows="5" formControlName="jobDescription"></textarea>
+        <small class="text-danger"
+               *ngIf="jobCreateForm.controls['jobDescription'].touched && jobCreateForm.controls['jobDescription'].hasError('required')">
+            Description
+            is required !
+        </small>
+    </div>
+
+    <div class="mb10">
+        <mat-checkbox formControlName="isPrivate"></mat-checkbox>
+        <label style="margin-left: 10px;">Private</label>
+    </div>
+
+
+    <div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!jobCreateForm.valid">
+            Submit
+        </button>
+    </div>
+</form>

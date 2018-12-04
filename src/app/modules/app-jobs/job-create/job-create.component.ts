@@ -6,6 +6,7 @@ import {takeUntil} from 'rxjs/operators';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {JobType} from '../../../shared/models/JobType';
 import {AppJobsService} from '../app-jobs.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
     selector: 'app-job-create',
@@ -24,7 +25,8 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         private router: Router,
         private appJobsService: AppJobsService,
         private activatedRoute: ActivatedRoute,
-        private notificationService: NotificationsService
+        private notificationService: NotificationsService,
+        private dialogBox: MatDialog
     ) {
     }
 
@@ -75,5 +77,6 @@ export class JobCreateComponent implements OnInit, OnDestroy {
                 this.router.navigate(['..'], {relativeTo: this.activatedRoute});
             }
         });
+        this.dialogBox.closeAll();
     }
 }

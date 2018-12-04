@@ -11,6 +11,7 @@ import {AuthService} from '../../../core/authentication/auth.service';
 import {Router} from '@angular/router';
 import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 import {JsonJob} from '../../models/JsonJob';
+import {JsonUser} from '../../models/JsonUser';
 
 @Component({
     selector: 'app-app-job',
@@ -24,6 +25,7 @@ export class AppJobComponent implements OnInit {
 
     // selectedJob: JsonJob;
     selectedJob: JsonJobSummary;
+    currentUser: JsonUser;
 
     constructor(private dialogBox: MatDialog,
                 private jobService: AppJobsService,
@@ -33,6 +35,7 @@ export class AppJobComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.currentUser = this.authService.getCurrentUser();
     }
 
     displayDescription(description: string) {

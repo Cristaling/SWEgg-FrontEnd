@@ -38,6 +38,7 @@ export class AppJobsComponent implements OnInit, OnDestroy {
 
         dialogConfig.disableClose = false;
         dialogConfig.autoFocus = true;
+        dialogConfig.width = '20em';
 
         this.dialog.open(JobCreateComponent, dialogConfig);
     }
