@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {NotificationsService} from '../../../shared/services/notifications.service';
+import {JobType} from '../../../shared/models/JobType';
 import {AppJobsService} from '../app-jobs.service';
 
 @Component({
@@ -15,10 +16,13 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
     private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
     jobCreateForm: FormGroup;
+    jobTypeSelected: JobType;
+
+    jobTypes: JobType[];
 
     constructor(
         private router: Router,
-        private jobCreateService: AppJobsService,
+        private appJobsService: AppJobsService,
         private activatedRoute: ActivatedRoute,
         private notificationService: NotificationsService
     ) {
@@ -30,12 +34,15 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
     initForms(): any {
         this.jobCreateForm = new FormGroup({
-            jobType: new FormControl('', Validators.required),
+            jobTypeSelected: new FormControl(''),
             jobTitle: new FormControl('', Validators.required),
             jobDescription: new FormControl('', Validators.required),
             isPrivate: new FormControl(''),
         });
-        this.jobCreateForm.patchValue({'jobType': 'SINGLE'});
+        this.appJobsService.getJobTypesHttp().pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+            this.jobTypes = response;
+            return response.data;
+        });
     }
 
 
@@ -51,7 +58,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     onJobCreate() {
         const values = this.jobCreateForm.value;
         const jobStatus = values.isPrivate ? 'INVITED' : 'OPEN';
-        this.jobCreateService.createJobHttp(values.jobType, jobStatus, values.jobTitle, values.jobDescription)
+        this.appJobsService.createJobHttp(this.jobTypeSelected.value.toLocaleUpperCase(), jobStatus, values.jobTitle, values.jobDescription)
             .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             if (jobStatus === 'INVITED') {
                 this.notificationService.showPopupMessage('Not implemented!', 'OK');

@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {JobCreateComponent} from './job-create/job-create.component';
 import {ProfileService} from '../../shared/services/profile.service';
 import {JsonJobSummary} from '../../shared/models/JsonJobSummary';
 import {AppJobsService} from './app-jobs.service';
@@ -22,7 +24,8 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private jobsService : AppJobsService) {
+        private dialog: MatDialog,
+        private jobsService: AppJobsService) {
     }
 
     ngOnInit() {
@@ -30,7 +33,13 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     }
 
     onCreateJob() {
-        this.router.navigate(['create'], {relativeTo: this.activatedRoute});
+
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+
+        this.dialog.open(JobCreateComponent, dialogConfig);
     }
 
     ngOnDestroy() {
