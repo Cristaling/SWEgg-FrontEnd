@@ -1,0 +1,9 @@
+<mat-list-option
+        matTooltip="{{people}}"
+        matBadge="{{people.length}}"
+        matBadgePosition="after"
+        matBadgeColor="accent"
+        [selected]="people.indexOf(currentUser.email) !== -1"
+        (click)="endorse(ability)">
+    {{ability}}
+</mat-list-option>

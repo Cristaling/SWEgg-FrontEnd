@@ -24,6 +24,9 @@ export class ProfileHandlerComponent implements OnInit {
         this.currentUser = this.authService.getCurrentUser();
         this.route.paramMap.subscribe(params => {
             this.profileEmail = params.get('email');
+            if (!this.profileEmail) {
+                this.profileEmail = this.currentUser.email;
+            }
         });
     }
 

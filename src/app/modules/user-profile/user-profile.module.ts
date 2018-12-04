@@ -10,6 +10,7 @@ import { ProfileHandlerComponent } from './profile-handler/profile-handler.compo
 import { EndorsementsComponent } from './endorsements/endorsements.component';
 import { ProfileEditPageComponent } from './profile-edit-page/profile-edit-page.component';
 import { PasswordEditPageComponent } from './password-edit-page/password-edit-page.component';
+import { EndorsementComponent } from './endorsements/endorsement/endorsement.component';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { PasswordEditPageComponent } from './password-edit-page/password-edit-pa
         ProfileHandlerComponent,
         EndorsementsComponent,
         ProfileEditPageComponent,
-        PasswordEditPageComponent],
+        PasswordEditPageComponent,
+        EndorsementComponent],
     providers: [UserProfileService, EndorsementsService]
 })
 export class UserProfileModule {

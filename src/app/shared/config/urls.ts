@@ -10,7 +10,7 @@ export const urls = {
     profilePictureUrl: [baseEndpoint, 'user', 'profile-picture'].join('/'),
     userUrl: [baseEndpoint, 'user/'].join('/'),
     abilitiesUrl: [baseEndpoint, 'ability'].join('/'),
-    addAbilitiesUrl: [baseEndpoint, 'ability', 'add'].join('/'),
+    toggleEndorsementUrl: [baseEndpoint, 'ability', 'endorse'].join('/'),
     endorsementsUrl: [baseEndpoint, 'ability', 'endorsements'].join('/'),
     jobUrl: ['api', 'job'].join('/'),
     getJobSummaries: ['api', 'job', 'summaries'].join('/'),

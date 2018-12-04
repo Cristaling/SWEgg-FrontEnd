@@ -1,4 +1,3 @@
-import { EndorsementMap } from './../../../shared/models/EndorsementMap';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,9 +11,9 @@ export class EndorsementsService {
     /**
      * Get current user profile
      * @param {string} email of user
-     * @returns {Observable<EndorsementMap>}
+     * @returns {Observable<any>}
      */
-    getEndorsements(email: string): Observable<EndorsementMap> {
+    getEndorsements(email: string): Observable<any> {
         const params = new HttpParams().set('email', email);
         return this.httpClient.get(urls.endorsementsUrl, {params: params});
     }
@@ -22,8 +21,11 @@ export class EndorsementsService {
     /**
      * Add abilities
      */
-    addAbilitiesHttp(abilities: string[]): Observable<any> {
-        return this.httpClient.post(urls.addAbilitiesUrl, abilities);
+    toggleEndorsementHttp(ability: string, email: string): Observable<any> {
+        return this.httpClient.post(urls.toggleEndorsementUrl, {
+            'email': email,
+            'abilityName': ability
+        });
     }
 
 }

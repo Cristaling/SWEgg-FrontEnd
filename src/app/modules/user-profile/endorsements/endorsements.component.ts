@@ -1,8 +1,9 @@
 import { EndorsementsService } from './endorsements.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { startWith, map, takeUntil } from 'rxjs/operators';
+import {Component, OnInit, Input, OnChanges} from '@angular/core';
+import {startWith, map, takeUntil, take} from 'rxjs/operators';
 import { pipe, Subject } from 'rxjs';
 import { NotificationsService } from 'src/app/shared/services/notifications.service';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-endorsements',
@@ -15,6 +16,7 @@ export class EndorsementsComponent implements OnInit {
 
     @Input() userEmail: string;
     abilitiesToAdd: string[] = [];
+    endorsements: any;
 
     constructor(private endorsementsService: EndorsementsService,
         private notificationService: NotificationsService) { }
@@ -24,15 +26,21 @@ export class EndorsementsComponent implements OnInit {
     }
 
     loadUserEndorsements() {
-
+        this.endorsementsService.getEndorsements(this.userEmail)
+            .pipe(takeUntil(this.navigateToOtherComponent))
+            .subscribe(response => {
+                this.endorsements = response;
+            });
     }
 
     addAbilities() {
-        this.endorsementsService.addAbilitiesHttp(this.abilitiesToAdd)
-            .pipe(takeUntil(this.navigateToOtherComponent))
-            .subscribe(response => {
-                this.notificationService.showPopupMessage('Testing was successfull!', 'OK');
-            });
+        for (const ability of this.abilitiesToAdd) {
+            this.endorsementsService.toggleEndorsementHttp(ability, this.userEmail)
+                .pipe(takeUntil(this.navigateToOtherComponent))
+                .subscribe(response => {
+                    // this.notificationService.showPopupMessage('Testing was successfull!', 'OK');
+                });
+        }
     }
 
 }

@@ -1,6 +1,24 @@
-<div class="mt20 col-md-10">
-    <app-ability-selector [selectedAbilities]="abilitiesToAdd"></app-ability-selector>
-    <div (click)="addAbilities()" >
-        Test
+<div class="mt20 col-md-12">
+    <div fxLayout="column">
+        <div fxLayout="row">
+            <app-ability-selector
+                fxFlex="90"
+                [selectedAbilities]="abilitiesToAdd">
+            </app-ability-selector>
+            <button
+                fxFlex="10"
+                mat-raised-button
+                color="primary"
+                (click)="addAbilities()" >
+                Add
+            </button>
+        </div>
+        <mat-selection-list class="col-md-12">
+            <app-endorsement *ngFor="let endorsement of endorsements"
+                             [ability]="endorsement.ability"
+                             [people]="endorsement.emails"
+                             [userEmail]="userEmail">
+            </app-endorsement>
+        </mat-selection-list>
     </div>
 </div>
