@@ -1,6 +1,6 @@
 <div class="mt20 col-md-12">
     <div fxLayout="column">
-        <div *ngIf="userEmail === currentUser.email" fxLayout="row">
+        <div *ngIf="userEmail === currentUser.email" fxLayout="row" fxLayoutAlign="space-around center">
             <app-ability-selector
                 fxFlex="90"
                 [selectedAbilities]="abilitiesToAdd">
@@ -9,6 +9,7 @@
                 fxFlex="10"
                 mat-raised-button
                 color="primary"
+                style="height: 50%"
                 [disabled]="abilitiesToAdd.length == 0"
                 (click)="addAbilities()" >
                 Add
