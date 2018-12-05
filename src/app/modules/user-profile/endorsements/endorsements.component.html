@@ -9,6 +9,7 @@
                 fxFlex="10"
                 mat-raised-button
                 color="primary"
+                [disabled]="abilitiesToAdd.length == 0"
                 (click)="addAbilities()" >
                 Add
             </button>
