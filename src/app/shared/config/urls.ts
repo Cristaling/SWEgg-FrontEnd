@@ -2,6 +2,7 @@ const baseEndpoint = 'api';
 
 export const urls = {
     loginUserUrl: [baseEndpoint, 'security', 'login'].join('/'),
+    socialLoginUserUrl: [baseEndpoint, 'security', 'social', 'login'].join('/'),
     getProfileUrl: [baseEndpoint, 'user', 'profile'].join('/'),
     registerUserUrl: [baseEndpoint, 'register'].join('/'),
     jobCreateUrl: ['api', 'job'].join('/'),
