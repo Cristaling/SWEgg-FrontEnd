@@ -34,8 +34,11 @@ export class AppJobsService {
      * Get all summaries for jobs
      * @returns {Observable<any>}
      */
-    public getJobsHttp(page: number, count: number): Observable<any> {
-        const params = new HttpParams().set('page', String(page)).set('count', String(count));
+    public getJobsHttp(page: number, count: number, title?: string): Observable<any> {
+        let params = new HttpParams().set('page', String(page)).set('count', String(count));
+        if (title) {
+            params = params.set('title', title);
+        }
         return this.httpClient.get(urls.getJobSummaries, {params: params});
     }
 

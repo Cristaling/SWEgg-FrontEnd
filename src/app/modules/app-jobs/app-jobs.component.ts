@@ -27,6 +27,8 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     filteredTitleOptions: Observable<string[]>;
     controlSearchTitle = new FormControl();
 
+    waitSearchTitle;
+
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -58,11 +60,11 @@ export class AppJobsComponent implements OnInit, OnDestroy {
         this.navigateToOtherComponent.complete();
     }
 
-    getJobs() {
+    getJobs(title?: string) {
         if (this.finished) {
             return;
         }
-        this.jobsService.getJobsHttp(this.currentPage, this.countPage).subscribe(jobsSummaries => {
+        this.jobsService.getJobsHttp(this.currentPage, this.countPage, title).subscribe(jobsSummaries => {
             if (jobsSummaries.length === 0 || jobsSummaries.length < this.countPage) {
                 this.finished = true;
             }
@@ -81,15 +83,24 @@ export class AppJobsComponent implements OnInit, OnDestroy {
         return ArrayHelper.removeDuplicates(this.allJobs.filter(job => job.title.toLowerCase().includes(filterValue)).map(job => job.title));
     }
 
-    filterJobsByTitle(option: string) {
-        this.allJobs = this.allJobs.filter(job => job.title.startsWith(option));
-        this.finished = true;
+    filterJobsByTitle() {
+        clearTimeout(this.waitSearchTitle);
+        this.waitSearchTitle = setTimeout(() => {
+            this.currentPage = 0;
+            this.finished = false;
+            this.allJobs = [];
+            this.getJobs(this.controlSearchTitle.value);
+        }, 500);
+
+        // this.allJobs = this.allJobs.filter(job => job.title.startsWith(option));
+        // this.finished = true;
     }
 
     removeFilters() {
         this.controlSearchTitle.setValue('');
         this.currentPage = 0;
         this.finished = false;
+        this.allJobs = [];
         this.getJobs();
     }
 }
