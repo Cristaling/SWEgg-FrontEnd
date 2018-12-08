@@ -12,6 +12,10 @@ import {Router} from '@angular/router';
 import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 import {JsonJob} from '../../models/JsonJob';
 import {JsonUser} from '../../models/JsonUser';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {JsonJobApplicationAddRequest} from '../../models/JsonJobApplicationAddRequest';
+import {NotificationsService} from '../../services/notifications.service';
 
 @Component({
     selector: 'app-app-job',
@@ -19,19 +23,23 @@ import {JsonUser} from '../../models/JsonUser';
     styleUrls: ['./app-job.component.scss']
 })
 export class AppJobComponent implements OnInit {
+    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
 
     @ViewChild('jobModal') jobModal;
     @Input() job: JsonJobSummary;
 
-    // selectedJob: JsonJob;
-    selectedJob: JsonJobSummary;
+    selectedJob: JsonJob;
+    applicationsJob: JsonJobApplicationAddRequest[];
+    currentUserApplicated: boolean = true;
+
     currentUser: JsonUser;
 
     constructor(private dialogBox: MatDialog,
                 private jobService: AppJobsService,
                 private profileService: ProfileService,
                 private authService: AuthService,
-                private router: Router) {
+                private router: Router,
+                private notificationService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -52,14 +60,23 @@ export class AppJobComponent implements OnInit {
         return title;
     }
 
-    onJobClick(job: JsonJob) {
-        // this.jobService.getJobHttp(job).subscribe((jobResponse: JsonJob) => {
-        //     this.selectedJob = jobResponse;
-        // });
-        this.selectedJob = job;
-        this.dialogBox.open(this.jobModal, {
-            width: '400px'
+    onJobClick(job) {
+        this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJob) => {
+            this.selectedJob = jobResponse;
+            this.jobService.getApplicationsForJob(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonJobApplicationAddRequest[]) => {
+                this.applicationsJob = applications;
+                this.verifyCurrentUserApplicated();
+            });
+            this.dialogBox.open(this.jobModal, {
+                width: '400px'
+            });
         });
+        // this.selectedJob = job;
+
+    }
+
+    verifyCurrentUserApplicated() {
+        this.currentUserApplicated = this.applicationsJob.find(application => application.applicant.email === this.currentUser.email) !== undefined;
     }
 
     getProfilePicture(email: string) {
@@ -73,5 +90,14 @@ export class AppJobComponent implements OnInit {
 
     closeDialog() {
         this.dialogBox.closeAll();
+    }
+
+    applyJob() {
+        this.jobService.applyToJob(this.selectedJob).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+            this.notificationService.showPopupMessage('You have successfully applied !', 'OK');
+            this.dialogBox.closeAll();
+        }, error1 =>  {
+            this.notificationService.showPopupMessage('An error occurred !', 'OK');
+        });
     }
 }

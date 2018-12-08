@@ -16,6 +16,6 @@ export const urls = {
     jobUrl: ['api', 'job'].join('/'),
     getJobSummaries: ['api', 'job', 'summaries'].join('/'),
     getUserRelatedJobSummaries: ['api', 'job', 'related'].join('/'),
-
-
+    jobApplication: ['api', 'job-application'].join('/'),
+    applicationsByJob: ['api', 'job-application', 'getByJob'].join('/')
 };
