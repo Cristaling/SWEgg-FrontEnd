@@ -26,6 +26,7 @@ export class AppJobsService {
             'jobStatus': jobStatus,
             'title': title,
             'description': description,
+            'abilities' : abilities
         };
         return this.httpClient.post(urls.jobUrl, jobAddRequest);
     }
