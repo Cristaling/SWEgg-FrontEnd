@@ -8,7 +8,7 @@ import { MatDialog, MatListOption, MatSelectionList, MatSelectionListChange } fr
 import { urls } from '../../../shared/config/urls';
 import { ProfileService } from '../../../shared/services/profile.service';
 import { AuthService } from '../../../core/authentication/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { AppJobsService } from '../../../modules/app-jobs/app-jobs.service';
 import { JsonJob } from '../../models/JsonJob';
 import { JsonUser } from '../../models/JsonUser';
@@ -18,6 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { JsonJobApplicationAddRequest } from '../../models/JsonJobApplicationAddRequest';
 import { NotificationsService } from '../../services/notifications.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'app-app-job',
@@ -30,6 +31,7 @@ export class AppJobComponent implements OnInit, AfterViewInit {
 
     @ViewChild('jobModal') jobModal;
     @Input() job: JsonJobSummary;
+    @Input() visible = true;
 
     selectedJob: JsonJob;
     applicationsJob: JsonUser[];
@@ -42,11 +44,31 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         private profileService: ProfileService,
         private authService: AuthService,
         private router: Router,
-        private notificationService: NotificationsService) {
+        private notificationService: NotificationsService,
+        private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
+        if (!this.visible) {
+            this.activatedRoute.queryParams.subscribe(params => {
+                if (params.job) {
+                    this.jobService.getJobHttp(params.job).pipe(takeUntil(this.navigateToOtherComponent))
+                        .subscribe((jobResponse: JsonJobSummary) => {
+                            this.selectedJob = jobResponse;
+                            this.job = jobResponse;
+                            this.jobService.getApplicationsForJob(params.job).pipe(
+                                takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
+                                    this.applicationsJob = applications;
+                                    this.verifyCurrentUserApplicated();
+                                });
+                            this.dialogBox.open(this.jobModal, {
+                                width: '400px'
+                            });
+                        });
+                }
+            });
+        }
     }
 
     displayDescription(description: string) {
@@ -64,13 +86,14 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     }
 
     onJobClick(job) {
+        this.router.navigate(['.'], {relativeTo: this.activatedRoute, queryParams: { job: job.uuid }, queryParamsHandling: 'merge' });
         this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJobSummary) => {
             this.selectedJob = jobResponse;
             this.jobService.getApplicationsForJob(job.uuid).pipe(
                 takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
-                this.applicationsJob = applications;
-                this.verifyCurrentUserApplicated();
-            });
+                    this.applicationsJob = applications;
+                    this.verifyCurrentUserApplicated();
+                });
             this.dialogBox.open(this.jobModal, {
                 width: '400px'
             });

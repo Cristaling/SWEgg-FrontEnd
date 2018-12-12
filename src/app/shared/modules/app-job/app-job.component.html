@@ -1,4 +1,4 @@
-<mat-card class="hover-mat-card job-card" (click)="onJobClick(job)">
+<mat-card *ngIf="visible" class="hover-mat-card job-card" (click)="onJobClick(job)">
     <mat-card-header style="overflow:hidden;display: flex;align-items: center;">
         <img mat-card-avatar [matTooltip]="job.ownerName" class="header-user-image"
              [src]="getProfilePicture(job.ownerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
