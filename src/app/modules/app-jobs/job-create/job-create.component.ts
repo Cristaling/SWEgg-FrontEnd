@@ -44,6 +44,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         });
         this.appJobsService.getJobTypesHttp().pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.jobTypes = response;
+            this.jobTypeSelected = this.jobTypes[0];
             return response.data;
         });
     }
