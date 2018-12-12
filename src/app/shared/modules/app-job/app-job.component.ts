@@ -25,14 +25,14 @@ import {NotificationsService} from '../../services/notifications.service';
     styleUrls: ['./app-job.component.scss']
 })
 export class AppJobComponent implements OnInit, AfterViewInit {
-export class AppJobComponent implements OnInit {
+
     private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
 
     @ViewChild('jobModal') jobModal;
     @Input() job: JsonJobSummary;
 
     selectedJob: JsonJob;
-    applicationsJob: JsonJobApplicationAddRequest[];
+    applicationsJob: JsonUser[];
     currentUserApplicated: boolean = true;
 
     currentUser: JsonUser;
@@ -67,7 +67,7 @@ export class AppJobComponent implements OnInit {
     onJobClick(job) {
         this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJob) => {
             this.selectedJob = jobResponse;
-            this.jobService.getApplicationsForJob(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonJobApplicationAddRequest[]) => {
+            this.jobService.getApplicationsForJob(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
                 this.applicationsJob = applications;
                 this.verifyCurrentUserApplicated();
             });
@@ -75,13 +75,13 @@ export class AppJobComponent implements OnInit {
                 width: '400px'
             });
         });
-        this.getAllaplicationsForJob(this.selectedJob.uuid);
+        // this.getAllaplicationsForJob(this.selectedJob.uuid);
         // this.selectedJob = job;
 
     }
 
     verifyCurrentUserApplicated() {
-        this.currentUserApplicated = this.applicationsJob.find(application => application.applicant.email === this.currentUser.email) !== undefined;
+        this.currentUserApplicated = this.applicationsJob.find(application => application.email === this.currentUser.email) !== undefined;
     }
 
     getProfilePicture(email: string) {

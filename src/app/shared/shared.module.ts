@@ -43,15 +43,13 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatChipsModule,
         MatDialogModule,
         InfiniteScrollModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatBadgeModule,
         MatChipsModule,
-        MatChipsModule,
-        SocialLoginModule
+        SocialLoginModule,
         // AppJobModule,
         MatSelectModule
     ],
@@ -76,15 +74,13 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatChipsModule,
         AbilitySelectorComponent,
         MatDialogModule,
         InfiniteScrollModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatBadgeModule,
-        MatChipsModule,
-        SocialLoginModule
+        SocialLoginModule,
         MatChipsModule,
         MatSelectModule
     ],
