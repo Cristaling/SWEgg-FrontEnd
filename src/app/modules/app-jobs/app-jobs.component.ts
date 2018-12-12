@@ -16,7 +16,7 @@ import {ArrayHelper} from '../../shared/helpers/array-helper';
   styleUrls: ['./app-jobs.component.scss']
 })
 export class AppJobsComponent implements OnInit, OnDestroy {
-    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     currentPage = 0;
     countPage = 8;
@@ -80,7 +80,8 @@ export class AppJobsComponent implements OnInit, OnDestroy {
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
 
-        return ArrayHelper.removeDuplicates(this.allJobs.filter(job => job.title.toLowerCase().includes(filterValue)).map(job => job.title));
+        return ArrayHelper.removeDuplicates(
+            this.allJobs.filter(job => job.title.toLowerCase().includes(filterValue)).map(job => job.title));
     }
 
     filterJobsByTitle() {

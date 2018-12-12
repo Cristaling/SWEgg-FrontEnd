@@ -24,4 +24,7 @@ export interface JsonJobSummary {
      */
     description?: string;
 
+    employeeEmail?: string;
+    employeeName?: string;
+
 }

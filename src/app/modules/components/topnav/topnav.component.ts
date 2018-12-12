@@ -9,7 +9,7 @@ import {AuthService} from '../../../core/authentication/auth.service';
     styleUrls: ['./topnav.component.scss']
 })
 export class TopnavComponent implements OnInit {
-    pushRightClass: string = 'push-right';
+    pushRightClass = 'push-right';
 
     constructor(public router: Router, private translate: TranslateService, private authService: AuthService) {
         this.router.events.subscribe(val => {

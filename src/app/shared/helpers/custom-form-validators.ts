@@ -10,12 +10,11 @@ export class CustomValidators extends Validators {
         }
 
         return password === confirmPassword ? null : {invalidConfirm: true};
-    };
+    }
 
     static dateValidator: ValidatorFn = (control: FormControl): ValidationErrors | null => {
         if (control.value) {
             return new Date(control.value).toString() == null ? {invalidDate: true} : null;
         }
-    };
-
+    }
 }

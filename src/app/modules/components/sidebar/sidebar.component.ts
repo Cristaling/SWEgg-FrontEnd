@@ -9,7 +9,7 @@ import {NotificationsService} from '../../../shared/services/notifications.servi
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-    showMenu: string = '';
+    showMenu = '';
     currentUser: JsonUserData;
     profileImage;
 

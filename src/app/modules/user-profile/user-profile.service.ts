@@ -26,7 +26,7 @@ export class UserProfileService {
         return this.httpClient.post(urls.changePasswordUrl, passwordJson);
     }
 
-    postProfileImage(file : File, email: string): Observable<any> {
+    postProfileImage(file: File, email: string): Observable<any> {
 
         const formData = new FormData();
         formData.append('file', file);

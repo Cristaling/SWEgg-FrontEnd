@@ -24,31 +24,33 @@
                 <span class="ml5" style="color: green; text-align: center;display: table-cell;vertical-align: middle;">OPEN</span>
             </div>
         </mat-card-header>
-
-        <mat-card-content style="font-size: 13px;text-align: justify">{{selectedJob.description}}</mat-card-content>
         <mat-accordion>
-            <mat-expansion-panel *ngIf="currentUser.email === selectedJob.owner.email">
+            <mat-expansion-panel *ngIf="currentUser.email === selectedJob.ownerEmail">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         People who applied for this job
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-selection-list #userSelection (selectionChange)="onSelectedUserForJob($event)">
-                    <mat-list-option *ngFor="let obiect of allAplicants" [value]="obiect">
+                    <mat-list-option *ngFor="let applicant of applicationsJob" 
+                    [value]="applicant"
+                    [selected]="applicant.email === job.employeeEmail">
                         <div style="display:flex">
-                            <img class="img-circle" src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png" style="margin-right: 5em;width:20px;height:20px;">
-                            <span>{{obiect.name}}</span>
+                            <img class="img-circle" 
+                            [src]="getProfilePicture(applicant.email)" 
+                            (click)="goToProfile(applicant.email)"
+                            style="margin-right: 5em;width:20px;height:20px;">
+                            <span>{{applicant.firstName}} {{applicant.lastName}}</span>
                         </div>
                     </mat-list-option>
                 </mat-selection-list>
                 <button mat-button (click)="submitApplicant(userSelection)">
-                    <mat-icon class="nav-icon">cancel</mat-icon>
-                    Close
+                    Select for your job
                 </button>
             </mat-expansion-panel>
         </mat-accordion>
-
-
+        <br>
+        
         <mat-card-content style="font-size: 13px;text-align: justify">{{selectedJob?.description}}</mat-card-content>
         <mat-card-actions>
             <div fxFlex fxLayoutAlign="center">

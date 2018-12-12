@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {JsonJobSummary} from '../../shared/models/JsonJobSummary';
-import {JsonJob} from '../../shared/models/JsonJob';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {urls} from '../../shared/config/urls';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { JsonJobSummary } from '../../shared/models/JsonJobSummary';
+import { JsonJob } from '../../shared/models/JsonJob';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { urls } from '../../shared/config/urls';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppJobsService {
@@ -26,7 +26,7 @@ export class AppJobsService {
             'jobStatus': jobStatus,
             'title': title,
             'description': description,
-            'abilities' : abilities
+            'abilities': abilities
         };
         return this.httpClient.post(urls.jobUrl, jobAddRequest);
     }
@@ -40,7 +40,7 @@ export class AppJobsService {
         if (title) {
             params = params.set('title', title);
         }
-        return this.httpClient.get(urls.getJobSummaries, {params: params});
+        return this.httpClient.get(urls.getJobSummaries, { params: params });
     }
 
     /**
@@ -50,13 +50,13 @@ export class AppJobsService {
      */
     public getJobHttp(uuid: string): Observable<any> {
         const httpParams = new HttpParams().set('jobUUID', uuid);
-        return this.httpClient.get(urls.jobUrl, {params: httpParams});
+        return this.httpClient.get(urls.jobUrl, { params: httpParams });
     }
 
 
     public getUserJobsHttp(email: string): Observable<any> {
         const params = new HttpParams().set('email', email);
-        return this.httpClient.get(urls.getUserRelatedJobSummaries, {params : params});
+        return this.httpClient.get(urls.getUserRelatedJobSummaries, { params: params });
     }
 
     getJobTypesHttp(): Observable<any> {
@@ -66,7 +66,7 @@ export class AppJobsService {
     getJobApplications(uuid: string): Observable<any> {
         const params = new HttpParams().set('uuid', uuid);
 
-        return this.httpClient.get(urls.getApplicationsForJob, {params : params });
+        return this.httpClient.get(urls.getApplicationsForJob, { params: params });
     }
 
     applyToJob(job: JsonJob): Observable<any> {
@@ -78,5 +78,9 @@ export class AppJobsService {
 
     getApplicationsForJob(uuid: string): Observable<any> {
         return this.httpClient.get(`${urls.applicationsByJob}/${uuid}`);
+    }
+
+    selectEmployeeForJob(jobUUID: string, employeeEmail: string) {
+        return this.httpClient.patch(urls.jobUrl, { jobUUID, email: employeeEmail });
     }
 }

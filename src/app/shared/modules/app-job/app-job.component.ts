@@ -1,23 +1,23 @@
-import {AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {JsonJobSummary} from '../../models/JsonJobSummary';
-import {MatDialog, MatListOption, MatSelectionList, MatSelectionListChange} from '@angular/material';
+import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { JsonJobSummary } from '../../models/JsonJobSummary';
+import { MatDialog, MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material';
 // import {JsonJob} from '../../models/JsonJob';
 // import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 // import {JsonJob} from '../../../shared/models/JsonJob';
 // import {AppJobsService} from '../app-jobs.service';
-import {urls} from '../../../shared/config/urls';
-import {ProfileService} from '../../../shared/services/profile.service';
-import {AuthService} from '../../../core/authentication/auth.service';
-import {Router} from '@angular/router';
-import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
-import {JsonJob} from '../../models/JsonJob';
-import {JsonUser} from '../../models/JsonUser';
-import {JsonUserData} from '../../models/JsonUserData';
-import {SelectionModel} from '@angular/cdk/collections';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {JsonJobApplicationAddRequest} from '../../models/JsonJobApplicationAddRequest';
-import {NotificationsService} from '../../services/notifications.service';
+import { urls } from '../../../shared/config/urls';
+import { ProfileService } from '../../../shared/services/profile.service';
+import { AuthService } from '../../../core/authentication/auth.service';
+import { Router } from '@angular/router';
+import { AppJobsService } from '../../../modules/app-jobs/app-jobs.service';
+import { JsonJob } from '../../models/JsonJob';
+import { JsonUser } from '../../models/JsonUser';
+import { JsonUserData } from '../../models/JsonUserData';
+import { SelectionModel } from '@angular/cdk/collections';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { JsonJobApplicationAddRequest } from '../../models/JsonJobApplicationAddRequest';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
     selector: 'app-app-job',
@@ -26,24 +26,23 @@ import {NotificationsService} from '../../services/notifications.service';
 })
 export class AppJobComponent implements OnInit, AfterViewInit {
 
-    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     @ViewChild('jobModal') jobModal;
     @Input() job: JsonJobSummary;
 
     selectedJob: JsonJob;
     applicationsJob: JsonUser[];
-    currentUserApplicated: boolean = true;
-
+    currentUserApplicated = true;
     currentUser: JsonUser;
     allAplicants: any[] = [];
 
     constructor(private dialogBox: MatDialog,
-                private jobService: AppJobsService,
-                private profileService: ProfileService,
-                private authService: AuthService,
-                private router: Router,
-                private notificationService: NotificationsService) {
+        private jobService: AppJobsService,
+        private profileService: ProfileService,
+        private authService: AuthService,
+        private router: Router,
+        private notificationService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -65,9 +64,10 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     }
 
     onJobClick(job) {
-        this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJob) => {
+        this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJobSummary) => {
             this.selectedJob = jobResponse;
-            this.jobService.getApplicationsForJob(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
+            this.jobService.getApplicationsForJob(job.uuid).pipe(
+                takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
                 this.applicationsJob = applications;
                 this.verifyCurrentUserApplicated();
             });
@@ -107,7 +107,20 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     }
 
     submitApplicant(userSelection) {
-        console.log(userSelection.selectedOptions.selected[0].value);
+        const valueSelected = userSelection.selectedOptions.selected[0];
+        if (valueSelected) {
+            const applicant = valueSelected.value;
+            if (this.job.employeeEmail === applicant.email) {
+                this.notificationService.showPopupMessage(`${this.job.employeeName} already selected for you job!`, 'OK');
+                return;
+            }
+            this.jobService.selectEmployeeForJob(this.job.uuid, applicant.email).pipe(
+                takeUntil(this.navigateToOtherComponent)).subscribe(_ => {
+                    this.job.employeeEmail = applicant.email;
+                    this.job.employeeName = `${applicant.firstName} ${applicant.lastName}`;
+                    this.notificationService.showPopupMessage(`${this.job.employeeName} selected for you job!`, 'OK');
+                });
+        }
     }
     getAllaplicationsForJob(jobUUID) {
         this.jobService.getJobApplications(jobUUID).subscribe(jobApplications => {
@@ -119,7 +132,7 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         this.jobService.applyToJob(this.selectedJob).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.notificationService.showPopupMessage('You have successfully applied !', 'OK');
             this.dialogBox.closeAll();
-        }, error1 =>  {
+        }, error1 => {
             this.notificationService.showPopupMessage('An error occurred !', 'OK');
         });
     }

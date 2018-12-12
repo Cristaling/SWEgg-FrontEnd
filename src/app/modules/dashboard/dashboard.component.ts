@@ -13,12 +13,12 @@ import {delay} from 'rxjs/operators';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit , OnDestroy {
-    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
     finishedAllJobs = false;
     emptyRelevantJobs = false;
     emptyAllJobs = false;
     allJobs: JsonJobSummary[] = [];
-    user : JsonUserData;
+    user: JsonUserData;
     constructor(
         private router: Router,
         private jobsService: AppJobsService,
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     }
 
     ngOnInit() {
-       this.user= this.authService.getCurrentUser();
+       this.user = this.authService.getCurrentUser();
         if (this.finishedAllJobs) {
             return;
         }

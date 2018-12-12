@@ -17,7 +17,7 @@ import {ImageValidator} from '../../shared/helpers/image-validator';
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
 
-    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     securityForm: FormGroup;
     profileForm: FormGroup;
@@ -59,12 +59,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     showProfileData() {
         const user: JsonUserData = this.authService.getCurrentUser();
         let date = null;
-        if(user.birthDate != null) {
+        if (user.birthDate != null) {
             date = user.birthDate.toString().split('T')[0];
         }
         this.profileForm.patchValue({'firstName': user.firstName});
         this.profileForm.patchValue({'lastName': user.lastName});
-        if(date != null) {
+        if (date != null) {
             this.profileForm.patchValue({'birthDate': new Date(date)});
         }
         this.profileForm.patchValue({'town': user.town});
@@ -82,7 +82,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         };
         this.userProfileService.changeUserDataHttp(userData).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
                 if (this.selectedFile && this.validSelectedFile) {
-                    this.userProfileService.postProfileImage(this.selectedFile, this.currentUser.email).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(image => {
+                    this.userProfileService.postProfileImage(this.selectedFile, this.currentUser.email)
+                    .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(image => {
                         this.notificationService.showPopupMessage('Profile data was updated successfully !', 'OK');
                         this.notificationService.updateProfileImageEvent.next(image);
                     }, error1 =>
@@ -102,15 +103,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         const formValues = this.securityForm.value;
         const currentPassword = SecurityHelper.hashPassword(formValues.currentPassword).toString();
         const newPassword = SecurityHelper.hashPassword(formValues.password).toString();
-        this.userProfileService.changePasswordHttp(currentPassword, newPassword).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+        this.userProfileService.changePasswordHttp(currentPassword, newPassword)
+        .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.notificationService.showPopupMessage('Password was successfully changed !', 'OK');
         });
     }
 
     onFileChanged(event) {
         const reader = new FileReader();
-        reader.onload = (event: any) => {
-            this.localUrl = event.target.result;
+        reader.onload = (loadEvent: any) => {
+            this.localUrl = loadEvent.target.result;
         };
         reader.readAsDataURL(event.target.files[0]);
         this.selectedFile = event.target.files[0];

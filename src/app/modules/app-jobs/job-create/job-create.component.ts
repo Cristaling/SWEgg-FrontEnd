@@ -15,7 +15,7 @@ import {MatDialogRef} from '@angular/material';
 })
 export class JobCreateComponent implements OnInit, OnDestroy {
 
-    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
     jobCreateForm: FormGroup;
     jobTypeSelected: JobType;
 

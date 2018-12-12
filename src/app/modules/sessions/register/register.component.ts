@@ -15,7 +15,7 @@ import {CustomValidators} from '../../../shared/helpers/custom-form-validators';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
-    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     registerForm: FormGroup;
 
@@ -50,7 +50,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     onRegister() {
         const register = this.registerForm.value;
-        this.registerService.registerUserHttp(register.email, register.password, register.firstName, register.lastName, register.birthDate, register.town).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+        this.registerService.registerUserHttp(register.email,
+                                              register.password,
+                                              register.firstName,
+                                              register.lastName,
+                                              register.birthDate,
+                                              register.town).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
             this.notificationService.showPopupMessage('Your account was successfully created !', 'OK');
             this.router.navigate(['../login'], {relativeTo: this.activatedRoute});
             }, (error) => {

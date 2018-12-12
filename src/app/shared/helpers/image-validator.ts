@@ -3,7 +3,7 @@ export class ImageValidator {
 
     public static validateImageFile(file: File): boolean {
         if (file.type.match('image.*')) {
-            if(file.size > this.maxFileSize){
+            if (file.size > this.maxFileSize) {
                 alert('File size exceeded 1MB. Please upload a smaller one !');
                 return false;
             }

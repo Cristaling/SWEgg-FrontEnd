@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 })
 export class ProfilePageComponent implements OnInit {
 
-    private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
+    private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     @Input() userEmail: string;
     user: JsonUserData;
