@@ -10,7 +10,7 @@ import {
     MatTabsModule, MatToolbarModule,
     MatTooltipModule,
     MatChipsModule,
-    MatAutocompleteModule, MatExpansionModule, MatBadgeModule
+    MatAutocompleteModule, MatExpansionModule, MatBadgeModule, MatSelectModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -48,8 +48,9 @@ import { AbilitySelectorService } from './services/ability-selector.service';
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatBadgeModule,
-        MatChipsModule
+        MatChipsModule,
         // AppJobModule,
+        MatSelectModule
     ],
     exports: [
         CommonModule,
@@ -79,7 +80,8 @@ import { AbilitySelectorService } from './services/ability-selector.service';
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatBadgeModule,
-        MatChipsModule
+        MatChipsModule,
+        MatSelectModule
     ],
     declarations: [AbilitySelectorComponent],
     providers: [AbilitySelectorService, MatNativeDateModule]

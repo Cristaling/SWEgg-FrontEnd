@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AppJobsService} from '../app-jobs/app-jobs.service';
 import {JsonUserData} from '../../shared/models/JsonUserData';
 import {AuthService} from '../../core/authentication/auth.service';
+import {delay} from 'rxjs/operators';
 
 @Component({
     selector: 'app-dashboard',
@@ -13,25 +14,41 @@ import {AuthService} from '../../core/authentication/auth.service';
 })
 export class DashboardComponent implements OnInit , OnDestroy {
     private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
-
-    allJobs: JsonJobSummary[];
-
+    finishedAllJobs = false;
+    emptyRelevantJobs = false;
+    emptyAllJobs = false;
+    allJobs: JsonJobSummary[] = [];
+    user : JsonUserData;
     constructor(
         private router: Router,
         private jobsService: AppJobsService,
-        private authService: AuthService,) {
+        private authService: AuthService) {
     }
 
     ngOnInit() {
-        const user: JsonUserData = this.authService.getCurrentUser();
-        this.jobsService.getUserJobsHttp(user.email).subscribe(jobsSummaries => {
-            this.allJobs = jobsSummaries;
-        });
+       this.user= this.authService.getCurrentUser();
+        if (this.finishedAllJobs) {
+            return;
+        }
+        this.getAllJobs();
+
     }
 
     ngOnDestroy() {
         this.navigateToOtherComponent.next();
         this.navigateToOtherComponent.complete();
+    }
+
+    getAllJobs() {
+        this.jobsService.getUserJobsHttp(this.user.email).subscribe(jobsSummaries => {
+            if (this.allJobs.length === 0 ) {
+                this.finishedAllJobs = true;
+            }
+            this.allJobs = jobsSummaries;
+            if (this.allJobs.length === 0) {
+                this.emptyAllJobs = true;
+            }
+        });
     }
 
 }

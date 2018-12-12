@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {JsonJobSummary} from '../../models/JsonJobSummary';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatListOption, MatSelectionList, MatSelectionListChange} from '@angular/material';
 // import {JsonJob} from '../../models/JsonJob';
 // import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 // import {JsonJob} from '../../../shared/models/JsonJob';
@@ -12,13 +12,15 @@ import {Router} from '@angular/router';
 import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 import {JsonJob} from '../../models/JsonJob';
 import {JsonUser} from '../../models/JsonUser';
+import {JsonUserData} from '../../models/JsonUserData';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
     selector: 'app-app-job',
     templateUrl: './app-job.component.html',
     styleUrls: ['./app-job.component.scss']
 })
-export class AppJobComponent implements OnInit {
+export class AppJobComponent implements OnInit, AfterViewInit {
 
     @ViewChild('jobModal') jobModal;
     @Input() job: JsonJobSummary;
@@ -26,6 +28,7 @@ export class AppJobComponent implements OnInit {
     // selectedJob: JsonJob;
     selectedJob: JsonJobSummary;
     currentUser: JsonUser;
+    allAplicants: any[] = [];
 
     constructor(private dialogBox: MatDialog,
                 private jobService: AppJobsService,
@@ -60,6 +63,7 @@ export class AppJobComponent implements OnInit {
         this.dialogBox.open(this.jobModal, {
             width: '400px'
         });
+        this.getAllaplicationsForJob(this.selectedJob.uuid);
     }
 
     getProfilePicture(email: string) {
@@ -73,5 +77,23 @@ export class AppJobComponent implements OnInit {
 
     closeDialog() {
         this.dialogBox.closeAll();
+    }
+
+    ngAfterViewInit(): void {
+
+    }
+
+    onSelectedUserForJob(checkbox) {
+        checkbox.source.deselectAll();
+        checkbox.option.selected = true;
+    }
+
+    submitApplicant(userSelection) {
+        console.log(userSelection.selectedOptions.selected[0].value);
+    }
+    getAllaplicationsForJob(jobUUID) {
+        this.jobService.getJobApplications(jobUUID).subscribe(jobApplications => {
+            this.allAplicants = jobApplications;
+        });
     }
 }

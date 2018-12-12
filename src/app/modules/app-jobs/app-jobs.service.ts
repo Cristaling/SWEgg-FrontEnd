@@ -58,4 +58,10 @@ export class AppJobsService {
     getJobTypesHttp(): Observable<any> {
         return this.httpClient.get(urls.jobTypesUrl);
     }
+
+    getJobApplications(uuid: string): Observable<any> {
+        const params = new HttpParams().set('uuid', uuid);
+
+        return this.httpClient.get(urls.getApplicationsForJob, {params : params });
+    }
 }
