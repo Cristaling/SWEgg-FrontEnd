@@ -10,7 +10,7 @@ import {
     MatTabsModule, MatToolbarModule,
     MatTooltipModule,
     MatChipsModule,
-    MatAutocompleteModule, MatExpansionModule, MatBadgeModule
+    MatAutocompleteModule, MatExpansionModule, MatBadgeModule, MatSelectModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -43,15 +43,15 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatChipsModule,
         MatDialogModule,
         InfiniteScrollModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatBadgeModule,
         MatChipsModule,
-        SocialLoginModule
+        SocialLoginModule,
         // AppJobModule,
+        MatSelectModule
     ],
     exports: [
         CommonModule,
@@ -74,15 +74,15 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
-        MatChipsModule,
         AbilitySelectorComponent,
         MatDialogModule,
         InfiniteScrollModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
         MatBadgeModule,
+        SocialLoginModule,
         MatChipsModule,
-        SocialLoginModule
+        MatSelectModule
     ],
     declarations: [AbilitySelectorComponent],
     providers: [

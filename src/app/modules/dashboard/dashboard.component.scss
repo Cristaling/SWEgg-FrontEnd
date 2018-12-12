@@ -8,6 +8,7 @@ table {
         border-radius: 5px;
         margin-top: -25px;
     }
+
 }
 
 .mat-table {
@@ -17,4 +18,20 @@ table {
 
 .mb-20 {
     margin-bottom: 20px;
+}
+
+.mat-card-empty{
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+.mat-card-with-elem{
+    height: 280px;
+    overflow: auto;
+
 }

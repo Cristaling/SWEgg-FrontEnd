@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {JsonJobSummary} from '../../models/JsonJobSummary';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatListOption, MatSelectionList, MatSelectionListChange} from '@angular/material';
 // import {JsonJob} from '../../models/JsonJob';
 // import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 // import {JsonJob} from '../../../shared/models/JsonJob';
@@ -12,6 +12,8 @@ import {Router} from '@angular/router';
 import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 import {JsonJob} from '../../models/JsonJob';
 import {JsonUser} from '../../models/JsonUser';
+import {JsonUserData} from '../../models/JsonUserData';
+import {SelectionModel} from '@angular/cdk/collections';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {JsonJobApplicationAddRequest} from '../../models/JsonJobApplicationAddRequest';
@@ -22,17 +24,19 @@ import {NotificationsService} from '../../services/notifications.service';
     templateUrl: './app-job.component.html',
     styleUrls: ['./app-job.component.scss']
 })
-export class AppJobComponent implements OnInit {
+export class AppJobComponent implements OnInit, AfterViewInit {
+
     private navigateToOtherComponent: Subject<any> = new Subject();  //destroy all subscriptions when component is destroyed
 
     @ViewChild('jobModal') jobModal;
     @Input() job: JsonJobSummary;
 
     selectedJob: JsonJob;
-    applicationsJob: JsonJobApplicationAddRequest[];
+    applicationsJob: JsonUser[];
     currentUserApplicated: boolean = true;
 
     currentUser: JsonUser;
+    allAplicants: any[] = [];
 
     constructor(private dialogBox: MatDialog,
                 private jobService: AppJobsService,
@@ -63,7 +67,7 @@ export class AppJobComponent implements OnInit {
     onJobClick(job) {
         this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJob) => {
             this.selectedJob = jobResponse;
-            this.jobService.getApplicationsForJob(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonJobApplicationAddRequest[]) => {
+            this.jobService.getApplicationsForJob(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
                 this.applicationsJob = applications;
                 this.verifyCurrentUserApplicated();
             });
@@ -71,12 +75,13 @@ export class AppJobComponent implements OnInit {
                 width: '400px'
             });
         });
+        // this.getAllaplicationsForJob(this.selectedJob.uuid);
         // this.selectedJob = job;
 
     }
 
     verifyCurrentUserApplicated() {
-        this.currentUserApplicated = this.applicationsJob.find(application => application.applicant.email === this.currentUser.email) !== undefined;
+        this.currentUserApplicated = this.applicationsJob.find(application => application.email === this.currentUser.email) !== undefined;
     }
 
     getProfilePicture(email: string) {
@@ -90,6 +95,24 @@ export class AppJobComponent implements OnInit {
 
     closeDialog() {
         this.dialogBox.closeAll();
+    }
+
+    ngAfterViewInit(): void {
+
+    }
+
+    onSelectedUserForJob(checkbox) {
+        checkbox.source.deselectAll();
+        checkbox.option.selected = true;
+    }
+
+    submitApplicant(userSelection) {
+        console.log(userSelection.selectedOptions.selected[0].value);
+    }
+    getAllaplicationsForJob(jobUUID) {
+        this.jobService.getJobApplications(jobUUID).subscribe(jobApplications => {
+            this.allAplicants = jobApplications;
+        });
     }
 
     applyJob() {
