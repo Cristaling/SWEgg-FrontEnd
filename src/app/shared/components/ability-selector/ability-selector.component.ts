@@ -53,15 +53,15 @@ export class AbilitySelectorComponent implements OnInit {
 
             // Add our ability
             if ((value || '').trim()) {
-                this.selectedAbilities.push(value.trim());
-            }
+                if (this.selectedAbilities.indexOf(value) === -1) {
+                    this.selectedAbilities.push(value.trim());
+                    if (input) {
+                        input.value = '';
+                    }
 
-            // Reset the input value
-            if (input) {
-                input.value = '';
+                    this.abilityCtrl.setValue(null);
+                }
             }
-
-            this.abilityCtrl.setValue(null);
         }
     }
 
