@@ -44,7 +44,7 @@ export class EndorsementsComponent implements OnInit {
             this.endorsementsService.toggleEndorsementHttp(ability, this.userEmail)
                 .pipe(takeUntil(this.navigateToOtherComponent))
                 .subscribe(response => {
-                    // this.notificationService.showPopupMessage('Testing was successfull!', 'OK');
+                    this.loadUserEndorsements();
                 });
         }
     }

@@ -9,7 +9,12 @@ export interface JsonJob {
     /**
      *
      */
-    user?: JsonUser;
+    owner?: JsonUser;
+
+    /**
+     *
+     */
+    employee?: JsonUser;
 
     /**
      *
@@ -35,5 +40,4 @@ export interface JsonJob {
      *
      */
     abilities?: string[];
-
 }

@@ -6,7 +6,6 @@ import {AppJobsRoutingModule} from './app-jobs-routing.module';
 import {AppJobsComponent} from './app-jobs.component';
 import {SharedModule} from '../../shared/shared.module';
 import {JobCreateComponent} from './job-create/job-create.component';
-import {JobCreateService} from './job-create/job-create.service';
 import {MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {AppJobsService} from './app-jobs.service';
@@ -29,7 +28,6 @@ import {AppJobModule} from '../../shared/modules/app-job/app-job/app-job.module'
         JobCreateComponent
     ],
     providers: [
-        JobCreateService,
         AppJobsService
     ],
     entryComponents: [JobCreateComponent],

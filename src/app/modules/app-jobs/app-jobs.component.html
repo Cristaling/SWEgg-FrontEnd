@@ -3,12 +3,13 @@
 <div fxLayout="row">
     <form fxLayoutAlign="flex-start">
         <mat-form-field class="">
-            <input type="text" placeholder="Search by title" matInput [formControl]="controlSearchTitle" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredTitleOptions | async" [value]="option" (click)="filterJobsByTitle(option)">
-                    {{option}}
-                </mat-option>
-            </mat-autocomplete>
+            <!--<input type="text" placeholder="Filter by title" matInput [formControl]="controlSearchTitle" [matAutocomplete]="auto">-->
+            <!--<mat-autocomplete #auto="matAutocomplete">-->
+                <!--<mat-option *ngFor="let option of filteredTitleOptions | async" [value]="option" (click)="filterJobsByTitle(option)">-->
+                    <!--{{option}}-->
+                <!--</mat-option>-->
+            <!--</mat-autocomplete>-->
+            <input type="text" placeholder="Filter by title" matInput [formControl]="controlSearchTitle" (keyup)="filterJobsByTitle()">
         </mat-form-field>
         <mat-chip-list class="ml10" fxLayoutAlign="center center">
              <mat-chip style="cursor: pointer" (click)="removeFilters()">Remove filters</mat-chip>

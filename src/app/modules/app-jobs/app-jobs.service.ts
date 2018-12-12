@@ -26,7 +26,7 @@ export class AppJobsService {
             'jobStatus': jobStatus,
             'title': title,
             'description': description,
-            'abilities': abilities
+            'abilities' : abilities
         };
         return this.httpClient.post(urls.jobUrl, jobAddRequest);
     }
@@ -35,8 +35,11 @@ export class AppJobsService {
      * Get all summaries for jobs
      * @returns {Observable<any>}
      */
-    public getJobsHttp(page: number, count: number): Observable<any> {
-        const params = new HttpParams().set('page', String(page)).set('count', String(count));
+    public getJobsHttp(page: number, count: number, title?: string): Observable<any> {
+        let params = new HttpParams().set('page', String(page)).set('count', String(count));
+        if (title) {
+            params = params.set('title', title);
+        }
         return this.httpClient.get(urls.getJobSummaries, {params: params});
     }
 
@@ -46,7 +49,8 @@ export class AppJobsService {
      * @returns {JsonJob}
      */
     public getJobHttp(uuid: string): Observable<any> {
-        return this.httpClient.get(urls.jobUrl);
+        const httpParams = new HttpParams().set('jobUUID', uuid);
+        return this.httpClient.get(urls.jobUrl, {params: httpParams});
     }
 
 
@@ -63,5 +67,16 @@ export class AppJobsService {
         const params = new HttpParams().set('uuid', uuid);
 
         return this.httpClient.get(urls.getApplicationsForJob, {params : params });
+    }
+
+    applyToJob(job: JsonJob): Observable<any> {
+        const uuidRequest = {
+            uuid: job.uuid
+        };
+        return this.httpClient.post(urls.jobApplication, uuidRequest);
+    }
+
+    getApplicationsForJob(uuid: string): Observable<any> {
+        return this.httpClient.get(`${urls.applicationsByJob}/${uuid}`);
     }
 }

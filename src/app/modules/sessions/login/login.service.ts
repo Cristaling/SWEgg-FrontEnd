@@ -25,4 +25,16 @@ export class LoginService implements OnInit {
         const hashedPassword = SecurityHelper.hashPassword(password);
         return this.httpClient.post(urls.loginUserUrl, {email: email, password: hashedPassword});
     }
+
+    /**
+     * Request to login
+     * @param email
+     * @param {string} password
+     * @returns {Observable<any>} 401 unauthorized if credentials are invalid, token if is valid
+     */
+    socialLoginUserHttp(token: string): Observable<any> {
+        return this.httpClient.post(urls.socialLoginUserUrl, {
+            token: token
+        });
+    }
 }

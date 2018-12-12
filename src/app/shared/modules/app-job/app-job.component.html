@@ -13,11 +13,16 @@
     <mat-card>
         <mat-card-header>
             <img mat-card-avatar
-                 [src]="getProfilePicture(selectedJob.ownerEmail)" (click)="goToProfile(selectedJob.ownerEmail)">
+                 [src]="getProfilePicture(job?.ownerEmail)" (click)="goToProfile(job?.ownerEmail)">
             <mat-card-title>
-                <h3 class="m-0">{{selectedJob.title}}</h3>
+                <h3 class="m-0">{{selectedJob?.title}}</h3>
             </mat-card-title>
-            <mat-card-subtitle style="font-size: 13px;">by {{selectedJob.ownerName}}</mat-card-subtitle>
+            <mat-card-subtitle style="font-size: 13px;">by {{job?.ownerName}}</mat-card-subtitle>
+            <div fxFlex></div>
+            <div *ngIf="selectedJob?.jobStatus === 'OPEN'" style="display: table;">
+                <mat-icon>event_available</mat-icon>
+                <span class="ml5" style="color: green; text-align: center;display: table-cell;vertical-align: middle;">OPEN</span>
+            </div>
         </mat-card-header>
 
         <mat-card-content style="font-size: 13px;text-align: justify">{{selectedJob.description}}</mat-card-content>
@@ -44,9 +49,10 @@
         </mat-accordion>
 
 
+        <mat-card-content style="font-size: 13px;text-align: justify">{{selectedJob?.description}}</mat-card-content>
         <mat-card-actions>
             <div fxFlex fxLayoutAlign="center">
-                <button *ngIf="currentUser.email !== selectedJob.ownerEmail" mat-button>
+                <button *ngIf="currentUser.email !== job.ownerEmail && !currentUserApplicated" mat-button (click)="applyJob()">
                     <mat-icon class="nav-icon">send</mat-icon>
                     Apply
                 </button>

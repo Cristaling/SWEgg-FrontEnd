@@ -26,6 +26,7 @@
         "@angular/router": "^6.0.0",
         "@ngx-translate/core": "^10.0.2",
         "@ngx-translate/http-loader": "^3.0.1",
+        "angular-6-social-login": "^1.1.1",
         "bootstrap": "^3.3.7",
         "chart.js": "^2.7.2",
         "classlist.js": "1.1.20150312",
