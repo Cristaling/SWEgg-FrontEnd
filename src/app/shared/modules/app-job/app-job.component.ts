@@ -117,6 +117,7 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     }
 
     closeDialog() {
+        this.router.navigate(['.'], {relativeTo: this.activatedRoute, queryParams: { job: null }, queryParamsHandling: 'merge' });
         this.dialogBox.closeAll();
     }
 
