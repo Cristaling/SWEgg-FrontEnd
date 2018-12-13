@@ -87,17 +87,17 @@ export class AppJobComponent implements OnInit, AfterViewInit {
 
     onJobClick(job) {
         this.router.navigate(['.'], {relativeTo: this.activatedRoute, queryParams: { job: job.uuid }, queryParamsHandling: 'merge' });
-        this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJobSummary) => {
-            this.selectedJob = jobResponse;
-            this.jobService.getApplicationsForJob(job.uuid).pipe(
-                takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
-                    this.applicationsJob = applications;
-                    this.verifyCurrentUserApplicated();
-                });
-            this.dialogBox.open(this.jobModal, {
-                width: '400px'
-            });
-        });
+        // this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJobSummary) => {
+        //     this.selectedJob = jobResponse;
+        //     this.jobService.getApplicationsForJob(job.uuid).pipe(
+        //         takeUntil(this.navigateToOtherComponent)).subscribe((applications: JsonUser[]) => {
+        //             this.applicationsJob = applications;
+        //             this.verifyCurrentUserApplicated();
+        //         });
+        //     this.dialogBox.open(this.jobModal, {
+        //         width: '400px'
+        //     });
+        // });
         // this.getAllaplicationsForJob(this.selectedJob.uuid);
         // this.selectedJob = job;
 
