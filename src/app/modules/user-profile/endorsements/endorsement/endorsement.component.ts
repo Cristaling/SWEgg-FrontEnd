@@ -42,4 +42,7 @@ export class EndorsementComponent implements OnInit {
             });
     }
 
+    displayPeople() {
+        return this.people.join(', ');
+    }
 }

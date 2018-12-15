@@ -41,12 +41,23 @@ export class EndorsementsComponent implements OnInit {
 
     addAbilities() {
         for (const ability of this.abilitiesToAdd) {
-            this.endorsementsService.toggleEndorsementHttp(ability, this.userEmail)
-                .pipe(takeUntil(this.navigateToOtherComponent))
-                .subscribe(response => {
-                    this.loadUserEndorsements();
-                });
+            if (!this.abilityAlreadyExists(ability)) {
+                this.endorsementsService.toggleEndorsementHttp(ability, this.userEmail)
+                    .pipe(takeUntil(this.navigateToOtherComponent))
+                    .subscribe(response => {
+                        this.loadUserEndorsements();
+                    });
+            }
         }
+    }
+
+    abilityAlreadyExists(ability) {
+        for (const endorsement of this.endorsements) {
+            if (endorsement.ability === ability) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
