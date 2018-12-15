@@ -113,7 +113,8 @@ export class AppJobComponent implements OnInit, AfterViewInit {
 
     goToProfile(email: string) {
         this.router.navigate([`/user-profile/${email}`]);
-        this.closeDialog();
+        this.dialogBox.closeAll();
+        // this.closeDialog();
     }
 
     closeDialog() {
