@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, NavigationEnd, ActivatedRoute} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../../../core/authentication/auth.service';
+import {Observable} from 'rxjs';
+import {JsonUserData} from '../../../shared/models/JsonUserData';
+import {FormControl} from '@angular/forms';
+import {UserProfileService} from '../../user-profile/user-profile.service';
 
 @Component({
     selector: 'app-topnav',
@@ -10,8 +14,12 @@ import {AuthService} from '../../../core/authentication/auth.service';
 })
 export class TopnavComponent implements OnInit {
     pushRightClass = 'push-right';
+    filteredUsers: Observable<JsonUserData[]>;
+    searchedUserCtrl = new FormControl();
 
-    constructor(public router: Router, private translate: TranslateService, private authService: AuthService) {
+    private waitSearchTitle;
+
+    constructor(public router: Router, private translate: TranslateService, public authService: AuthService, public userProfileService: UserProfileService) {
         this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -43,5 +51,19 @@ export class TopnavComponent implements OnInit {
 
     goToUserProfile() {
         this.router.navigate(['/user-profile']);
+    }
+
+    goToProfile(email: string) {
+        this.router.navigate([`/user-profile/${email}`]);
+    }
+
+    searchForUsers() {
+        clearTimeout(this.waitSearchTitle);
+        this.waitSearchTitle = setTimeout(() => {
+            this.userProfileService.searchForUser(this.searchedUserCtrl.value).subscribe(users => {
+                this.filteredUsers = users;
+            });
+        }, 500);
+
     }
 }

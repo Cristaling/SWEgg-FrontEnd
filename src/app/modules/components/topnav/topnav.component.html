@@ -5,9 +5,24 @@
     <div class="nav-brand">
         My application
     </div>
-    <form class="hidden-sm" style="margin-left: 20px; margin-top: 5px; font-size: 16px">
-        <mat-form-field>
-            <input matInput placeholder="Search" type="text">
+    <form class="hidden-sm" style="margin-left: 20px; margin-top: 5px; font-size: 14px">
+        <mat-form-field style="width: 20vw">
+            <input
+                matInput
+                placeholder="Search user"
+                type="text"
+                [matAutocomplete]="auto"
+                [formControl]="searchedUserCtrl"
+                (click)="$event.target.select()"
+                (keyup)="searchForUsers()">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let user of filteredUsers" [value]="user.firstName + ' ' + user.lastName" (click)="goToProfile(user.email)">
+                    <img class="search-user-img" aria-hidden [src]="authService.getProfilePicture(user.email)" height="25">
+                    <span style="font-size: 14px">{{user.firstName + ' ' + user.lastName}}</span>
+                    <small *ngIf="user.town" class="text-muted"> | <span style="font-size: 10px">Town: {{user.town}}</span></small>
+                </mat-option>
+            </mat-autocomplete>
+            <mat-icon class="clear-search-button" matTooltip="Clear search">search</mat-icon>
         </mat-form-field>
     </form>
     <span class="nav-spacer"></span>

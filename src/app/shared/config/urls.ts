@@ -10,6 +10,7 @@ export const urls = {
     changePasswordUrl: [baseEndpoint, 'security', 'password'].join('/'),
     profilePictureUrl: [baseEndpoint, 'user', 'profile-picture'].join('/'),
     userUrl: [baseEndpoint, 'user/'].join('/'),
+    searchUserUrl: [baseEndpoint, 'user', 'search'].join('/'),
     abilitiesUrl: [baseEndpoint, 'ability'].join('/'),
     toggleEndorsementUrl: [baseEndpoint, 'ability', 'endorse'].join('/'),
     endorsementsUrl: [baseEndpoint, 'ability', 'endorsements'].join('/'),

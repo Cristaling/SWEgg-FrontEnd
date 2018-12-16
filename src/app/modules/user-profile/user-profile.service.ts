@@ -34,4 +34,9 @@ export class UserProfileService {
 
         return this.httpClient.patch(urls.userUrl, formData, {responseType: 'text'});
     }
+
+    searchForUser(name): Observable<any> {
+        const params = new HttpParams().set('name', name);
+        return this.httpClient.get(urls.searchUserUrl, {params: params});
+    }
 }

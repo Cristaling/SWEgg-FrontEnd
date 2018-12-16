@@ -5,6 +5,7 @@ import {AuthService} from '../../../core/authentication/auth.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import {takeUntil} from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -20,12 +21,16 @@ export class ProfilePageComponent implements OnInit {
     profilePicture: any;
 
     constructor(private authService: AuthService,
-        private profileService: ProfileService) { }
+        private profileService: ProfileService,
+                private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
-        if (this.userEmail) {
-            this.loadUserData();
-        }
+        this.activatedRoute.params.subscribe(param => {
+            this.userEmail = param.email;
+            if (this.userEmail) {
+                this.loadUserData();
+            }
+        });
     }
 
     loadUserData() {
