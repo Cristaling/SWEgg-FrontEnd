@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
                                               register.lastName,
                                               register.birthDate,
                                               register.town).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
-            this.notificationService.showPopupMessage('Your account was successfully created !', 'OK');
+            this.notificationService.showPopupMessage('A confirmation mail was sent ! You have to activate your account to login !', 'OK');
             this.router.navigate(['../login'], {relativeTo: this.activatedRoute});
             }, (error) => {
             if (error.status === 409) {

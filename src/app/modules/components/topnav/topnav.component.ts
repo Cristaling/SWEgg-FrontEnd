@@ -25,6 +25,11 @@ export class TopnavComponent implements OnInit {
                 this.toggleSidebar();
             }
         });
+        // this.filteredUsers = this.searchedUserCtrl.valueChanges
+        //     .pipe(
+        //         startWith(''),
+        //         map(userName => userName ? this._filterSearchedUsers(userName) : this.usersForSearch.slice())
+        //     );
     }
 
     ngOnInit() {

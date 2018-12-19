@@ -21,8 +21,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 }
             });
         }
-
-        return next.handle(request).pipe(catchError((error, caught) => {
+        return this.router.url === '/sessions/login' ? next.handle(request) : next.handle(request).pipe(catchError((error, caught) => {
             this.handleAuthError(error);
             return of(error);
         }) as any);
