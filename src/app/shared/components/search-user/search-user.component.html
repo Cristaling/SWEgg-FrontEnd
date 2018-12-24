@@ -9,12 +9,32 @@
             (click)="$event.target.select()"
             (keyup)="searchForUsers()">
         <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let user of filteredUsers" [value]="user.firstName + ' ' + user.lastName" (click)="goToProfile(user.email)">
+            <mat-option *ngFor="let user of filteredUsers" [value]="user.firstName + ' ' + user.lastName" (click)="handleClickUser(user)">
                 <img class="search-user-img" aria-hidden [src]="authService.getProfilePicture(user.email)" height="25">
                 <span style="margin-left:1em;font-size: 14px">{{user.firstName + ' ' + user.lastName}}</span>
                 <small *ngIf="user.town" class="text-muted"> | <span style="font-size: 10px">Town: {{user.town}}</span></small>
             </mat-option>
         </mat-autocomplete>
-        <mat-icon class="clear-search-button" matTooltip="Clear search">search</mat-icon>
     </mat-form-field>
+    <mat-icon matTooltip="Search">search</mat-icon>
 </form>
+
+<div *ngIf="userToRecommend">
+    <mat-card *ngFor="let user of recommandationReceivers; let i = index">
+        <mat-card-header>
+            <img mat-card-avatar
+                 [src]="authService.getProfilePicture(user.email)">
+            <mat-card-title><span  style="font-size: 12px;">{{user.firstName + ' ' + user.lastName}}</span></mat-card-title>
+            <mat-card-subtitle><span  style="font-size: 12px;">{{user.email}}</span></mat-card-subtitle>
+            <div fxFlex></div>
+            <button mat-button (click)="discardUser(i)">
+                <mat-icon fxFlexAlign="center" >delete</mat-icon>
+            </button>
+        </mat-card-header>
+    </mat-card>
+    <div fxFlex fxLayoutAlign="center" class="mt20" (click)="sendRecommandation()">
+        <button *ngIf="recommandationReceivers.length !== 0" mat-raised-button color="primary">
+            Submit
+        </button>
+    </div>
+</div>

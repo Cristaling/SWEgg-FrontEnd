@@ -1,28 +1,31 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JsonUserData } from './../../../shared/models/JsonUserData';
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ViewChild, OnDestroy} from '@angular/core';
 import {AuthService} from '../../../core/authentication/auth.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import {takeUntil} from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent implements OnInit, OnDestroy {
 
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
+    @ViewChild('recommendUser') recommendUser;
     @Input() userEmail: string;
     user: JsonUserData;
     profilePicture: any;
 
     constructor(private authService: AuthService,
         private profileService: ProfileService,
-                private activatedRoute: ActivatedRoute) { }
+                private activatedRoute: ActivatedRoute,
+                private dialogBox: MatDialog) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe(param => {
@@ -47,4 +50,15 @@ export class ProfilePageComponent implements OnInit {
         return this.authService.getProfilePicture(email);
     }
 
+    openRecommendDialog() {
+        const dialogOptions: MatDialogConfig = {
+            height: '70%'
+        };
+        this.dialogBox.open(this.recommendUser, dialogOptions);
+    }
+
+    ngOnDestroy(): void {
+        this.navigateToOtherComponent.next();
+        this.navigateToOtherComponent.complete();
+    }
 }

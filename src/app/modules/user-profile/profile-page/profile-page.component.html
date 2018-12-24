@@ -8,9 +8,12 @@
 
         <div fxLayout="column">
 
-            <h1>
-                {{user.firstName}} {{user.lastName}}
-            </h1>
+            <div fxLayout="row" style="display:flex;align-items: center">
+                <h1>
+                    {{user.firstName}} {{user.lastName}}
+                </h1>
+                <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend to others</button>
+            </div>
 
             <label class="mt10">Email</label>
             <span>
@@ -32,3 +35,9 @@
     </div>
 
 </div>
+
+<ng-template #recommendUser>
+    <h4>Recommend user {{user.firstName + ' ' + user.lastName}} to:</h4>
+    <mat-divider style="margin-bottom: 2em"></mat-divider>
+    <app-search-user [userToRecommend]="user"></app-search-user>
+</ng-template>

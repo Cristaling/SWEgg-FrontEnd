@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {JsonUserData} from '../../shared/models/JsonUserData';
 import {urls} from '../../shared/config/urls';
 import {Observable} from 'rxjs';
+import {JsonUserRecommandation} from '../../shared/models/JsonUserRecommandation';
 
 @Injectable()
 export class UserProfileService {
@@ -38,5 +39,13 @@ export class UserProfileService {
     searchForUser(name): Observable<any> {
         const params = new HttpParams().set('name', name);
         return this.httpClient.get(urls.searchUserUrl, {params: params});
+    }
+
+    sendRecommandation(email: string, receiversEmail: string[]) {
+        const recommandation: JsonUserRecommandation = {
+            recommendedUserEmail: email,
+            recommendedToEmail: receiversEmail
+        };
+        return this.httpClient.post(urls.recommandationUser, recommandation);
     }
 }
