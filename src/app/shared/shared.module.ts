@@ -20,6 +20,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { AbilitySelectorComponent } from './components/ability-selector/ability-selector.component';
 import { AbilitySelectorService } from './services/ability-selector.service';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
+import { SearchUserComponent } from './components/search-user/search-user.component';
 
 @NgModule({
     imports: [
@@ -75,6 +76,7 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatNativeDateModule,
         FlexLayoutModule,
         AbilitySelectorComponent,
+        SearchUserComponent,
         MatDialogModule,
         InfiniteScrollModule,
         MatProgressSpinnerModule,
@@ -84,7 +86,7 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatChipsModule,
         MatSelectModule
     ],
-    declarations: [AbilitySelectorComponent],
+    declarations: [AbilitySelectorComponent, SearchUserComponent],
     providers: [
         {
             provide: AuthServiceConfig,

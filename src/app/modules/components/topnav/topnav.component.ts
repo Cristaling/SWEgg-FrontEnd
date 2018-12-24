@@ -14,10 +14,6 @@ import {UserProfileService} from '../../user-profile/user-profile.service';
 })
 export class TopnavComponent implements OnInit {
     pushRightClass = 'push-right';
-    filteredUsers: Observable<JsonUserData[]>;
-    searchedUserCtrl = new FormControl();
-
-    private waitSearchTitle;
 
     constructor(public router: Router, private translate: TranslateService, public authService: AuthService, public userProfileService: UserProfileService) {
         this.router.events.subscribe(val => {
@@ -56,19 +52,5 @@ export class TopnavComponent implements OnInit {
 
     goToUserProfile() {
         this.router.navigate(['/user-profile']);
-    }
-
-    goToProfile(email: string) {
-        this.router.navigate([`/user-profile/${email}`]);
-    }
-
-    searchForUsers() {
-        clearTimeout(this.waitSearchTitle);
-        this.waitSearchTitle = setTimeout(() => {
-            this.userProfileService.searchForUser(this.searchedUserCtrl.value).subscribe(users => {
-                this.filteredUsers = users;
-            });
-        }, 500);
-
     }
 }
