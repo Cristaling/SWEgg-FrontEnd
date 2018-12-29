@@ -6,7 +6,8 @@ import {takeUntil} from 'rxjs/operators';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {JobType} from '../../../shared/models/JobType';
 import {AppJobsService} from '../app-jobs.service';
-import {MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {InvitePeopleJobComponent} from '../../../shared/modules/invite-people-job/invite-people-job.component';
 
 @Component({
     selector: 'app-job-create',
@@ -14,11 +15,10 @@ import {MatDialogRef} from '@angular/material';
     styleUrls: ['./job-create.component.scss']
 })
 export class JobCreateComponent implements OnInit, OnDestroy {
-
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
     jobCreateForm: FormGroup;
     jobTypeSelected: JobType;
-
+    dialogRefInvite: any;
     jobTypes: JobType[];
     selectedAbilities: string[] = [];
 
@@ -27,6 +27,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         private appJobsService: AppJobsService,
         private activatedRoute: ActivatedRoute,
         private notificationService: NotificationsService,
+        private dialogInvite: MatDialog,
         private dialogRef: MatDialogRef<JobCreateComponent>
     ) {
     }
@@ -84,5 +85,15 @@ export class JobCreateComponent implements OnInit, OnDestroy {
                 this.router.navigate(['..'], {relativeTo: this.activatedRoute});
             }
         });
+    }
+
+
+    invitePeople() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+
+        this.dialogRefInvite = this.dialogInvite.open(InvitePeopleJobComponent, dialogConfig);
     }
 }

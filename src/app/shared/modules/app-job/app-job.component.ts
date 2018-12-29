@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { JsonJobSummary } from '../../models/JsonJobSummary';
-import { MatDialog, MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material';
+import {MatDialog, MatDialogConfig, MatListOption, MatSelectionList, MatSelectionListChange} from '@angular/material';
 // import {JsonJob} from '../../models/JsonJob';
 // import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 // import {JsonJob} from '../../../shared/models/JsonJob';
@@ -19,6 +19,8 @@ import { Subject } from 'rxjs';
 import { JsonJobApplicationAddRequest } from '../../models/JsonJobApplicationAddRequest';
 import { NotificationsService } from '../../services/notifications.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import {InviteOnJobComponent} from '../invite-on-job/invite-on-job.component';
+import {InvitePeopleJobComponent} from '../invite-people-job/invite-people-job.component';
 
 @Component({
     selector: 'app-app-job',
@@ -38,6 +40,8 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     currentUserApplicated = true;
     currentUser: JsonUser;
     allAplicants: any[] = [];
+    dialogRefInvite: any;
+
 
     constructor(private dialogBox: MatDialog,
         private jobService: AppJobsService,
@@ -45,7 +49,8 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         private authService: AuthService,
         private router: Router,
         private notificationService: NotificationsService,
-        private activatedRoute: ActivatedRoute) {
+        private activatedRoute: ActivatedRoute,
+                ) {
     }
 
     ngOnInit() {
@@ -160,5 +165,14 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         }, error1 => {
             this.notificationService.showPopupMessage('An error occurred !', 'OK');
         });
+    }
+
+    openInviteDialog() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+
+        this.dialogRefInvite = this.dialogBox.open(InvitePeopleJobComponent, dialogConfig);
     }
 }

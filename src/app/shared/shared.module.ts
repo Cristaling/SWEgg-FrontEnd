@@ -21,6 +21,8 @@ import { AbilitySelectorComponent } from './components/ability-selector/ability-
 import { AbilitySelectorService } from './services/ability-selector.service';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import { SearchUserComponent } from './components/search-user/search-user.component';
+import { InvitePeopleJobComponent } from './modules/invite-people-job/invite-people-job.component';
+import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.component';
 
 @NgModule({
     imports: [
@@ -86,7 +88,7 @@ import { SearchUserComponent } from './components/search-user/search-user.compon
         MatChipsModule,
         MatSelectModule
     ],
-    declarations: [AbilitySelectorComponent, SearchUserComponent],
+    declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent],
     providers: [
         {
             provide: AuthServiceConfig,

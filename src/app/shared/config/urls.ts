@@ -16,6 +16,7 @@ export const urls = {
     endorsementsUrl: [baseEndpoint, 'ability', 'endorsements'].join('/'),
     jobUrl: ['api', 'job'].join('/'),
     getJobSummaries: ['api', 'job', 'summaries'].join('/'),
+    getOwnerJobSummaries: ['api', 'job', 'own'].join('/'),
     getUserRelatedJobSummaries: ['api', 'job', 'related'].join('/'),
     getApplicationsForJob: ['api', 'job-application', 'getByJob'].join('/'),
 

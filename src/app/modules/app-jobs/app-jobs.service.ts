@@ -83,4 +83,11 @@ export class AppJobsService {
     selectEmployeeForJob(jobUUID: string, employeeEmail: string) {
         return this.httpClient.patch(urls.jobUrl, { jobUUID, email: employeeEmail });
     }
+
+    public getOpenJobsForOwnerHttp(email: string): Observable<any> {
+        const params = new HttpParams().set('email', email);
+
+        return this.httpClient.get(urls.getOwnerJobSummaries, { params: params });
+    }
+
 }

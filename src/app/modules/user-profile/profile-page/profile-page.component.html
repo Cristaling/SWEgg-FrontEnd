@@ -12,7 +12,7 @@
                 <h1>
                     {{user.firstName}} {{user.lastName}}
                 </h1>
-                <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend to others</button>
+
             </div>
 
             <label class="mt10">Email</label>
@@ -32,6 +32,11 @@
 
         </div>
 
+
+    </div>
+    <div style="display: block">
+        <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend to others</button>
+        <button mat-raised-button color="primary" class="recommend-button" (click)="openInviteToJobDialog()">Invite for job</button>
     </div>
 
 </div>

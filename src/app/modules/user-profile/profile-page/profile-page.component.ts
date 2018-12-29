@@ -7,6 +7,8 @@ import {takeUntil} from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material';
+import {InvitePeopleJobComponent} from '../../../shared/modules/invite-people-job/invite-people-job.component';
+import {InviteOnJobComponent} from '../../../shared/modules/invite-on-job/invite-on-job.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -21,11 +23,14 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     @Input() userEmail: string;
     user: JsonUserData;
     profilePicture: any;
+    dialogRefInvite: any;
+
 
     constructor(private authService: AuthService,
         private profileService: ProfileService,
                 private activatedRoute: ActivatedRoute,
-                private dialogBox: MatDialog) { }
+                private dialogBox: MatDialog
+                ) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe(param => {
@@ -60,5 +65,14 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.navigateToOtherComponent.next();
         this.navigateToOtherComponent.complete();
+    }
+
+    openInviteToJobDialog() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+
+        this.dialogRefInvite = this.dialogBox.open(InviteOnJobComponent, dialogConfig);
     }
 }

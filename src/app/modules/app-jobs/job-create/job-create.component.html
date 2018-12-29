@@ -41,6 +41,16 @@
                 <label style="margin-left: 10px;">Private</label>
             </div>
         </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column" *ngIf="jobCreateForm.controls['isPrivate'].value">
+            <div class="mb2">
+                <div style="color: red">*If you make this job private no one can apply for your job. You have to invite people.You can do that now or latter.</div>
+            </div>
+            <div class="mb10">
+                <button mat-raised-button color="primary" type="button" (click)="invitePeople()">
+                    Invite people for your job
+                </button>
+            </div>
+        </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill class="mb10">
                 <app-ability-selector [selectedAbilities]="selectedAbilities"></app-ability-selector>
