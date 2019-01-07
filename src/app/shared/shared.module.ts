@@ -21,6 +21,7 @@ import { AbilitySelectorComponent } from './components/ability-selector/ability-
 import { AbilitySelectorService } from './services/ability-selector.service';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import { SearchUserComponent } from './components/search-user/search-user.component';
+import {LightboxModule} from 'ngx-lightbox';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { SearchUserComponent } from './components/search-user/search-user.compon
         MatChipsModule,
         SocialLoginModule,
         // AppJobModule,
-        MatSelectModule
+        MatSelectModule,
+        LightboxModule
     ],
     exports: [
         CommonModule,
@@ -84,7 +86,8 @@ import { SearchUserComponent } from './components/search-user/search-user.compon
         MatBadgeModule,
         SocialLoginModule,
         MatChipsModule,
-        MatSelectModule
+        MatSelectModule,
+        LightboxModule
     ],
     declarations: [AbilitySelectorComponent, SearchUserComponent],
     providers: [

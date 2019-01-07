@@ -3,7 +3,7 @@
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="25px">
 
         <div fxLayout="column">
-            <img src="{{profilePicture}}" class="user-photo" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
+            <img src="{{profilePicture}}" class="user-photo" (click)="openProfileImage(user.email)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
             <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend</button>
         </div>
 
@@ -37,7 +37,6 @@
 </div>
 
 <ng-template #recommendUser>
-
     <h4>Recommend user {{user.firstName + ' ' + user.lastName}} to:</h4>
     <mat-divider style="margin-bottom: 3em"></mat-divider>
     <app-search-user [userToRecommend]="user"></app-search-user>
