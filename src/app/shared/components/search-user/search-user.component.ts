@@ -39,7 +39,11 @@ export class SearchUserComponent implements OnInit, OnDestroy {
     searchForUsers() {
         clearTimeout(this.waitSearchTitle);
         this.waitSearchTitle = setTimeout(() => {
-            this.userProfileService.searchForUser(this.searchedUserCtrl.value).subscribe(users => {
+            const value: string = this.searchedUserCtrl.value;
+            if (value.trim() === '') {
+                return;
+            }
+            this.userProfileService.searchForUser(value).subscribe(users => {
                 if (this.userToRecommend != null) {
                     users = users.filter(user => {
                         return user.email !== this.userToRecommend.email && !this.receiversEmail.has(user.email);

@@ -52,7 +52,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
     openRecommendDialog() {
         const dialogOptions: MatDialogConfig = {
-            height: '70%'
+            height: '60%'
         };
         this.dialogBox.open(this.recommendUser, dialogOptions);
     }
