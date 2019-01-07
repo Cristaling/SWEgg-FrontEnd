@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {JsonUserData} from '../../../shared/models/JsonUserData';
 import {FormControl} from '@angular/forms';
 import {UserProfileService} from '../../user-profile/user-profile.service';
+import {JsonUser} from '../../../shared/models/JsonUser';
+import {urls} from '../../../shared/config/urls';
 
 @Component({
     selector: 'app-topnav',
@@ -14,6 +16,7 @@ import {UserProfileService} from '../../user-profile/user-profile.service';
 })
 export class TopnavComponent implements OnInit {
     pushRightClass = 'push-right';
+    currentUser: JsonUser;
 
     constructor(public router: Router, private translate: TranslateService, public authService: AuthService, public userProfileService: UserProfileService) {
         this.router.events.subscribe(val => {
@@ -29,6 +32,7 @@ export class TopnavComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.currentUser = this.authService.getCurrentUser();
     }
 
     isToggled(): boolean {
@@ -52,5 +56,9 @@ export class TopnavComponent implements OnInit {
 
     goToUserProfile() {
         this.router.navigate(['/user-profile']);
+    }
+
+    getProfilePicture(email) {
+        return `${urls.profilePictureUrl}?email=${email}&token=${this.authService.getToken()}`;
     }
 }
