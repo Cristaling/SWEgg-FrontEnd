@@ -58,15 +58,23 @@
                     <mat-icon class="nav-icon">send</mat-icon>
                     Apply
                 </button>
+
+                <button *ngIf="currentUser.email === job.ownerEmail"  mat-button (click)="openInviteDialog()">
+                    <mat-icon>add</mat-icon>
+                    Invite
+                </button>
                 <button mat-button (click)="closeDialog()">
                     <mat-icon class="nav-icon">cancel</mat-icon>
                     Close
                 </button>
-                <button mat-button (click)="openInviteDialog()">
-                    <mat-icon>add</mat-icon>
-                    Invite
+                <button *ngIf="currentUser.email === job.ownerEmail" mat-button (click)="removeJob()">
+                    <mat-icon class="nav-icon">delete_forever</mat-icon>
+                    Cancellation
                 </button>
             </div>
         </mat-card-actions>
     </mat-card>
 </ng-template>
+    <app-invite-people-job *ngIf ="showDialogInvite" (close)="closeDialogInvite($event)"  [showInvite]="true">
+    </app-invite-people-job>
+

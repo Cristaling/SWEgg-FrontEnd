@@ -14,15 +14,14 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {AppJobComponent} from './modules/app-job/app-job.component';
-import {AppJobModule} from './modules/app-job/app-job/app-job.module';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { AbilitySelectorComponent } from './components/ability-selector/ability-selector.component';
 import { AbilitySelectorService } from './services/ability-selector.service';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import { SearchUserComponent } from './components/search-user/search-user.component';
-import { InvitePeopleJobComponent } from './modules/invite-people-job/invite-people-job.component';
 import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.component';
+import { UserCardComponent } from '../modules/dashboard/components/recommendations-tab/user-card/user-card.component';
+import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
 
 @NgModule({
     imports: [
@@ -86,7 +85,8 @@ import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.comp
         MatBadgeModule,
         SocialLoginModule,
         MatChipsModule,
-        MatSelectModule
+        MatSelectModule,
+        InvitePeopleJobComponent
     ],
     declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent],
     providers: [
@@ -94,7 +94,8 @@ import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.comp
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
         },
-        AbilitySelectorService, MatNativeDateModule]
+        AbilitySelectorService, MatNativeDateModule],
+
 })
 export class SharedModule {
 

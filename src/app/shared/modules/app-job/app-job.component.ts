@@ -19,7 +19,6 @@ import { Subject } from 'rxjs';
 import { JsonJobApplicationAddRequest } from '../../models/JsonJobApplicationAddRequest';
 import { NotificationsService } from '../../services/notifications.service';
 import { forEach } from '@angular/router/src/utils/collection';
-import {InviteOnJobComponent} from '../invite-on-job/invite-on-job.component';
 import {InvitePeopleJobComponent} from '../invite-people-job/invite-people-job.component';
 
 @Component({
@@ -32,15 +31,17 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     @ViewChild('jobModal') jobModal;
+    @ViewChild('invitePeople') inviteModal;
     @Input() job: JsonJobSummary;
     @Input() visible = true;
-
+    userInviteList: JsonUserData[] = []
     selectedJob: JsonJob;
     applicationsJob: JsonUser[];
     currentUserApplicated = true;
     currentUser: JsonUser;
     allAplicants: any[] = [];
     dialogRefInvite: any;
+    showDialogInvite: boolean = false;
 
 
     constructor(private dialogBox: MatDialog,
@@ -168,11 +169,14 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     }
 
     openInviteDialog() {
-        const dialogConfig = new MatDialogConfig();
+        this.showDialogInvite=true;
+    }
 
-        dialogConfig.disableClose = false;
-        dialogConfig.autoFocus = true;
+    removeJob() {
 
-        this.dialogRefInvite = this.dialogBox.open(InvitePeopleJobComponent, dialogConfig);
+    }
+
+    closeDialogInvite($event: boolean) {
+        this.showDialogInvite = false;
     }
 }

@@ -58,7 +58,9 @@ export class AppJobsService {
         const params = new HttpParams().set('email', email);
         return this.httpClient.get(urls.getUserRelatedJobSummaries, { params: params });
     }
-
+    public getRelevantUserJobsHttp(): Observable<any> {
+        return this.httpClient.get(urls.getUserRelevantJobSummaries);
+    }
     getJobTypesHttp(): Observable<any> {
         return this.httpClient.get(urls.jobTypesUrl);
     }
