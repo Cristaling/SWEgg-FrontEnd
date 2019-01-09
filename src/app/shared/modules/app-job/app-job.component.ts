@@ -175,8 +175,4 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     removeJob() {
 
     }
-
-    closeDialogInvite($event: boolean) {
-        this.showDialogInvite = false;
-    }
 }

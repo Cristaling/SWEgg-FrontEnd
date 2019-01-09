@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {JsonUserData} from '../../models/JsonUserData';
 import {UserProfileService} from '../../../modules/user-profile/user-profile.service';
@@ -12,13 +12,13 @@ import {MatDialog} from '@angular/material';
     templateUrl: './invite-people-job.component.html',
     styleUrls: ['./invite-people-job.component.scss']
 })
-export class InvitePeopleJobComponent implements OnInit {
-
+export class InvitePeopleJobComponent implements OnInit, OnDestroy {
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
     @ViewChild('inviteModal') inviteModal;
-    @Input() selectedUsers;
-    @Input()showInvite;
+    @Input() selectedUsers: any[];
+    @Input() showInvite;
     @Output() close = new EventEmitter<boolean>();
+    dialogRef;
 
     filteredUsers: Observable<JsonUserData[]>;
     private waitSearchTitle;
@@ -30,14 +30,15 @@ export class InvitePeopleJobComponent implements OnInit {
                 private cdr: ChangeDetectorRef
                ) {
     }
+    ngOnDestroy(): void {
+        this.dialogRef.close();
+    }
 
     ngOnInit() {
         this.userProfileService.searchForUser('').subscribe(users => {
             this.filteredUsers = users;
-            this.cdr.detectChanges();
-
+            this.dialogRef = this.dialogBox.open(this.inviteModal);
         });
-        this.dialogBox.open(this.inviteModal);
     }
 
 
@@ -58,11 +59,11 @@ export class InvitePeopleJobComponent implements OnInit {
     }
 
     closeDialog() {
-        // this.dialogRef.close();
         this.close.emit(true);
     }
 
-    onNgModelChange($event) {
-
+    onNgModelChange(event) {
+        this.selectedUsers.splice(0,this.selectedUsers.length);
+        this.selectedUsers.push(...event);
     }
 }

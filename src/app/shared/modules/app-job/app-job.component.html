@@ -75,6 +75,6 @@
         </mat-card-actions>
     </mat-card>
 </ng-template>
-    <app-invite-people-job *ngIf ="showDialogInvite" (close)="closeDialogInvite($event)"  [showInvite]="true">
+    <app-invite-people-job *ngIf ="showDialogInvite" (close)="showDialogInvite = false"  [showInvite]="true">
     </app-invite-people-job>
 

@@ -65,3 +65,4 @@
         </div>
     </form>
 </div>
+<app-invite-people-job *ngIf="showInviteModal" [selectedUsers]="invitedUsers" [showInvite]="false" (close)="closeInviteDialog()"></app-invite-people-job>

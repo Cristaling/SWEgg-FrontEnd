@@ -21,6 +21,8 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     dialogRefInvite: any;
     jobTypes: JobType[];
     selectedAbilities: string[] = [];
+    invitedUsers = [];
+    showInviteModal = false;
 
     constructor(
         private router: Router,
@@ -89,11 +91,11 @@ export class JobCreateComponent implements OnInit, OnDestroy {
 
 
     invitePeople() {
-        const dialogConfig = new MatDialogConfig();
+        this.showInviteModal = true;
+    }
 
-        dialogConfig.disableClose = false;
-        dialogConfig.autoFocus = true;
-
-        this.dialogRefInvite = this.dialogInvite.open(InvitePeopleJobComponent, dialogConfig);
+    closeInviteDialog(){
+        this.showInviteModal = false;
+        console.log(this.invitedUsers);
     }
 }
