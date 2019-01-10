@@ -19,6 +19,7 @@ import { AbilitySelectorComponent } from './components/ability-selector/ability-
 import { AbilitySelectorService } from './services/ability-selector.service';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import { SearchUserComponent } from './components/search-user/search-user.component';
+import {LightboxModule} from 'ngx-lightbox';
 import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.component';
 import { UserCardComponent } from '../modules/dashboard/components/recommendations-tab/user-card/user-card.component';
 import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
@@ -53,7 +54,8 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         MatChipsModule,
         SocialLoginModule,
         // AppJobModule,
-        MatSelectModule
+        MatSelectModule,
+        LightboxModule
     ],
     exports: [
         CommonModule,
@@ -86,6 +88,7 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         SocialLoginModule,
         MatChipsModule,
         MatSelectModule,
+        LightboxModule,
         InvitePeopleJobComponent,
         InviteOnJobComponent
     ],

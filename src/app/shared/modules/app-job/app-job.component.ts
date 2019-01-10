@@ -69,9 +69,10 @@ export class AppJobComponent implements OnInit, AfterViewInit {
                                     this.applicationsJob = applications;
                                     this.verifyCurrentUserApplicated();
                                 });
-                            this.dialogBox.open(this.jobModal, {
+                            const dialog = this.dialogBox.open(this.jobModal, {
                                 width: '400px'
                             });
+                            dialog.afterClosed().subscribe(_ => this.closeDialog());
                         });
                 }
             });
