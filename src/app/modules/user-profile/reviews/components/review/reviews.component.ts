@@ -2,12 +2,11 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ReviewSummary} from '../../../../../shared/models/ReviewSummary';
 import {AuthService} from '../../../../../core/authentication/auth.service';
 import {Router} from '@angular/router';
-import {Subject, Subscription} from 'rxjs';
+import {Subject} from 'rxjs';
 import {ReviewsService} from '../../services/reviews.service';
 import {Review} from '../../../../../shared/models/Review';
 import {NotificationsService} from '../../../../../shared/services/notifications.service';
 import {takeUntil} from 'rxjs/operators';
-import {initChangeDetectorIfExisting} from '@angular/core/src/render3/instructions';
 
 @Component({
     selector: 'app-reviews',
@@ -31,8 +30,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
         }
     ];
 
-    subscriptions: Subscription[] = [];
-
     constructor(private authService: AuthService,
                 private router: Router,
                 private reviewsService: ReviewsService,
@@ -41,9 +38,10 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
-        this.subscriptions.push(this.reviewsService.getUserReviews(this.userEmail).subscribe(reviews => {
+        this.reviewsService.getUserReviews(this.userEmail).pipe(takeUntil(this.navigateToOtherComponent))
+            .subscribe(reviews => {
             this.reviews.push(...reviews);
-        }));
+        });
     }
 
     getProfilePicture(email: string) {
@@ -61,7 +59,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
             return;
         }
         this.review.reviewedEmail = this.userEmail;
-        this.reviewsService.addUserReview(this.review)
+        this.reviewsService.addUserReview(this.review).pipe(takeUntil(this.navigateToOtherComponent))
             .subscribe(
                 response => {
                     const item = this.reviews.find((review) =>
@@ -77,13 +75,11 @@ export class ReviewsComponent implements OnInit, OnDestroy {
                     }
                 },
                 (err) => {
-                    console.log(err);
-                    // this.notificationService.showPopupMessage('Rating must be set!', 'OK');
+                     this.notificationService.showPopupMessage('The user must have work for at least one job for you', 'OK');
                 });
     }
 
     ngOnDestroy() {
-        this.subscriptions.forEach(sub => sub.unsubscribe());
         this.reviews = [];
         this.navigateToOtherComponent.next();
         this.navigateToOtherComponent.complete();
