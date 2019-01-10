@@ -11,12 +11,16 @@ import { EndorsementsComponent } from './endorsements/endorsements.component';
 import { ProfileEditPageComponent } from './profile-edit-page/profile-edit-page.component';
 import { PasswordEditPageComponent } from './password-edit-page/password-edit-page.component';
 import { EndorsementComponent } from './endorsements/endorsement/endorsement.component';
+import {ReviewsModule} from './reviews/reviews.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     imports: [
         CommonModule,
         SharedModule,
-        UserProfileRoutingModule
+        UserProfileRoutingModule,
+        ReviewsModule,
+        HttpClientModule
     ],
     declarations: [UserProfileComponent,
         ProfilePageComponent,

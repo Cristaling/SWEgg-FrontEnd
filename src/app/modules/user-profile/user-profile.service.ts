@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {JsonUserData} from '../../shared/models/JsonUserData';
 import {urls} from '../../shared/config/urls';
 import {Observable} from 'rxjs';

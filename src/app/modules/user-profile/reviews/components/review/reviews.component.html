@@ -1,0 +1,22 @@
+<div style="align-items: center;display: flex">
+    <app-rating [review]="review" [disabled]="false"></app-rating>
+    <mat-form-field style="width: 300px;margin:20px">
+        <textarea [(ngModel)]="review.text" matInput placeholder="Leave review comment(optional)"></textarea>
+    </mat-form-field>
+    <button class="btn-primary btn" style="float: right" (click)="addReview()">Save Review</button>
+</div>
+
+<div>
+    <mat-card *ngFor="let rev of reviews" class="hover-mat-card job-card">
+        <mat-card-header style="overflow:hidden;display: flex;align-items: center;">
+            <img mat-card-avatar [matTooltip]="rev.reviewerFirstName + rev.reviewerLastName" class="header-user-image"
+                 [src]="getProfilePicture(rev.reviewerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
+                 (click)="goToProfile(rev.reviewerEmail)">
+            <mat-card-title style="text-align: center;">
+                <app-rating [review]='rev' [disabled]="true"></app-rating>
+            </mat-card-title>
+            <mat-card-subtitle style="font-size: 13px;text-align: justify;">
+            </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
