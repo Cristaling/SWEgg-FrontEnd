@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../core/authentication/auth.service';
 import {JsonUserData} from '../../../shared/models/JsonUserData';
 import {NotificationsService} from '../../../shared/services/notifications.service';
+import {Lightbox} from 'ngx-lightbox';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-sidebar',
@@ -16,6 +18,8 @@ export class SidebarComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private notificationService: NotificationsService,
+        private lightBox: Lightbox,
+        private router: Router
     ) {
     }
 
@@ -40,5 +44,23 @@ export class SidebarComponent implements OnInit {
 
     getProfileImage(email: string) {
         return this.authService.getProfilePicture(email);
+    }
+
+    openProfileImage() {
+        const album = {
+            src: this.authService.getProfilePicture(this.currentUser.email),
+            caption: 'Your profile picture',
+            thumb: ''
+        };
+        this.lightBox.open([album], 0);
+    }
+
+    goToUserProfile() {
+        this.router.navigate(['/user-profile']);
+    }
+
+    onLoggedout() {
+        this.authService.logout();
+        this.router.navigate(['/sessions/login']);
     }
 }

@@ -17,6 +17,11 @@
             display: block;
         }
     }
+    .title-nav {
+        margin-left: 15px;
+        font-size: 12px;
+        font-family: 'Lato', sans-serif;
+    }
 }
 
 .nested-menu {
@@ -64,6 +69,7 @@
 
         object-fit: cover;
         object-position: center right;
+        cursor: pointer;
     }
     .app-user-name {
         display: block;
@@ -72,4 +78,27 @@
         color: rgba(0, 0, 0, .96);
         margin-left: -2px;
     }
+}
+
+.icon-xs {
+    font-size: 13px!important;
+    line-height: 13px;
+    height: 13px;
+    width: 13px;
+}
+
+.app-user-controls {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-control {
+    font-size: 16px!important;
+    line-height: 16px;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
 }

@@ -7,6 +7,7 @@ import {takeUntil} from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material';
+import {Lightbox} from 'ngx-lightbox';
 
 @Component({
   selector: 'app-profile-page',
@@ -25,7 +26,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     constructor(private authService: AuthService,
         private profileService: ProfileService,
                 private activatedRoute: ActivatedRoute,
-                private dialogBox: MatDialog) { }
+                private dialogBox: MatDialog,
+                private lightBox: Lightbox) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe(param => {
@@ -52,9 +54,18 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
     openRecommendDialog() {
         const dialogOptions: MatDialogConfig = {
-            height: '70%'
+            height: '60%'
         };
         this.dialogBox.open(this.recommendUser, dialogOptions);
+    }
+
+    openProfileImage(email: string) {
+        const album = {
+            src: this.getProfilePicture(email),
+            caption: 'Profile picture',
+            thumb: ''
+        };
+        this.lightBox.open([album], 0);
     }
 
     ngOnDestroy(): void {
