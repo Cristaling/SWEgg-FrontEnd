@@ -11,8 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
     imports: [
         CommonModule,
         RatingModule,
-        SharedModule,
-        HttpClientModule
+        SharedModule
     ],
     declarations: [ReviewsComponent, RatingComponent],
     exports: [ReviewsComponent],

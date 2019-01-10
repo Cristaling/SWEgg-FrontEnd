@@ -19,8 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
         CommonModule,
         SharedModule,
         UserProfileRoutingModule,
-        ReviewsModule,
-        HttpClientModule
+        ReviewsModule
     ],
     declarations: [UserProfileComponent,
         ProfilePageComponent,

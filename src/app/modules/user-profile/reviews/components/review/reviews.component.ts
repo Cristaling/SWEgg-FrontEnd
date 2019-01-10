@@ -7,6 +7,7 @@ import {ReviewsService} from '../../services/reviews.service';
 import {Review} from '../../../../../shared/models/Review';
 import {NotificationsService} from '../../../../../shared/services/notifications.service';
 import {takeUntil} from 'rxjs/operators';
+import {initChangeDetectorIfExisting} from '@angular/core/src/render3/instructions';
 
 @Component({
     selector: 'app-reviews',
@@ -60,15 +61,25 @@ export class ReviewsComponent implements OnInit, OnDestroy {
             return;
         }
         this.review.reviewedEmail = this.userEmail;
-        this.reviewsService.addUserReview(this.review) //.pipe(takeUntil(this.navigateToOtherComponent))
+        this.reviewsService.addUserReview(this.review)
             .subscribe(
                 response => {
-                console.log(response);
-            },
-            (err) => {
-                console.log(err);
-                // this.notificationService.showPopupMessage('Rating must be set!', 'OK');
-            });
+                    const item = this.reviews.find((review) =>
+                        review.uuid === response.uuid
+                    );
+                    if (item) {
+                        const index = this.reviews.indexOf(item);
+                        this.reviews.splice(index, 1);
+                        this.reviews.splice(0, 0, response);
+                    } else {
+                        const items = this.reviews.splice(this.reviews.length - 1, 1);
+                        this.reviews.splice(0, 0, response);
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    // this.notificationService.showPopupMessage('Rating must be set!', 'OK');
+                });
     }
 
     ngOnDestroy() {
