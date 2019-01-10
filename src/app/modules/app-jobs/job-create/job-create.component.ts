@@ -71,8 +71,13 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             values.jobDescription,
             this.selectedAbilities)
             .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+                console.log(response);
             if (jobStatus === 'INVITED') {
-                this.notificationService.showPopupMessage('Not implemented!', 'OK');
+                // this.notificationService.showPopupMessage('Not implemented!', 'OK');
+                for (const user of this.invitedUsers) {
+                    this.appJobsService.inviteToJob(response, user.email).subscribe(response2 => {
+                    });
+                }
             } else {
                 this.notificationService.showPopupMessage('Your job was saved successfully !', 'OK');
                 this.router.navigate(['..'], {relativeTo: this.activatedRoute});
@@ -94,7 +99,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.showInviteModal = true;
     }
 
-    closeInviteDialog(){
+    closeInviteDialog() {
         this.showInviteModal = false;
         console.log(this.invitedUsers);
     }

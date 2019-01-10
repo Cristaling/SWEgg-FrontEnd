@@ -1,25 +1,27 @@
-<div class="dialog">
-    <h2 mat-dialog-title>Invite people for your job</h2>
+<ng-template #InviteModal>
+    <div class="dialog">
+        <h2 mat-dialog-title>Invite people for your job</h2>
 
-    <mat-selection-list >
-        <mat-list-option *ngFor="let job of allJobs"
-                         [value]="job">
-            <div style="display:flex">
-                {{job.title}}
+        <mat-selection-list >
+            <mat-list-option *ngFor="let job of allJobs"
+                             [value]="job">
+                <div style="display:flex">
+                    {{job.title}}
+                </div>
+            </mat-list-option>
+        </mat-selection-list>
+
+        <mat-card-actions>
+            <div fxFlex fxLayoutAlign="center">
+                <button mat-button>
+                    <mat-icon class="nav-icon">send</mat-icon>
+                    Invite
+                </button>
+                <button mat-button (click)="closeDialog()">
+                    <mat-icon class="nav-icon">cancel</mat-icon>
+                    Close
+                </button>
             </div>
-        </mat-list-option>
-    </mat-selection-list>
-
-    <mat-card-actions>
-        <div fxFlex fxLayoutAlign="center">
-            <button mat-button>
-                <mat-icon class="nav-icon">send</mat-icon>
-                Invite
-            </button>
-            <button mat-button (click)="closeDialog()">
-                <mat-icon class="nav-icon">cancel</mat-icon>
-                Close
-            </button>
-        </div>
-    </mat-card-actions>
-</div>
+        </mat-card-actions>
+    </div>
+</ng-template>

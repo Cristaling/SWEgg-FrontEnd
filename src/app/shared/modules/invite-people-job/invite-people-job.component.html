@@ -19,7 +19,7 @@
 
         <mat-card-actions>
             <div fxFlex fxLayoutAlign="center">
-                <button *ngIf="showInvite" mat-button>
+                <button *ngIf="showInvite" mat-button (click)="inviteJob()">
                     <mat-icon class="nav-icon">send</mat-icon>
                     Invite
                 </button>

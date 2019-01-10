@@ -24,12 +24,13 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     user: JsonUserData;
     profilePicture: any;
     dialogRefInvite: any;
+    showDialogInvite = false;
 
 
     constructor(private authService: AuthService,
         private profileService: ProfileService,
                 private activatedRoute: ActivatedRoute,
-                private dialogBox: MatDialog
+                private dialogBox: MatDialog,
                 ) { }
 
     ngOnInit() {
@@ -68,11 +69,10 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     }
 
     openInviteToJobDialog() {
-        const dialogConfig = new MatDialogConfig();
+        this.showDialogInvite=true;
+    }
 
-        dialogConfig.disableClose = false;
-        dialogConfig.autoFocus = true;
-
-        this.dialogRefInvite = this.dialogBox.open(InviteOnJobComponent, dialogConfig);
+    closeInviteDialog(){
+        this.showDialogInvite=false;
     }
 }

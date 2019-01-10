@@ -29,7 +29,7 @@ export class InvitationTabComponent implements OnInit, OnDestroy {
         if (this.finishedInvitedJobs) {
             return;
         }
-        this.getAllJobs();
+        this.getInvitationsJobs();
 
     }
 
@@ -38,8 +38,8 @@ export class InvitationTabComponent implements OnInit, OnDestroy {
         this.navigateToOtherComponent.complete();
     }
 
-    getAllJobs() {
-        this.jobsService.getUserJobsHttp(this.user.email).subscribe(jobsSummaries => {
+    getInvitationsJobs() {
+        this.jobsService.getInvitedJobs().subscribe(jobsSummaries => {
             if (this.invitedJobs.length === 0 ) {
                 this.finishedInvitedJobs = true;
             }
@@ -49,6 +49,7 @@ export class InvitationTabComponent implements OnInit, OnDestroy {
             }
         });
     }
+
 
 
 

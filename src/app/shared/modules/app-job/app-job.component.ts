@@ -39,6 +39,7 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     applicationsJob: JsonUser[];
     currentUserApplicated = true;
     currentUser: JsonUser;
+    invitedUsers = [];
     allAplicants: any[] = [];
     dialogRefInvite: any;
     showDialogInvite: boolean = false;
@@ -169,10 +170,14 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     }
 
     openInviteDialog() {
-        this.showDialogInvite=true;
+        this.showDialogInvite = true;
     }
 
     removeJob() {
 
+    }
+
+    closeInviteDialog() {
+        this.showDialogInvite = false;
     }
 }

@@ -86,7 +86,8 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         SocialLoginModule,
         MatChipsModule,
         MatSelectModule,
-        InvitePeopleJobComponent
+        InvitePeopleJobComponent,
+        InviteOnJobComponent
     ],
     declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent],
     providers: [

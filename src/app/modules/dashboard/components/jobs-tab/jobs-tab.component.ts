@@ -36,7 +36,7 @@ export class JobsTabComponent implements OnInit, OnDestroy {
             return;
         }
         this.getAllJobs();
-        // this.getRelevantJobs();
+        this.getRelevantJobs();
 
     }
 

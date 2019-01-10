@@ -29,8 +29,7 @@ import {AppJobsService} from '../app-jobs/app-jobs.service';
         ProfileEditPageComponent,
         PasswordEditPageComponent,
         EndorsementComponent],
-    providers: [UserProfileService, EndorsementsService,AppJobsService],
-    entryComponents: [InviteOnJobComponent],
+    providers: [UserProfileService, EndorsementsService, AppJobsService]
 
 })
 export class UserProfileModule {

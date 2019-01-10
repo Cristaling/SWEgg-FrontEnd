@@ -46,3 +46,5 @@
     <mat-divider style="margin-bottom: 2em"></mat-divider>
     <app-search-user [userToRecommend]="user"></app-search-user>
 </ng-template>
+<app-invite-on-job *ngIf ="showDialogInvite" (close)="closeInviteDialog()"  [selectedUser]="userEmail"  >
+</app-invite-on-job>

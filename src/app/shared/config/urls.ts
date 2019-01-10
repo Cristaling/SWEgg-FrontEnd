@@ -20,6 +20,8 @@ export const urls = {
     getUserRelatedJobSummaries: ['api', 'job', 'related'].join('/'),
     getUserRelevantJobSummaries: ['api', 'job', 'top'].join('/'),
     getApplicationsForJob: ['api', 'job-application', 'getByJob'].join('/'),
+    inviteOnJob: ['api', 'job-invite'].join('/'),
+    jobsInvites: ['api', 'job-invite'].join('/'),
 
 
     jobApplication: ['api', 'job-application'].join('/'),
