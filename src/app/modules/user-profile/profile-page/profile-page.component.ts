@@ -30,7 +30,6 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
                 private activatedRoute: ActivatedRoute,
                 private dialogBox: MatDialog,
                 private lightBox: Lightbox) { }
-                ) { }
 
     ngOnInit() {
         this.activatedRoute.params.subscribe(param => {

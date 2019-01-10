@@ -83,11 +83,20 @@ export class InvitePeopleJobComponent implements OnInit, OnDestroy {
     }
 
     inviteJob() {
+        let index = 0;
+        const listSize = this.selectedUsers.length;
+        if (listSize === 0){
+            return;
+        }
         for (const user of this.selectedUsers) {
             this.jobService.inviteToJob(this.jobUUID, user.email).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+                index++;
+                if(index === listSize){
+                    this.notificationService.showPopupMessage('User invited successfull','OK');
+                    this.closeDialog();
+                }
             });
         }
-        this.closeDialog();
 
     }
 

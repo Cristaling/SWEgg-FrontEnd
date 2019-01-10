@@ -4,7 +4,11 @@
 
         <div fxLayout="column">
             <img src="{{profilePicture}}" class="user-photo" (click)="openProfileImage(user.email)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
-            <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend</button>
+            <div fxLayout="row" >
+                <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend</button>
+                <button mat-raised-button color="primary" class="recommend-button" (click)="openInviteToJobDialog()">Invite for job</button>
+            </div>
+
         </div>
 
         <div fxLayout="column">
@@ -34,10 +38,9 @@
 
 
     </div>
-    <div style="display: block">
-        <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend to others</button>
-        <button mat-raised-button color="primary" class="recommend-button" (click)="openInviteToJobDialog()">Invite for job</button>
-    </div>
+    <!--<div style="display: block">-->
+        <!--<button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend to others</button>-->
+    <!--</div>-->
 
 </div>
 
