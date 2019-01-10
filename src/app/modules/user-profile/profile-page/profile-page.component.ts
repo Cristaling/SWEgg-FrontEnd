@@ -7,8 +7,6 @@ import {takeUntil} from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {InvitePeopleJobComponent} from '../../../shared/modules/invite-people-job/invite-people-job.component';
-import {InviteOnJobComponent} from '../../../shared/modules/invite-on-job/invite-on-job.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -23,7 +21,6 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     @Input() userEmail: string;
     user: JsonUserData;
     profilePicture: any;
-    dialogRefInvite: any;
     showDialogInvite = false;
 
 
@@ -69,10 +66,10 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     }
 
     openInviteToJobDialog() {
-        this.showDialogInvite=true;
+        this.showDialogInvite = true;
     }
 
-    closeInviteDialog(){
-        this.showDialogInvite=false;
+    closeInviteDialog() {
+        this.showDialogInvite = false;
     }
 }

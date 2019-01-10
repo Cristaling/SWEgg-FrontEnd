@@ -89,7 +89,7 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         InvitePeopleJobComponent,
         InviteOnJobComponent
     ],
-    declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent],
+    declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent], entryComponents:[InviteOnJobComponent],
     providers: [
         {
             provide: AuthServiceConfig,

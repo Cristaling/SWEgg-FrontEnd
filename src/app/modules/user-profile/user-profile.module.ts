@@ -13,8 +13,8 @@ import { PasswordEditPageComponent } from './password-edit-page/password-edit-pa
 import { EndorsementComponent } from './endorsements/endorsement/endorsement.component';
 import {JobCreateComponent} from '../app-jobs/job-create/job-create.component';
 import {InvitePeopleJobComponent} from '../../shared/modules/invite-people-job/invite-people-job.component';
-import {InviteOnJobComponent} from '../../shared/modules/invite-on-job/invite-on-job.component';
 import {AppJobsService} from '../app-jobs/app-jobs.service';
+import {InviteOnJobComponent} from '../../shared/modules/invite-on-job/invite-on-job.component';
 
 @NgModule({
     imports: [
@@ -28,8 +28,11 @@ import {AppJobsService} from '../app-jobs/app-jobs.service';
         EndorsementsComponent,
         ProfileEditPageComponent,
         PasswordEditPageComponent,
-        EndorsementComponent],
-    providers: [UserProfileService, EndorsementsService, AppJobsService]
+        EndorsementComponent,
+        ],
+    providers: [UserProfileService, EndorsementsService, AppJobsService],
+    entryComponents: [InviteOnJobComponent]
+
 
 })
 export class UserProfileModule {

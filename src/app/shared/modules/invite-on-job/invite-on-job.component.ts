@@ -7,6 +7,8 @@ import {JsonUserData} from '../../models/JsonUserData';
 import {AuthService} from '../../../core/authentication/auth.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {forEach} from '../../../../../node_modules/@angular/router/src/utils/collection';
+import {NotificationsService} from '../../services/notifications.service';
 
 @Component({
     selector: 'app-invite-on-job',
@@ -14,24 +16,26 @@ import {Subject} from 'rxjs';
     styleUrls: ['./invite-on-job.component.scss']
 })
 export class InviteOnJobComponent implements OnInit, OnDestroy {
-    @ViewChild('inviteModal') inviteModal;
+    @ViewChild('InviteModal') inviteModal;
     allJobs: JsonJobSummary[] = [];
     user: JsonUserData;
     @Input() selectedUser;
     @Output() close = new EventEmitter<boolean>();
     private navigateToOtherComponent: Subject<any> = new Subject();
+    dialogRef;
+    selectedJobs=[];
 
     constructor(private router: Router,
                 private authService: AuthService,
                 private activatedRoute: ActivatedRoute,
                 private dialog: MatDialog,
                 private jobsService: AppJobsService,
-                private dialogBox: MatDialog
+                private dialogBox: MatDialog,
+                private notificationService: NotificationsService
     ) {
     }
 
     ngOnInit() {
-        this.dialogBox.open(this.inviteModal);
         this.user = this.authService.getCurrentUser();
         this.getJobs();
     }
@@ -39,6 +43,7 @@ export class InviteOnJobComponent implements OnInit, OnDestroy {
     getJobs() {
         this.jobsService.getOpenJobsForOwnerHttp(this.user.email).pipe(takeUntil(this.navigateToOtherComponent)).subscribe(jobsSummaries => {
             this.allJobs = jobsSummaries;
+            this.dialogRef = this.dialogBox.open(this.inviteModal);
         });
     }
     closeDialog() {
@@ -46,8 +51,24 @@ export class InviteOnJobComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.dialogRef.close();
         this.navigateToOtherComponent.next();
-        this.navigateToOtherComponent.closed;
+        this.navigateToOtherComponent.complete();
     }
+    inviteToJob(){
+        let index = 0;
+        const listSize=this.selectedJobs.length;
+        for (const job of this.selectedJobs){
+            this.jobsService.inviteToJob(job.uuid, this.selectedUser).pipe(takeUntil(this.navigateToOtherComponent))
+                .subscribe(_ => {
+                    index++;
+                    if(index === listSize){
+                        this.notificationService.showPopupMessage('User invited successfull','OK');
+                        this.closeDialog();
+                    }
+                });
+        }
+    }
+
 
 }

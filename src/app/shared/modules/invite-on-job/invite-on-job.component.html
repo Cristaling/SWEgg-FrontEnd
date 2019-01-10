@@ -2,7 +2,7 @@
     <div class="dialog">
         <h2 mat-dialog-title>Invite people for your job</h2>
 
-        <mat-selection-list >
+        <mat-selection-list [(ngModel)]="selectedJobs">
             <mat-list-option *ngFor="let job of allJobs"
                              [value]="job">
                 <div style="display:flex">
@@ -13,7 +13,7 @@
 
         <mat-card-actions>
             <div fxFlex fxLayoutAlign="center">
-                <button mat-button>
+                <button mat-button (click)="inviteToJob()">
                     <mat-icon class="nav-icon">send</mat-icon>
                     Invite
                 </button>
