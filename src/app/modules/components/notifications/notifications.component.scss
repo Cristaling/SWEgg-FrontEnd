@@ -5,19 +5,32 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 20%;
-    min-width: 20%;
+    width: 17%;
+    min-width: 17%;
     z-index: 9999;
     box-shadow: 20px 20px 50px grey;
 }
 
 .notifications-header {
-    margin: 0 !important;
-    padding: 0 !important;
     height:10%;
     display: flex;
     vertical-align: center;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-bottom: 10px;
+}
+
+.notifications-content {
+    height: 100%;
+}
+
+
+.notification-item:hover {
+    background-color: #dddddd;
+
+}
+
+.notification-item {
+    cursor: pointer;
 }

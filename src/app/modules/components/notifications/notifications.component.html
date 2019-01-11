@@ -1,4 +1,19 @@
-<div class="notifications-header mat-bg-primary">
-    <h4>Notifications</h4>
-</div>
 
+<div style="height:100%">
+    <div class="notifications-header mat-bg-primary">
+        <h4>Notifications</h4>
+        <button mat-icon-button style="position:absolute; right: 0; top: 0" (click)="hideNotifications()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    
+    <div class="notifications-content">
+         <mat-list>
+            <mat-list-item class="notification-item">
+                <mat-icon mat-list-icon>notifications</mat-icon>
+                <h4 mat-line>Example title</h4>
+                <span style="font-size: 10px" mat-line matTooltip="A modification has occured ! Please check for it !">A modification has occured ! Please check for it ! </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

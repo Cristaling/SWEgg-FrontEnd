@@ -9,6 +9,7 @@ import {UserProfileService} from '../../user-profile/user-profile.service';
 import {JsonUser} from '../../../shared/models/JsonUser';
 import {urls} from '../../../shared/config/urls';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {NotificationsService} from '../../../shared/services/notifications.service';
 
 @Component({
     selector: 'app-topnav',
@@ -33,7 +34,8 @@ export class TopnavComponent implements OnInit {
     pushRightClass = 'push-right';
     currentUser: JsonUser;
 
-    constructor(public router: Router, private translate: TranslateService, public authService: AuthService, public userProfileService: UserProfileService) {
+    constructor(public router: Router, private translate: TranslateService, public authService: AuthService, public userProfileService: UserProfileService,
+                public notificationService: NotificationsService) {
         this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -48,6 +50,9 @@ export class TopnavComponent implements OnInit {
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
+        this.notificationService.toggleNotifications.subscribe(response => {
+            this.toggleMenuNotifications();
+        });
     }
 
     isToggled(): boolean {
