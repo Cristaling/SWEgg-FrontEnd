@@ -24,9 +24,11 @@
     <!--<button mat-icon-button matTooltip="Logout" (click)="onLoggedout()">-->
         <!--<mat-icon>exit_to_app</mat-icon>-->
     <!--</button>-->
-    <mat-icon matBadge="1" matBadgePosition="above after" matBadgeColor="accent" style="cursor:pointer" matTooltip="Notifications">notifications</mat-icon>
+    <mat-icon matBadge="1" matBadgePosition="above after" matBadgeColor="accent" style="cursor:pointer" matTooltip="Notifications" (click)="toggleMenuNotifications()">notifications</mat-icon>
     <img mat-icon-button
          [src]="getProfilePicture(currentUser.email)"
          class="icon-profile"
          [matMenuTriggerFor]="profile">
 </mat-toolbar>
+
+<app-notifications [@slideInOut]="menuNotificationsState"></app-notifications>

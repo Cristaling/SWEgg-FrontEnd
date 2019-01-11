@@ -8,13 +8,28 @@ import {FormControl} from '@angular/forms';
 import {UserProfileService} from '../../user-profile/user-profile.service';
 import {JsonUser} from '../../../shared/models/JsonUser';
 import {urls} from '../../../shared/config/urls';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
     selector: 'app-topnav',
     templateUrl: './topnav.component.html',
-    styleUrls: ['./topnav.component.scss']
+    styleUrls: ['./topnav.component.scss'],
+    animations: [
+        trigger('slideInOut', [
+            state('in', style({
+                transform: 'translate3d(0, 0, 0)'
+            })),
+            state('out', style({
+                transform: 'translate3d(100%, 0, 0)'
+            })),
+            transition('in => out', animate('400ms ease-in-out')),
+            transition('out => in', animate('400ms ease-in-out'))
+        ]),
+    ]
 })
 export class TopnavComponent implements OnInit {
+    menuNotificationsState: string = 'out';
+
     pushRightClass = 'push-right';
     currentUser: JsonUser;
 
@@ -60,5 +75,9 @@ export class TopnavComponent implements OnInit {
 
     getProfilePicture(email) {
         return `${urls.profilePictureUrl}?email=${email}&token=${this.authService.getToken()}`;
+    }
+    toggleMenuNotifications() {
+        // 1-line if statement that toggles the value:
+        this.menuNotificationsState = this.menuNotificationsState === 'out' ? 'in' : 'out';
     }
 }
