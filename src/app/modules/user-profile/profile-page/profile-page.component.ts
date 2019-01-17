@@ -22,6 +22,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     @Input() userEmail: string;
     user: JsonUserData;
     profilePicture: any;
+    showDialogInvite = false;
+
 
     constructor(private authService: AuthService,
         private profileService: ProfileService,
@@ -71,5 +73,13 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.navigateToOtherComponent.next();
         this.navigateToOtherComponent.complete();
+    }
+
+    openInviteToJobDialog() {
+        this.showDialogInvite = true;
+    }
+
+    closeInviteDialog() {
+        this.showDialogInvite = false;
     }
 }

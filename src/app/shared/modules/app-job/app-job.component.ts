@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { JsonJobSummary } from '../../models/JsonJobSummary';
-import { MatDialog, MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material';
+import {MatDialog, MatDialogConfig, MatListOption, MatSelectionList, MatSelectionListChange} from '@angular/material';
 // import {JsonJob} from '../../models/JsonJob';
 // import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 // import {JsonJob} from '../../../shared/models/JsonJob';
@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
 import { JsonJobApplicationAddRequest } from '../../models/JsonJobApplicationAddRequest';
 import { NotificationsService } from '../../services/notifications.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import {InvitePeopleJobComponent} from '../invite-people-job/invite-people-job.component';
 
 @Component({
     selector: 'app-app-job',
@@ -30,14 +31,19 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     @ViewChild('jobModal') jobModal;
+    @ViewChild('invitePeople') inviteModal;
     @Input() job: JsonJobSummary;
     @Input() visible = true;
-
+    userInviteList: JsonUserData[] = []
     selectedJob: JsonJob;
     applicationsJob: JsonUser[];
     currentUserApplicated = true;
     currentUser: JsonUser;
+    invitedUsers = [];
     allAplicants: any[] = [];
+    dialogRefInvite: any;
+    showDialogInvite: boolean = false;
+
 
     constructor(private dialogBox: MatDialog,
         private jobService: AppJobsService,
@@ -45,7 +51,8 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         private authService: AuthService,
         private router: Router,
         private notificationService: NotificationsService,
-        private activatedRoute: ActivatedRoute) {
+        private activatedRoute: ActivatedRoute,
+                ) {
     }
 
     ngOnInit() {
@@ -161,5 +168,17 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         }, error1 => {
             this.notificationService.showPopupMessage('An error occurred !', 'OK');
         });
+    }
+
+    openInviteDialog() {
+        this.showDialogInvite = true;
+    }
+
+    removeJob() {
+
+    }
+
+    closeInviteDialog() {
+        this.showDialogInvite = false;
     }
 }

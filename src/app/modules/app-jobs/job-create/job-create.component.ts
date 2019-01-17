@@ -6,7 +6,8 @@ import {takeUntil} from 'rxjs/operators';
 import {NotificationsService} from '../../../shared/services/notifications.service';
 import {JobType} from '../../../shared/models/JobType';
 import {AppJobsService} from '../app-jobs.service';
-import {MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {InvitePeopleJobComponent} from '../../../shared/modules/invite-people-job/invite-people-job.component';
 
 @Component({
     selector: 'app-job-create',
@@ -14,19 +15,21 @@ import {MatDialogRef} from '@angular/material';
     styleUrls: ['./job-create.component.scss']
 })
 export class JobCreateComponent implements OnInit, OnDestroy {
-
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
     jobCreateForm: FormGroup;
     jobTypeSelected: JobType;
-
+    dialogRefInvite: any;
     jobTypes: JobType[];
     selectedAbilities: string[] = [];
+    invitedUsers = [];
+    showInviteModal = false;
 
     constructor(
         private router: Router,
         private appJobsService: AppJobsService,
         private activatedRoute: ActivatedRoute,
         private notificationService: NotificationsService,
+        private dialogInvite: MatDialog,
         private dialogRef: MatDialogRef<JobCreateComponent>
     ) {
     }
@@ -68,8 +71,13 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             values.jobDescription,
             this.selectedAbilities)
             .pipe(takeUntil(this.navigateToOtherComponent)).subscribe(response => {
+                console.log(response);
             if (jobStatus === 'INVITED') {
-                this.notificationService.showPopupMessage('Not implemented!', 'OK');
+                // this.notificationService.showPopupMessage('Not implemented!', 'OK');
+                for (const user of this.invitedUsers) {
+                    this.appJobsService.inviteToJob(response, user.email).subscribe(response2 => {
+                    });
+                }
             } else {
                 this.notificationService.showPopupMessage('Your job was saved successfully !', 'OK');
                 this.router.navigate(['..'], {relativeTo: this.activatedRoute});
@@ -84,5 +92,15 @@ export class JobCreateComponent implements OnInit, OnDestroy {
                 this.router.navigate(['..'], {relativeTo: this.activatedRoute});
             }
         });
+    }
+
+
+    invitePeople() {
+        this.showInviteModal = true;
+    }
+
+    closeInviteDialog() {
+        this.showInviteModal = false;
+        console.log(this.invitedUsers);
     }
 }
