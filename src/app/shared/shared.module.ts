@@ -10,7 +10,7 @@ import {
     MatTabsModule, MatToolbarModule,
     MatTooltipModule,
     MatChipsModule,
-    MatAutocompleteModule, MatExpansionModule, MatBadgeModule, MatSelectModule
+    MatAutocompleteModule, MatExpansionModule, MatBadgeModule, MatSelectModule, MatCheckboxModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -23,6 +23,8 @@ import {LightboxModule} from 'ngx-lightbox';
 import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.component';
 import { UserCardComponent } from '../modules/dashboard/components/recommendations-tab/user-card/user-card.component';
 import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {JobCreateComponent} from '../modules/app-jobs/job-create/job-create.component';
 
 @NgModule({
     imports: [
@@ -55,7 +57,8 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         SocialLoginModule,
         // AppJobModule,
         MatSelectModule,
-        LightboxModule
+        LightboxModule,
+        MatCheckboxModule
     ],
     exports: [
         CommonModule,
@@ -90,9 +93,11 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         MatSelectModule,
         LightboxModule,
         InvitePeopleJobComponent,
-        InviteOnJobComponent
+        InviteOnJobComponent,
+        JobCreateComponent,
+        MatCheckboxModule
     ],
-    declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent], entryComponents:[InviteOnJobComponent],
+    declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent, ConfirmDialogComponent, JobCreateComponent, ConfirmDialogComponent], entryComponents:[InviteOnJobComponent],
     providers: [
         {
             provide: AuthServiceConfig,

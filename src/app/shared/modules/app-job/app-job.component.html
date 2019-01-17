@@ -4,10 +4,27 @@
              [src]="getProfilePicture(job.ownerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
             (click)="goToProfile(job.ownerEmail)">
         <mat-card-title style="text-align: center;">{{displayTitle(job.title)}}</mat-card-title>
-        <mat-card-subtitle style="font-size: 13px;text-align: justify;">{{displayDescription(job.description)}}
-        </mat-card-subtitle>
+        <mat-card-subtitle style="font-size: 13px;text-align: justify;">{{displayDescription(job.description)}}</mat-card-subtitle>
+        <div fxFlex></div>
+        <div *ngIf="job?.jobStatus === 'OPEN'" style="position:absolute;right:5%;top:5%;display: table;">
+            <mat-icon>event_available</mat-icon>
+            <span class="ml5" style="color: green; text-align: center;display: table-cell;vertical-align: middle;">OPEN</span>
+        </div>
+        <div *ngIf="job?.jobStatus === 'DONE'" style="position:absolute;right:5%;top:5%;display: table;">
+            <mat-icon>done</mat-icon>
+            <span class="ml5" style="color: red; text-align: center;display: table-cell;vertical-align: middle;">DONE</span>
+        </div>
+        <div *ngIf="job?.jobStatus === 'ACCEPTED'" style="position:absolute;right:5%;top:5%;display: table;">
+            <mat-icon>done_all</mat-icon>
+            <span class="ml5" style="color: darkgreen; text-align: center;display: table-cell;vertical-align: middle;">ACCEPTED</span>
+        </div>
     </mat-card-header>
 </mat-card>
+<mat-menu #statuses="matMenu">
+    <button *ngFor="let status of jobStatuses" mat-menu-item (click)="changeStatusOfJob(status)">
+        <span>{{status}}</span>
+    </button>
+</mat-menu>
 
 <ng-template #jobModal>
     <mat-card>
@@ -17,12 +34,25 @@
             <mat-card-title>
                 <h3 class="m-0">{{selectedJob?.title}}</h3>
             </mat-card-title>
-            <mat-card-subtitle style="font-size: 13px;">by {{job?.ownerName}}</mat-card-subtitle>
+            <mat-card-subtitle style="font-size: 13px;">
+                <span>by {{job?.ownerName}}</span>
+                <button (click)="editJob(selectedJob)" mat-icon-button style="margin-left: 5px"><mat-icon>create</mat-icon></button>
+            </mat-card-subtitle>
             <div fxFlex></div>
-            <div *ngIf="selectedJob?.jobStatus === 'OPEN'" style="display: table;">
-                <mat-icon>event_available</mat-icon>
-                <span class="ml5" style="color: green; text-align: center;display: table-cell;vertical-align: middle;">OPEN</span>
-            </div>
+            <button [disabled]="selectedJob.ownerEmail !== currentUser.email" style="cursor:pointer;height:2%;" class="mat-button" [matMenuTriggerFor]="statuses">
+                <div *ngIf="selectedJob?.jobStatus === 'OPEN'" style="display: table;">
+                    <mat-icon>event_available</mat-icon>
+                    <span class="ml5" style="color: green; text-align: center;display: table-cell;vertical-align: middle;">OPEN</span>
+                </div>
+                <div *ngIf="selectedJob?.jobStatus === 'DONE'" style="display: table;">
+                    <mat-icon>done</mat-icon>
+                    <span class="ml5" style="color: red; text-align: center;display: table-cell;vertical-align: middle;">DONE</span>
+                </div>
+                <div *ngIf="selectedJob?.jobStatus === 'ACCEPTED'" style="display: table;">
+                    <mat-icon>done_all</mat-icon>
+                    <span class="ml5" style="color: darkgreen; text-align: center;display: table-cell;vertical-align: middle;">ACCEPTED</span>
+                </div>
+            </button>
         </mat-card-header>
         <mat-accordion>
             <mat-expansion-panel *ngIf="currentUser.email === selectedJob.ownerEmail">

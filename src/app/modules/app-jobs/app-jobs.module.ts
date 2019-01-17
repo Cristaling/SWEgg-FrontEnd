@@ -26,7 +26,6 @@ import {InvitePeopleJobComponent} from '../../shared/modules/invite-people-job/i
     ],
     declarations: [
         AppJobsComponent,
-        JobCreateComponent
     ],
     providers: [
         AppJobsService
