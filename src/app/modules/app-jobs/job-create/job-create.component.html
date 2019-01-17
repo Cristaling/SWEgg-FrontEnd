@@ -15,7 +15,7 @@
         </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div class="mb10" fxFlexFill>
-                <label>Job title<b class="text-danger">*</b></label>
+                <label>Job title<b class="text-danger">* Minimum length of 5 characters</b></label>
                 <input class="form-control" formControlName="jobTitle">
                 <small class="text-danger"
                        *ngIf="jobCreateForm.controls['jobTitle'].touched && jobCreateForm.controls['jobTitle'].hasError('required')">
