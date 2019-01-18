@@ -39,10 +39,21 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
-        this.reviewsService.getUserReviews(this.userEmail).pipe(takeUntil(this.navigateToOtherComponent))
-            .subscribe(reviews => {
-            this.reviews.push(...reviews);
+        this.notificationService.viewUserProfile.subscribe(data=> {
+            this.reviews = [];
+            this.reviewsService.getUserReviews(data).pipe(takeUntil(this.navigateToOtherComponent))
+                .subscribe(reviews => {
+                    this.reviews.push(...reviews);
+                });
         });
+        this.notificationService.changeProfilePage.subscribe(data => {
+            this.reviews = [];
+            this.reviewsService.getUserReviews(this.userEmail).pipe(takeUntil(this.navigateToOtherComponent))
+                .subscribe(reviews => {
+                    this.reviews.push(...reviews);
+                });
+        })
+
     }
 
     getProfilePicture(email: string) {

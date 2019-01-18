@@ -33,5 +33,6 @@ export const urls = {
     recommandationUser: [baseEndpoint, 'recommend'].join('/'),
 
     changeStatusJob: [baseEndpoint, 'job', 'update-status'].join('/'),
-    getJobStatuses: [baseEndpoint, 'job', 'statuses'].join('/')
+    getJobStatuses: [baseEndpoint, 'job', 'statuses'].join('/'),
+    selectJobForEmployee: [baseEndpoint, 'job', 'select-employee'].join('/')
 };

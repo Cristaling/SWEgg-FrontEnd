@@ -17,7 +17,7 @@ export class AppJobsService {
             .subscribe(response => {
                 this.jobStatuses = response;
                 this.notificationService.jobStatusesModified.next();
-            }) 
+            })
     }
 
     /**
@@ -105,7 +105,7 @@ export class AppJobsService {
     }
 
     selectEmployeeForJob(jobUUID: string, employeeEmail: string) {
-        return this.httpClient.patch(urls.jobUrl, { jobUUID, email: employeeEmail });
+        return this.httpClient.patch(urls.selectJobForEmployee, { jobUUID, email: employeeEmail });
     }
 
     public getOpenJobsForOwnerHttp(email: string): Observable<any> {
