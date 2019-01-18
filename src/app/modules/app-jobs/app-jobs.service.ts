@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AppJobsService {
 
+    jobStatuses: Array<string>;
+
     constructor(private httpClient: HttpClient) {
     }
 
@@ -105,4 +107,28 @@ export class AppJobsService {
         return this.httpClient.get(urls.getOwnerJobSummaries, { params: params });
     }
 
+    public getJobStatuses(): Observable<any> {
+        return this.httpClient.get(urls.getJobStatuses);
+    }
+
+    public changeJobStatus(uuidJob: string, status: string): Observable<any> {
+        return this.httpClient.patch(urls.changeStatusJob, {jobId: uuidJob, jobStatus: status});
+    }
+
+    public editJob(uuid: string, title: string, description: string): Observable<any> {
+
+        const jobEditRequest: JsonJob = {
+            'title': title,
+            'description': description,
+        };
+        return this.httpClient.patch(`${urls.jobUrl}/${uuid}`, jobEditRequest);
+    }
+
+    public setJobStatuses(jobStatuses: Array<string>) {
+        this.jobStatuses = jobStatuses;
+    }
+
+    public getJobStatusesField() {
+        return this.jobStatuses;
+    }
 }

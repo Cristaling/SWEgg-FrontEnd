@@ -26,9 +26,12 @@ export const urls = {
 
     jobApplication: ['api', 'job-application'].join('/'),
     applicationsByJob: ['api', 'job-application', 'getByJob'].join('/'),
-
     verifyUser: [baseEndpoint, 'security', 'verify'].join('/'),
+
     userReviews: [baseEndpoint, 'review'].join('/'),
 
-    recommandationUser: [baseEndpoint, 'recommend'].join('/')
+    recommandationUser: [baseEndpoint, 'recommend'].join('/'),
+
+    changeStatusJob: [baseEndpoint, 'job', 'update-status'].join('/'),
+    getJobStatuses: [baseEndpoint, 'job', 'statuses'].join('/')
 };
