@@ -64,5 +64,7 @@
     "filter":"Filtrează",
     "abilities":"Abilități",
     "changePassword":"Schimbare parolă",
-    "filterByTitle":"Filtrează după titlu"
+    "filterByTitle":"Filtrează după titlu",
+    "viewProfile":"Vizualizeaza profil",
+    "editProfile":"Editeaza profil"
 }

@@ -57,6 +57,8 @@ export class SearchUserComponent implements OnInit, OnDestroy {
 
     goToProfile(email: string) {
         this.router.navigate([`/user-profile/${email}`]);
+        this.notificationService.viewUserProfile.next();
+
     }
 
     handleClickUser(user) {

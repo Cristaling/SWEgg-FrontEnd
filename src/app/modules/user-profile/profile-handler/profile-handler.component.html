@@ -4,10 +4,10 @@
         <mat-tab-group>
 
             <mat-tab label="{{'profile' | translate }}">
-                <div *ngIf="currentUser.email === profileEmail" >
+                <div *ngIf="editMode" >
                     <app-profile-edit-page></app-profile-edit-page>
                 </div>
-                <div *ngIf="currentUser.email !== profileEmail" >
+                <div *ngIf="!editMode">
                     <app-profile-page [userEmail]="profileEmail"></app-profile-page>
                 </div>
             </mat-tab>

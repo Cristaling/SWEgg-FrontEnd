@@ -64,5 +64,7 @@
     "filter":"Filter",
     "abilities":"Abilities",
     "changePassword":"Change password",
-    "filterByTitle":"Filter by title"
+    "filterByTitle":"Filter by title",
+    "viewProfile":"View profile",
+    "editProfile":"Edit profile"
 }
