@@ -5,8 +5,8 @@
         <div fxLayout="column">
             <img src="{{profilePicture}}" class="user-photo" (click)="openProfileImage(user.email)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">
             <div fxLayout="row" >
-                <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend</button>
-                <button mat-raised-button color="primary" class="recommend-button" (click)="openInviteToJobDialog()">Invite for job</button>
+                <button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">{{'recommend' | translate}}</button>
+                <button mat-raised-button color="primary" class="recommend-button" (click)="openInviteToJobDialog()">{{'inviteForJob' | translate}}</button>
             </div>
 
         </div>
@@ -24,12 +24,12 @@
                 {{user.email}}
             </span>
 
-            <label class="mt10">Birth Day</label>
+            <label class="mt10">{{'birthDay' | translate }}</label>
             <span>
                 {{user.birthDate | date:'dd-MM-yyyy'}}
             </span>
 
-            <label class="mt10">Town</label>
+            <label class="mt10">{{'town' | translate}}</label>
             <span>
                 {{user.town}}
             </span>
@@ -45,7 +45,7 @@
 </div>
 
 <ng-template #recommendUser>
-    <h4>Recommend user {{user.firstName + ' ' + user.lastName}} to:</h4>
+    <h4>{{'recommendUser' | translate}} {{user.firstName + ' ' + user.lastName}} {{'to' | translate }}:</h4>
     <mat-divider style="margin-bottom: 3em"></mat-divider>
     <app-search-user [userToRecommend]="user"></app-search-user>
 </ng-template>

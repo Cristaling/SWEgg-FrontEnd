@@ -1,8 +1,8 @@
 <ng-template #inviteModal>
     <div class="dialog">
-        <h2 mat-dialog-title>Invite people for your job</h2>
+        <h2 mat-dialog-title>{{'invitePeopleForYourJob' | translate }}</h2>
         <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{'filter' | translate}}">
         </mat-form-field>
         <mat-selection-list [ngModel]="selectedUsers" (ngModelChange)="onNgModelChange($event)" >
             <mat-list-option *ngFor="let user of filteredUsers"
@@ -21,11 +21,11 @@
             <div fxFlex fxLayoutAlign="center">
                 <button *ngIf="showInvite" mat-button (click)="inviteJob()">
                     <mat-icon class="nav-icon">send</mat-icon>
-                    Invite
+                    {{'invite' | translate}}
                 </button>
                 <button mat-button (click)="closeDialog()">
                     <mat-icon class="nav-icon">cancel</mat-icon>
-                    Close
+                    {{'close' | translate}}
                 </button>
             </div>
         </mat-card-actions>

@@ -11,20 +11,20 @@
     </div>
     <div class="app-user-controls">
         <div [matMenuTriggerFor]="settings"><mat-icon class="icon-control mat-icon mr20" role="img">settings</mat-icon></div>
-        <div (click)="goToUserProfile()"><mat-icon class="icon-control mat-icon mr20" role="img" matTooltip="Profile">person</mat-icon></div>
-        <div (click)="onLoggedout()"><mat-icon class="icon-control mat-icon mr20" role="img" matTooltip="Logout">logout</mat-icon></div>
+        <div (click)="goToUserProfile()"><mat-icon class="icon-control mat-icon mr20" role="img" matTooltip="{{'profile' | translate}}">person</mat-icon></div>
+        <div (click)="onLoggedout()"><mat-icon class="icon-control mat-icon mr20" role="img" matTooltip="{{'logout' | translate}}">logout</mat-icon></div>
     </div>
     <mat-divider style="margin-bottom: 15px;"></mat-divider>
-    <span class="title-nav text-muted">Main Items</span>
+    <span class="title-nav text-muted">{{'menu' | translate}}</span>
     <mat-nav-list>
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/dashboard']">
             <mat-icon class="sidenav-icon">dashboard</mat-icon>
-            {{ 'Dashboard' | translate }}
+            {{ 'dashboard' | translate }}
         </a>
 
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/jobs']">
             <mat-icon class="sidenav-icon">work</mat-icon>
-            Jobs
+            {{'jobs' | translate}}
         </a>
     </mat-nav-list>
 </div>
@@ -32,10 +32,10 @@
 <mat-menu #settings="matMenu">
     <button mat-menu-item (click)="goToUserProfile()">
         <mat-icon>person</mat-icon>
-        <span>{{ 'Profile' | translate }}</span>
+        <span>{{ 'profile' | translate }}</span>
     </button>
     <button mat-menu-item (click)="onLoggedout()">
         <mat-icon>exit_to_app</mat-icon>
-        <span>{{ 'Logout' | translate }}</span>
+        <span>{{ 'logout' | translate }}</span>
     </button>
 </mat-menu>

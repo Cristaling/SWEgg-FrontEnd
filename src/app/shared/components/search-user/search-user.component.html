@@ -3,7 +3,7 @@
         <mat-form-field class="search-input">
             <input
                 matInput
-                placeholder="Search user"
+                placeholder="{{'searchUser' | translate}}"
                 type="text"
                 [matAutocomplete]="auto"
                 [formControl]="searchedUserCtrl"
@@ -13,12 +13,12 @@
                 <mat-option *ngFor="let user of filteredUsers" [value]="user.firstName + ' ' + user.lastName" (click)="handleClickUser(user)">
                     <img class="search-user-img" aria-hidden [src]="authService.getProfilePicture(user.email)" height="25">
                     <span style="margin-left:1em;font-size: 14px">{{user.firstName + ' ' + user.lastName}}</span>
-                    <small *ngIf="user.town" class="text-muted"> | <span style="font-size: 10px">Town: {{user.town}}</span></small>
+                    <small *ngIf="user.town" class="text-muted"> | <span style="font-size: 10px">{{'town' | translate}}: {{user.town}}</span></small>
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
         <div (click)="searchForUsers()">
-            <mat-icon matTooltip="Search" class="search-input-button" >search</mat-icon>
+            <mat-icon matTooltip="{{'search' | translate}}" class="search-input-button" >search</mat-icon>
         </div>
     </form>
 
@@ -37,7 +37,7 @@
         </mat-card>
         <div fxFlex fxLayoutAlign="end" class="mt20 mb20" (click)="sendRecommandation()">
             <button *ngIf="recommandationReceivers.length !== 0" mat-raised-button color="primary">
-                Submit
+                {{'save' | translate}}
             </button>
         </div>
     </div>

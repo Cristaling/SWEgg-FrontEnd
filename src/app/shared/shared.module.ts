@@ -23,6 +23,7 @@ import {LightboxModule} from 'ngx-lightbox';
 import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.component';
 import { UserCardComponent } from '../modules/dashboard/components/recommendations-tab/user-card/user-card.component';
 import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         SocialLoginModule,
         // AppJobModule,
         MatSelectModule,
-        LightboxModule
+        LightboxModule,
+        TranslateModule
     ],
     exports: [
         CommonModule,
@@ -90,7 +92,8 @@ import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-peopl
         MatSelectModule,
         LightboxModule,
         InvitePeopleJobComponent,
-        InviteOnJobComponent
+        InviteOnJobComponent,
+        TranslateModule
     ],
     declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent], entryComponents:[InviteOnJobComponent],
     providers: [

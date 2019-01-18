@@ -22,7 +22,7 @@ import {InvitePeopleJobComponent} from '../../shared/modules/invite-people-job/i
         MatDialogModule,
         MatInputModule,
         MatFormFieldModule,
-        MatSelectModule,
+        MatSelectModule
     ],
     declarations: [
         AppJobsComponent,
