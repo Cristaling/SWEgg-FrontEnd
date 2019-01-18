@@ -16,15 +16,19 @@ export const urls = {
     endorsementsUrl: [baseEndpoint, 'ability', 'endorsements'].join('/'),
     jobUrl: ['api', 'job'].join('/'),
     getJobSummaries: ['api', 'job', 'summaries'].join('/'),
+    getOwnerJobSummaries: ['api', 'job', 'own'].join('/'),
     getUserRelatedJobSummaries: ['api', 'job', 'related'].join('/'),
+    getUserRelevantJobSummaries: ['api', 'job', 'top'].join('/'),
     getApplicationsForJob: ['api', 'job-application', 'getByJob'].join('/'),
+    inviteOnJob: ['api', 'job-invite'].join('/'),
+    jobsInvites: ['api', 'job-invite'].join('/'),
 
 
     jobApplication: ['api', 'job-application'].join('/'),
     applicationsByJob: ['api', 'job-application', 'getByJob'].join('/'),
 
     verifyUser: [baseEndpoint, 'security', 'verify'].join('/'),
-    recommandationUser: [baseEndpoint, 'user', 'recommend'].join('/'),
+    userReviews: [baseEndpoint, 'review'].join('/'),
 
-    userReviews: [baseEndpoint, 'review'].join('/')
+    recommandationUser: [baseEndpoint, 'recommend'].join('/')
 };

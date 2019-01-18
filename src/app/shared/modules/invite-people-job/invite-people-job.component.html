@@ -1,0 +1,34 @@
+<ng-template #inviteModal>
+    <div class="dialog">
+        <h2 mat-dialog-title>{{'invitePeopleForYourJob' | translate }}</h2>
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{'filter' | translate}}">
+        </mat-form-field>
+        <mat-selection-list [ngModel]="selectedUsers" (ngModelChange)="onNgModelChange($event)" >
+            <mat-list-option *ngFor="let user of filteredUsers"
+                             [value]="user">
+                <div style="display:flex">
+                    <img class="img-circle"
+                         [src]="getProfilePicture(user.email)"
+                         (click)="goToProfile(user.email)"
+                         style="margin-right: 5em;width:20px;height:20px;">
+                    <span>{{user.firstName}} {{user.lastName}}</span>
+                </div>
+            </mat-list-option>
+        </mat-selection-list>
+
+        <mat-card-actions>
+            <div fxFlex fxLayoutAlign="center">
+                <button *ngIf="showInvite" mat-button (click)="inviteJob()">
+                    <mat-icon class="nav-icon">send</mat-icon>
+                    {{'invite' | translate}}
+                </button>
+                <button mat-button (click)="closeDialog()">
+                    <mat-icon class="nav-icon">cancel</mat-icon>
+                    {{'close' | translate}}
+                </button>
+            </div>
+        </mat-card-actions>
+    </div>
+</ng-template>
+

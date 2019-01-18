@@ -10,6 +10,7 @@ import {MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/mate
 import {MatSelectModule} from '@angular/material/select';
 import {AppJobsService} from './app-jobs.service';
 import {AppJobModule} from '../../shared/modules/app-job/app-job/app-job.module';
+import {InvitePeopleJobComponent} from '../../shared/modules/invite-people-job/invite-people-job.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,7 @@ import {AppJobModule} from '../../shared/modules/app-job/app-job/app-job.module'
         MatDialogModule,
         MatInputModule,
         MatFormFieldModule,
-        MatSelectModule,
+        MatSelectModule
     ],
     declarations: [
         AppJobsComponent,
@@ -30,7 +31,7 @@ import {AppJobModule} from '../../shared/modules/app-job/app-job/app-job.module'
     providers: [
         AppJobsService
     ],
-    entryComponents: [JobCreateComponent],
+    entryComponents: [JobCreateComponent, InvitePeopleJobComponent],
 })
 export class AppJobsModule {
 }

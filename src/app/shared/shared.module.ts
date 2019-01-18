@@ -14,14 +14,18 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {AppJobComponent} from './modules/app-job/app-job.component';
-import {AppJobModule} from './modules/app-job/app-job/app-job.module';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { AbilitySelectorComponent } from './components/ability-selector/ability-selector.component';
 import { AbilitySelectorService } from './services/ability-selector.service';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
 import { SearchUserComponent } from './components/search-user/search-user.component';
 import {LightboxModule} from 'ngx-lightbox';
+import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.component';
+import { UserCardComponent } from '../modules/dashboard/components/recommendations-tab/user-card/user-card.component';
+import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
+import { TranslateModule } from '@ngx-translate/core';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {rxStompConfig} from './config/rx-stomp.config';
 
 @NgModule({
     imports: [
@@ -54,7 +58,8 @@ import {LightboxModule} from 'ngx-lightbox';
         SocialLoginModule,
         // AppJobModule,
         MatSelectModule,
-        LightboxModule
+        LightboxModule,
+        TranslateModule
     ],
     exports: [
         CommonModule,
@@ -87,15 +92,28 @@ import {LightboxModule} from 'ngx-lightbox';
         SocialLoginModule,
         MatChipsModule,
         MatSelectModule,
-        LightboxModule
+        LightboxModule,
+        InvitePeopleJobComponent,
+        InviteOnJobComponent,
+        TranslateModule
     ],
-    declarations: [AbilitySelectorComponent, SearchUserComponent],
+    declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent], entryComponents:[InviteOnJobComponent],
     providers: [
         {
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
         },
-        AbilitySelectorService, MatNativeDateModule]
+        {
+            provide: InjectableRxStompConfig,
+            useValue: rxStompConfig
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+            deps: [InjectableRxStompConfig]
+        },
+        AbilitySelectorService, MatNativeDateModule],
+
 })
 export class SharedModule {
 

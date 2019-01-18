@@ -1,0 +1,36 @@
+<mat-card style="margin-bottom: 30px" class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title><h4><strong>{{'myJobs' | translate}}</strong></h4></mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content [ngClass]="emptyAllJobs? 'mat-card-empty':'mat-card-with-elem'">
+        <div *ngIf="!finishedAllJobs">
+            <mat-spinner style="width: 50%; margin:0 auto;"></mat-spinner>
+        </div>
+        <div class="mt30" fxLayout="row wrap" style="margin-top: 20px">
+            <div fxFlex="20em" style="margin-bottom: 20px;margin-left:30px" *ngFor="let job of allJobs">
+                <app-app-job [job]="job"></app-app-job>
+            </div>
+            <div *ngIf="emptyAllJobs">{{'noJobs' | translate}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card style="margin-bottom: 30px" class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title><h4><strong>{{'relevantJobs' | translate }}</strong></h4></mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content [ngClass]="emptyRelevantJobs? 'mat-card-empty':'mat-card-with-elem'">
+        <div *ngIf="!finishedRelevantJobs">
+            <mat-spinner style="width: 50%; margin:0 auto;"></mat-spinner>
+        </div>
+        <div class="mt30" fxLayout="row wrap" style="margin-top: 20px">
+            <div fxFlex="20em" style="margin-bottom: 20px;margin-left:30px" *ngFor="let job of relevantJobs">
+                <app-app-job [job]="job"></app-app-job>
+            </div>
+            <div *ngIf="emptyRelevantJobs">{{'noJobs' | translate}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<app-app-job [visible]=false></app-app-job>

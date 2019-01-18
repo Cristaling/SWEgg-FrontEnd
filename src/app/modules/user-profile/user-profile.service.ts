@@ -43,8 +43,8 @@ export class UserProfileService {
 
     sendRecommandation(email: string, receiversEmail: string[]) {
         const recommandation: JsonUserRecommandation = {
-            recommendedUserEmail: email,
-            recommendedToEmail: receiversEmail
+            recommendedEmail: email,
+            receiver: receiversEmail
         };
         return this.httpClient.post(urls.recommandationUser, recommandation);
     }

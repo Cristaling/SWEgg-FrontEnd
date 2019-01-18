@@ -2,10 +2,10 @@ export interface JsonUserRecommandation {
     /**
      *
      */
-    recommendedUserEmail?: string;
+    recommendedEmail?: string;
 
     /**
      *
      */
-    recommendedToEmail?: string[];
+    receiver?: string[];
 }

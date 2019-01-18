@@ -17,7 +17,7 @@
             <mat-card-title>
                 <h3 class="m-0">{{selectedJob?.title}}</h3>
             </mat-card-title>
-            <mat-card-subtitle style="font-size: 13px;">by {{job?.ownerName}}</mat-card-subtitle>
+            <mat-card-subtitle style="font-size: 13px;">{{'by' | translate}} {{job?.ownerName}}</mat-card-subtitle>
             <div fxFlex></div>
             <div *ngIf="selectedJob?.jobStatus === 'OPEN'" style="display: table;">
                 <mat-icon>event_available</mat-icon>
@@ -28,7 +28,7 @@
             <mat-expansion-panel *ngIf="currentUser.email === selectedJob.ownerEmail">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        People who applied for this job
+                        {{'peopleWhoAppliedForThisJob' | translate}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-selection-list #userSelection (selectionChange)="onSelectedUserForJob($event)">
@@ -45,7 +45,7 @@
                     </mat-list-option>
                 </mat-selection-list>
                 <button mat-button (click)="submitApplicant(userSelection)">
-                    Select for your job
+                    {{'selectForYourJob' | translate}}
                 </button>
             </mat-expansion-panel>
         </mat-accordion>
@@ -56,13 +56,26 @@
             <div fxFlex fxLayoutAlign="center">
                 <button *ngIf="currentUser.email !== job.ownerEmail && !currentUserApplicated" mat-button (click)="applyJob()">
                     <mat-icon class="nav-icon">send</mat-icon>
-                    Apply
+                    {{'apply' | translate}}
                 </button>
+                <button *ngIf="currentUser.email === job.ownerEmail" mat-button (click)="removeJob()">
+                    <mat-icon class="nav-icon">delete_forever</mat-icon>
+                    {{'delete' | translate}}
+                </button>
+
                 <button mat-button (click)="closeDialog()">
                     <mat-icon class="nav-icon">cancel</mat-icon>
-                    Close
+                    {{'close' | translate}}
                 </button>
+                <button *ngIf="currentUser.email === job.ownerEmail"  mat-button (click)="openInviteDialog()">
+                    <mat-icon>add</mat-icon>
+                    {{'invite' | translate}}
+                </button>
+
             </div>
         </mat-card-actions>
     </mat-card>
 </ng-template>
+    <app-invite-people-job *ngIf ="showDialogInvite" (close)="closeInviteDialog()"  [showInvite]="true" [selectedUsers]="invitedUsers" [jobUUID]="selectedJob.uuid" >
+    </app-invite-people-job>
+

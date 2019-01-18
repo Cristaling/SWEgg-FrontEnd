@@ -1,5 +1,5 @@
 <div class="dialog">
-    <h2 mat-dialog-title>Create a Job</h2>
+    <h2 mat-dialog-title>{{'createJob' | translate}}</h2>
     <form class="job-create-form" [formGroup]="jobCreateForm" (ngSubmit)="onJobCreate()">
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill>
@@ -15,30 +15,38 @@
         </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div class="mb10" fxFlexFill>
-                <label>Job title<b class="text-danger">*</b></label>
+                <label>{{'jobTitle' | translate}}<b class="text-danger">*</b></label>
                 <input class="form-control" formControlName="jobTitle">
                 <small class="text-danger"
                        *ngIf="jobCreateForm.controls['jobTitle'].touched && jobCreateForm.controls['jobTitle'].hasError('required')">
-                    Title
-                    is required !
+                    {{'requiredTitle' | translate}}
                 </small>
             </div>
         </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div class="mb10" fxFlexFill>
-                <label>Job description<b class="text-danger">* Minimum length of 5 characters</b></label>
+                <label>{{'jobDescription' | translate}}<b class="text-danger">{{'jobDescriptionWarning' | translate}}</b></label>
                 <textarea class="form-control" rows="5" formControlName="jobDescription"  minlength="5"></textarea>
                 <small class="text-danger"
                        *ngIf="jobCreateForm.controls['jobDescription'].touched && jobCreateForm.controls['jobDescription'].hasError('required')">
-                    Description
-                    is required !
+                    {{'requiredDescription' | translate}}
                 </small>
             </div>
         </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill class="mb10">
                 <mat-checkbox formControlName="isPrivate"></mat-checkbox>
-                <label style="margin-left: 10px;">Private</label>
+                <label style="margin-left: 10px;">{{'private' | translate}}</label>
+            </div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayout.lt-md="column" *ngIf="jobCreateForm.controls['isPrivate'].value">
+            <div class="mb2">
+                <div style="color: red">{{'jobPrivateWarning' | translate }}</div>
+            </div>
+            <div class="mb10">
+                <button mat-raised-button color="primary" type="button" (click)="invitePeople()">
+                    {{'jobInvite' | translate }}
+                </button>
             </div>
         </div>
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
@@ -49,9 +57,10 @@
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill>
                 <button mat-raised-button color="primary" type="submit" [disabled]="!jobCreateForm.valid">
-                    Submit
+                    {{'save' | translate}}
                 </button>
             </div>
         </div>
     </form>
 </div>
+<app-invite-people-job *ngIf="showInviteModal" [selectedUsers]="invitedUsers" [showInvite]="false" (close)="closeInviteDialog()"></app-invite-people-job>

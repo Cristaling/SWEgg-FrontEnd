@@ -59,6 +59,13 @@ export class AppJobsService {
         return this.httpClient.get(urls.getUserRelatedJobSummaries, { params: params });
     }
 
+
+    public getInvitedJobs(): Observable<any> {
+        return this.httpClient.get(urls.jobsInvites );
+    }
+    public getRelevantUserJobsHttp(): Observable<any> {
+        return this.httpClient.get(urls.getUserRelevantJobSummaries);
+    }
     getJobTypesHttp(): Observable<any> {
         return this.httpClient.get(urls.jobTypesUrl);
     }
@@ -76,6 +83,14 @@ export class AppJobsService {
         return this.httpClient.post(urls.jobApplication, uuidRequest);
     }
 
+    inviteToJob(jobUUID: string , email: string): Observable<any> {
+        const inviteRequest = {
+            jobUUID: jobUUID,
+            email: email
+        };
+        return this.httpClient.post(urls.inviteOnJob, inviteRequest);
+    }
+
     getApplicationsForJob(uuid: string): Observable<any> {
         return this.httpClient.get(`${urls.applicationsByJob}/${uuid}`);
     }
@@ -83,4 +98,11 @@ export class AppJobsService {
     selectEmployeeForJob(jobUUID: string, employeeEmail: string) {
         return this.httpClient.patch(urls.jobUrl, { jobUUID, email: employeeEmail });
     }
+
+    public getOpenJobsForOwnerHttp(email: string): Observable<any> {
+        const params = new HttpParams().set('email', email);
+
+        return this.httpClient.get(urls.getOwnerJobSummaries, { params: params });
+    }
+
 }
