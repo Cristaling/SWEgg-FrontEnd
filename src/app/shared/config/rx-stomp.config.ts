@@ -1,7 +1,8 @@
 import {InjectableRxStompConfig} from '@stomp/ng2-stompjs';
+import { environment } from 'src/environments/environment';
 
 export const rxStompConfig: InjectableRxStompConfig = {
-    brokerURL: 'ws://localhost:8080/la-negru-websocket/websocket',
+    brokerURL: `ws://${environment.host}/la-negru-websocket/websocket`,
     heartbeatIncoming: 0,
     heartbeatOutgoing: 20000,
     reconnectDelay: 200,
