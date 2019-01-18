@@ -2,6 +2,9 @@
 <div style="height:100%">
     <div class="notifications-header mat-bg-primary">
         <h4>{{'notifications' | translate}}</h4>
+        <button mat-icon-button style="position:absolute; right: 0; margin-top: 15px" matTooltip="{{'markAsRead' | translate }}" (click)="markAllAsRead()">
+            <mat-icon>done</mat-icon>
+        </button>
         <button mat-icon-button style="position:absolute; right: 0; top: 0" (click)="hideNotifications()">
             <mat-icon>close</mat-icon>
         </button>

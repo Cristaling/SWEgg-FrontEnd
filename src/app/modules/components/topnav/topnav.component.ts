@@ -36,7 +36,9 @@ export class TopnavComponent implements OnInit {
     pushRightClass = 'push-right';
     currentUser: JsonUser;
     notifications = [];
-    unreadCount = 0;
+    unreadCount = {
+        value: 0
+    };
 
     constructor(public router: Router,
         private translate: TranslateService,
@@ -61,12 +63,18 @@ export class TopnavComponent implements OnInit {
         this.socketService.subscribeSecured('/notifications').pipe(takeUntil(this.navigateToOtherComponent))
             .subscribe(message => {
                 const body: any = JSON.parse(message.body);
-                this.notifications.splice(0, 0, { text: body.text });
-                this.unreadCount++;
+                this.notifications.splice(0, 0, body);
+                this.unreadCount.value++;
             });
         this.notificationService.toggleNotifications.subscribe(response => {
             this.toggleMenuNotifications();
         });
+        this.notificationService.getUnreadNotification().pipe(takeUntil(this.navigateToOtherComponent))
+            .subscribe(response => {
+                console.log(response);
+                this.notifications.push(...response)
+                this.unreadCount.value = response.length;
+            })
     }
 
     isToggled(): boolean {

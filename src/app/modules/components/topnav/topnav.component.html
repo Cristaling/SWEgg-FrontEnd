@@ -22,7 +22,7 @@
          class="icon-profile"
          (click)="changeLang('en')"
          >
-    <mat-icon matBadge="{{unreadCount}}" matBadgePosition="above after" matBadgeColor="accent" style="cursor:pointer" matTooltip="Notifications" (click)="toggleMenuNotifications()">notifications</mat-icon>
+    <mat-icon matBadge="{{unreadCount.value}}" matBadgePosition="above after" matBadgeColor="accent" style="cursor:pointer" matTooltip="Notifications" (click)="toggleMenuNotifications()">notifications</mat-icon>
 </mat-toolbar>
 
-<app-notifications  [@slideInOut]="menuNotificationsState" [notifications]="notifications"></app-notifications>
+<app-notifications  [@slideInOut]="menuNotificationsState" [unreadCount]="unreadCount" [notifications]="notifications"></app-notifications>

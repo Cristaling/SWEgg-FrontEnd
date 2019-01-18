@@ -67,8 +67,9 @@
     "filterByTitle":"Filtrează după titlu",
     "latestReviews":"Ultimele recenzii",
     "leaveReview":"Lasă un comentariu la recenzie(opțional)",
-    "viewProfile":"Vizualizeaza profil",
-    "editProfile":"Editeaza profil,",
-    "noReviews":"Nu exista recenzii !",
-    "latest5Reviews": "Ultimele 5 Recenzii"
+    "viewProfile":"Vizualizează profil",
+    "editProfile":"Editează profil,",
+    "noReviews":"Nu există recenzii !",
+    "latest5Reviews": "Ultimele 5 recenzii",
+    "markAsRead":"Marchează ca citite"
 }

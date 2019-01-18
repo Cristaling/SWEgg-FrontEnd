@@ -35,5 +35,7 @@ export const urls = {
 
     changeStatusJob: [baseEndpoint, 'job', 'update-status'].join('/'),
     getJobStatuses: [baseEndpoint, 'job', 'statuses'].join('/'),
-    selectJobForEmployee: [baseEndpoint, 'job', 'select-employee'].join('/')
+    selectJobForEmployee: [baseEndpoint, 'job', 'select-employee'].join('/'),
+    getUnreadNotificationsUrl: [baseEndpoint, 'notification', 'unread'].join('/'),
+    markAsReadUrl: [baseEndpoint, 'notification', 'read'].join('/')
 };
