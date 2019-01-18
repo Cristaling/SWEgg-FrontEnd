@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "http://localhost:8080",
+        "target": "http://lanegru-env.w4kifm5ieu.us-east-2.elasticbeanstalk.com",
         "secure": false,
         "logLevel": "debug"
     }
