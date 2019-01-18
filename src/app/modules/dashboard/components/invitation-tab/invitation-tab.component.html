@@ -1,6 +1,6 @@
 <mat-card style="margin-bottom: 30px" class="mat-elevation-z8">
     <mat-card-header>
-        <mat-card-title><h4><strong>Jobs you've been invited to</strong></h4></mat-card-title>
+        <mat-card-title><h4><strong>{{'invitedJobs' | translate }}</strong></h4></mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content [ngClass]="emptyInvitedJobs? 'mat-card-empty':'mat-card-with-elem'">
@@ -11,7 +11,7 @@
             <div fxFlex="20em" style="margin-bottom: 20px;margin-left:30px" *ngFor="let job of invitedJobs">
                 <app-app-job [job]="job"></app-app-job>
             </div>
-            <div *ngIf="emptyInvitedJobs">No invitation for jobs</div>
+            <div *ngIf="emptyInvitedJobs">{{'noInviteForJob' | translate}}</div>
         </div>
     </mat-card-content>
 </mat-card>

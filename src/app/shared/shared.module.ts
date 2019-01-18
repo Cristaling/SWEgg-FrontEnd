@@ -25,6 +25,9 @@ import { UserCardComponent } from '../modules/dashboard/components/recommendatio
 import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {JobCreateComponent} from '../modules/app-jobs/job-create/job-create.component';
+import { TranslateModule } from '@ngx-translate/core';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {rxStompConfig} from './config/rx-stomp.config';
 
 @NgModule({
     imports: [
@@ -58,6 +61,7 @@ import {JobCreateComponent} from '../modules/app-jobs/job-create/job-create.comp
         // AppJobModule,
         MatSelectModule,
         LightboxModule,
+        TranslateModule,
         MatCheckboxModule
     ],
     exports: [
@@ -94,6 +98,8 @@ import {JobCreateComponent} from '../modules/app-jobs/job-create/job-create.comp
         LightboxModule,
         InvitePeopleJobComponent,
         InviteOnJobComponent,
+        TranslateModule,
+        InviteOnJobComponent,
         JobCreateComponent,
         MatCheckboxModule
     ],
@@ -102,6 +108,15 @@ import {JobCreateComponent} from '../modules/app-jobs/job-create/job-create.comp
         {
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
+        },
+        {
+            provide: InjectableRxStompConfig,
+            useValue: rxStompConfig
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+            deps: [InjectableRxStompConfig]
         },
         AbilitySelectorService, MatNativeDateModule],
 

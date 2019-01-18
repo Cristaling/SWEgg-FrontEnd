@@ -3,7 +3,7 @@
     <mat-card-content>
         <mat-tab-group>
 
-            <mat-tab label="Profile">
+            <mat-tab label="{{'profile' | translate }}">
                 <div *ngIf="currentUser.email === profileEmail" >
                     <app-profile-edit-page></app-profile-edit-page>
                 </div>
@@ -12,11 +12,11 @@
                 </div>
             </mat-tab>
 
-            <mat-tab label="Abilities">
+            <mat-tab label="{{'abilities' | translate}}">
                 <app-endorsements [userEmail]="profileEmail"></app-endorsements>
             </mat-tab>
 
-            <mat-tab label="Password" *ngIf="currentUser.email === profileEmail">
+            <mat-tab label="{{'changePassword' | translate }}" *ngIf="currentUser.email === profileEmail">
                 <app-password-edit-page></app-password-edit-page>
             </mat-tab>
 

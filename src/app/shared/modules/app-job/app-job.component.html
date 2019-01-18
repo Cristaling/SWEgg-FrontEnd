@@ -58,7 +58,7 @@
             <mat-expansion-panel *ngIf="currentUser.email === selectedJob.ownerEmail">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        People who applied for this job
+                        {{'peopleWhoAppliedForThisJob' | translate}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-selection-list #userSelection (selectionChange)="onSelectedUserForJob($event)">
@@ -75,7 +75,7 @@
                     </mat-list-option>
                 </mat-selection-list>
                 <button mat-button (click)="submitApplicant(userSelection)">
-                    Select for your job
+                    {{'selectForYourJob' | translate}}
                 </button>
             </mat-expansion-panel>
         </mat-accordion>
@@ -86,20 +86,20 @@
             <div fxFlex fxLayoutAlign="center">
                 <button *ngIf="currentUser.email !== job.ownerEmail && !currentUserApplicated" mat-button (click)="applyJob()">
                     <mat-icon class="nav-icon">send</mat-icon>
-                    Apply
+                    {{'apply' | translate}}
                 </button>
                 <button *ngIf="currentUser.email === job.ownerEmail" mat-button (click)="removeJob()">
                     <mat-icon class="nav-icon">delete_forever</mat-icon>
-                    Delete
+                    {{'delete' | translate}}
                 </button>
 
                 <button mat-button (click)="closeDialog()">
                     <mat-icon class="nav-icon">cancel</mat-icon>
-                    Close
+                    {{'close' | translate}}
                 </button>
                 <button *ngIf="currentUser.email === job.ownerEmail"  mat-button (click)="openInviteDialog()">
                     <mat-icon>add</mat-icon>
-                    Invite
+                    {{'invite' | translate}}
                 </button>
 
             </div>

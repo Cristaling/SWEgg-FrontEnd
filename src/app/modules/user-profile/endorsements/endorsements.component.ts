@@ -6,6 +6,8 @@ import { NotificationsService } from 'src/app/shared/services/notifications.serv
 import {MatExpansionModule} from '@angular/material/expansion';
 import {JsonUserData} from '../../../shared/models/JsonUserData';
 import {AuthService} from '../../../core/authentication/auth.service';
+import {SocketManagerService} from '../../../shared/services/socket-manager.service';
+import {Message} from '@stomp/stompjs';
 
 @Component({
   selector: 'app-endorsements',
@@ -24,7 +26,8 @@ export class EndorsementsComponent implements OnInit {
 
     constructor(private endorsementsService: EndorsementsService,
         private notificationService: NotificationsService,
-        private authService: AuthService) { }
+        private authService: AuthService,
+        private socketService: SocketManagerService) { }
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
@@ -37,6 +40,29 @@ export class EndorsementsComponent implements OnInit {
             .subscribe(response => {
                 this.endorsements = response;
             });
+        this.socketService.subscribeUnsecured(this.userEmail, '/endorsement/add', (message: Message) => {
+            const body: any = JSON.parse(message.body);
+            const ability: string = body.ability;
+            const email: string = body.email;
+            for (const endorsement of this.endorsements) {
+                if (endorsement.ability === ability) {
+                    endorsement.emails.push(email);
+                }
+            }
+        });
+        this.socketService.subscribeUnsecured(this.userEmail, '/endorsement/delete', (message: Message) => {
+            const body: any = JSON.parse(message.body);
+            const ability: string = body.ability;
+            const email: string = body.email;
+            for (const endorsement of this.endorsements) {
+                if (endorsement.ability === ability) {
+                    const index = endorsement.emails.indexOf(email, 0);
+                    if (index > -1) {
+                        endorsement.emails.splice(index, 1);
+                    }
+                }
+            }
+        });
     }
 
     addAbilities() {

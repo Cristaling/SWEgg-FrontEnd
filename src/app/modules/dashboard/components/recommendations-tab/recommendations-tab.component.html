@@ -1,6 +1,6 @@
 <mat-card style="margin-bottom: 30px" class="mat-elevation-z8">
     <mat-card-header>
-        <mat-card-title><h4><strong>Recommendation from users</strong></h4></mat-card-title>
+        <mat-card-title><h4><strong>{{'recommendationsFromUsers' | translate}}</strong></h4></mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content [ngClass]="emptyRecommendedUsers? 'mat-card-empty':'mat-card-with-elem'">
@@ -11,7 +11,7 @@
             <div fxFlex="20em" style="margin-bottom: 20px;margin-left:30px" *ngFor="let user of recommendedUsers">
                 <app-user-card [user]="user"></app-user-card>
             </div>
-            <div *ngIf="emptyRecommendedUsers">No users</div>
+            <div *ngIf="emptyRecommendedUsers">{{'noUsers' | translate}}</div>
         </div>
     </mat-card-content>
 </mat-card>
