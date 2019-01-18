@@ -8,6 +8,7 @@ import {TopnavComponent} from '../components/topnav/topnav.component';
 import {SidebarComponent} from '../components/sidebar/sidebar.component';
 import {SharedModule} from '../../shared/shared.module';
 import {UserProfileService} from '../user-profile/user-profile.service';
+import {NotificationsComponent} from '../components/notifications/notifications.component';
 
 @NgModule({
     imports: [
@@ -16,7 +17,7 @@ import {UserProfileService} from '../user-profile/user-profile.service';
         SharedModule,
         TranslateModule
     ],
-    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent],
+    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, NotificationsComponent],
     providers: [UserProfileService]
 })
 export class LayoutModule {

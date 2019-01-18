@@ -2,26 +2,27 @@
     <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
+    <!--<div class="nav-brand">-->
+        <!--{{ 'applicationName' | translate}}-->
+    <!--</div>-->
     <div class="nav-brand">
-        My application
+        <img src="../../../../assets/images/logo.png" style=" width: auto;
+  max-width: 180px;
+  height: auto;
+  max-height: 100px;">
     </div>
-    <form class="hidden-sm" style="margin-left: 20px; margin-top: 5px; font-size: 16px">
-        <mat-form-field>
-            <input matInput placeholder="Search" type="text">
-        </mat-form-field>
-    </form>
+    <app-search-user [userToRecommend]="null"></app-search-user>
     <span class="nav-spacer"></span>
-
-    <button class="hidden-sm" mat-icon-button matTooltip="Profile" [matMenuTriggerFor]="profile">
-        <mat-icon>account_circle</mat-icon>
-    </button>
-    <mat-menu #profile="matMenu">
-        <button mat-menu-item (click)="goToUserProfile()">
-            <mat-icon>person</mat-icon>
-            <span>{{ 'Profile' | translate }}</span>
-        </button>
-    </mat-menu>
-    <button mat-icon-button matTooltip="Logout" (click)="onLoggedout()">
-        <mat-icon>exit_to_app</mat-icon>
-    </button>
+    <img
+         src="../../../../assets/images/ro.png"
+         class="icon-profile"
+         (click)="changeLang('ro')"
+         >
+    <img src="../../../../assets/images/uk.png"
+         class="icon-profile"
+         (click)="changeLang('en')"
+         >
+    <mat-icon matBadge="{{unreadCount.value}}" matBadgePosition="above after" matBadgeColor="accent" style="cursor:pointer" matTooltip="Notifications" (click)="toggleMenuNotifications()">notifications</mat-icon>
 </mat-toolbar>
+
+<app-notifications  [@slideInOut]="menuNotificationsState" [unreadCount]="unreadCount" [notifications]="notifications"></app-notifications>

@@ -1,0 +1,44 @@
+<div style="position:relative;width:100%;margin-left:20px">
+    <form class="hidden-sm" style="font-size: 14px;position:relative;width:20vw;">
+        <mat-form-field class="search-input">
+            <input
+                matInput
+                placeholder="{{'searchUser' | translate}}"
+                type="text"
+                [matAutocomplete]="auto"
+                [formControl]="searchedUserCtrl"
+                (click)="$event.target.select()"
+                (keyup)="searchForUsers()">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let user of filteredUsers" [value]="user.firstName + ' ' + user.lastName" (click)="handleClickUser(user)">
+                    <img class="search-user-img" aria-hidden [src]="authService.getProfilePicture(user.email)" height="25">
+                    <span style="margin-left:1em;font-size: 14px">{{user.firstName + ' ' + user.lastName}}</span>
+                    <small *ngIf="user.town" class="text-muted"> | <span style="font-size: 10px">{{'town' | translate}}: {{user.town}}</span></small>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <div (click)="searchForUsers()">
+            <mat-icon matTooltip="{{'search' | translate}}" class="search-input-button" >search</mat-icon>
+        </div>
+    </form>
+
+    <div *ngIf="userToRecommend" class="user-recommended">
+        <mat-card *ngFor="let user of recommandationReceivers; let i = index" class="mb-20">
+            <mat-card-header>
+                <img mat-card-avatar
+                     [src]="authService.getProfilePicture(user.email)">
+                <mat-card-title><span  style="font-size: 12px;">{{user.firstName + ' ' + user.lastName}}</span></mat-card-title>
+                <mat-card-subtitle><span  style="font-size: 12px;">{{user.email}}</span></mat-card-subtitle>
+                <div fxFlex></div>
+                <button mat-button (click)="discardUser(i)">
+                    <mat-icon fxFlexAlign="center" >delete</mat-icon>
+                </button>
+            </mat-card-header>
+        </mat-card>
+        <div fxFlex fxLayoutAlign="end" class="mt20 mb20" (click)="sendRecommandation()">
+            <button *ngIf="recommandationReceivers.length !== 0" mat-raised-button color="primary">
+                {{'save' | translate}}
+            </button>
+        </div>
+    </div>
+</div>

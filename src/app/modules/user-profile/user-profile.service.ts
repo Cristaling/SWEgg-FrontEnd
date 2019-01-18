@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {JsonUserData} from '../../shared/models/JsonUserData';
 import {urls} from '../../shared/config/urls';
 import {Observable} from 'rxjs';
+import {JsonUserRecommandation} from '../../shared/models/JsonUserRecommandation';
 
 @Injectable()
 export class UserProfileService {
@@ -33,5 +34,18 @@ export class UserProfileService {
         formData.append('email', email);
 
         return this.httpClient.patch(urls.userUrl, formData, {responseType: 'text'});
+    }
+
+    searchForUser(name): Observable<any> {
+        const params = new HttpParams().set('name', name);
+        return this.httpClient.get(urls.searchUserUrl, {params: params});
+    }
+
+    sendRecommandation(email: string, receiversEmail: string[]) {
+        const recommandation: JsonUserRecommandation = {
+            recommendedEmail: email,
+            receiver: receiversEmail
+        };
+        return this.httpClient.post(urls.recommandationUser, recommandation);
     }
 }

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { JsonJobSummary } from '../../models/JsonJobSummary';
-import { MatDialog, MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material';
+import {MatDialog, MatDialogConfig, MatListOption, MatSelectionList, MatSelectionListChange} from '@angular/material';
 // import {JsonJob} from '../../models/JsonJob';
 // import {AppJobsService} from '../../../modules/app-jobs/app-jobs.service';
 // import {JsonJob} from '../../../shared/models/JsonJob';
@@ -19,6 +19,9 @@ import { Subject } from 'rxjs';
 import { JsonJobApplicationAddRequest } from '../../models/JsonJobApplicationAddRequest';
 import { NotificationsService } from '../../services/notifications.service';
 import { forEach } from '@angular/router/src/utils/collection';
+import {InvitePeopleJobComponent} from '../invite-people-job/invite-people-job.component';
+import {JobCreateComponent} from '../../../modules/app-jobs/job-create/job-create.component';
+import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-app-job',
@@ -30,14 +33,21 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
 
     @ViewChild('jobModal') jobModal;
+    @ViewChild('invitePeople') inviteModal;
     @Input() job: JsonJobSummary;
     @Input() visible = true;
-
+    userInviteList: JsonUserData[] = []
     selectedJob: JsonJob;
     applicationsJob: JsonUser[];
     currentUserApplicated = true;
     currentUser: JsonUser;
+    invitedUsers = [];
     allAplicants: any[] = [];
+    dialogRefInvite: any;
+    showDialogInvite: boolean = false;
+    dialogRef: any;
+    jobStatuses: Array<string>;
+    abilities;
 
     constructor(private dialogBox: MatDialog,
         private jobService: AppJobsService,
@@ -45,7 +55,9 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         private authService: AuthService,
         private router: Router,
         private notificationService: NotificationsService,
-        private activatedRoute: ActivatedRoute) {
+        private activatedRoute: ActivatedRoute,
+                private dialog: MatDialog
+                ) {
     }
 
     ngOnInit() {
@@ -62,13 +74,22 @@ export class AppJobComponent implements OnInit, AfterViewInit {
                                     this.applicationsJob = applications;
                                     this.verifyCurrentUserApplicated();
                                 });
-                            this.dialogBox.open(this.jobModal, {
+                            const dialog = this.dialogBox.open(this.jobModal, {
                                 width: '400px'
                             });
+                            dialog.afterClosed().subscribe(_ => this.closeDialog());
+                        });
+                    this.jobService.getAbilitiesForJob(params.job).pipe(takeUntil(this.navigateToOtherComponent))
+                        .subscribe(response => {
+                            this.abilities = response.map(ability => ability.name);
+                            console.log(this.abilities);
                         });
                 }
             });
         }
+        this.notificationService.jobStatusesModified.subscribe(response => {
+            this.jobStatuses = this.jobService.getJobStatusesField();
+        });
     }
 
     displayDescription(description: string) {
@@ -87,6 +108,11 @@ export class AppJobComponent implements OnInit, AfterViewInit {
 
     onJobClick(job) {
         this.router.navigate(['.'], {relativeTo: this.activatedRoute, queryParams: { job: job.uuid }, queryParamsHandling: 'merge' });
+        this.jobService.getAbilitiesForJob(this.job.uuid).pipe(takeUntil(this.navigateToOtherComponent))
+            .subscribe(response => {
+                this.abilities = response.map(ability => ability.name);
+                console.log(this.abilities);
+            });
         // this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJobSummary) => {
         //     this.selectedJob = jobResponse;
         //     this.jobService.getApplicationsForJob(job.uuid).pipe(
@@ -103,6 +129,25 @@ export class AppJobComponent implements OnInit, AfterViewInit {
 
     }
 
+    editJob(job: JsonJobSummary) {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = job;
+
+        this.dialogRef = this.dialog.open(JobCreateComponent, dialogConfig);
+        this.dialogRef.afterClosed().subscribe(() => {
+            this.refreshCurrentJob();
+        })
+    }
+
+    refreshCurrentJob() {
+        this.jobService.getJobHttp(this.selectedJob.uuid).subscribe((jobResponse: JsonJobSummary) => {
+            this.selectedJob = jobResponse;
+        });
+    }
+
     verifyCurrentUserApplicated() {
         this.currentUserApplicated = this.applicationsJob.find(application => application.email === this.currentUser.email) !== undefined;
     }
@@ -113,7 +158,8 @@ export class AppJobComponent implements OnInit, AfterViewInit {
 
     goToProfile(email: string) {
         this.router.navigate([`/user-profile/${email}`]);
-        this.closeDialog();
+        this.dialogBox.closeAll();
+        // this.closeDialog();
     }
 
     closeDialog() {
@@ -159,5 +205,41 @@ export class AppJobComponent implements OnInit, AfterViewInit {
         }, error1 => {
             this.notificationService.showPopupMessage('An error occurred !', 'OK');
         });
+    }
+
+    openInviteDialog() {
+        this.showDialogInvite = true;
+    }
+
+    removeJob() {
+
+    }
+
+    closeInviteDialog() {
+        this.showDialogInvite = false;
+    }
+
+    changeStatusOfJob(status: string) {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+            title: 'Change status',
+            message: `Are you sure you want to change status to ${status} ?`
+        }
+
+        this.dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
+        this.dialogRef.afterClosed().subscribe(response => {
+            if (response === 'ok') {
+                this.jobService.changeJobStatus(this.selectedJob.uuid, status).pipe(takeUntil(this.navigateToOtherComponent))
+                    .subscribe(responsee => {
+                        this.refreshCurrentJob();
+                        this.notificationService.showPopupMessage('Status was modified successfully !', 'OK');
+                    }, error => {
+                       this.notificationService.showPopupMessage('An error occured !', 'OK');
+                    });
+            }
+        })
     }
 }

@@ -10,16 +10,25 @@ import {
     MatTabsModule, MatToolbarModule,
     MatTooltipModule,
     MatChipsModule,
-    MatAutocompleteModule, MatExpansionModule, MatBadgeModule, MatSelectModule
+    MatAutocompleteModule, MatExpansionModule, MatBadgeModule, MatSelectModule, MatCheckboxModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {AppJobComponent} from './modules/app-job/app-job.component';
-import {AppJobModule} from './modules/app-job/app-job/app-job.module';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { AbilitySelectorComponent } from './components/ability-selector/ability-selector.component';
 import { AbilitySelectorService } from './services/ability-selector.service';
 import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular-6-social-login';
+import { SearchUserComponent } from './components/search-user/search-user.component';
+import {LightboxModule} from 'ngx-lightbox';
+import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.component';
+import { UserCardComponent } from '../modules/dashboard/components/recommendations-tab/user-card/user-card.component';
+import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {JobCreateComponent} from '../modules/app-jobs/job-create/job-create.component';
+import { TranslateModule } from '@ngx-translate/core';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {rxStompConfig} from './config/rx-stomp.config';
+import {RecommendationService} from './services/recommendation.service';
 
 @NgModule({
     imports: [
@@ -51,7 +60,10 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatChipsModule,
         SocialLoginModule,
         // AppJobModule,
-        MatSelectModule
+        MatSelectModule,
+        LightboxModule,
+        TranslateModule,
+        MatCheckboxModule
     ],
     exports: [
         CommonModule,
@@ -75,6 +87,7 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatNativeDateModule,
         FlexLayoutModule,
         AbilitySelectorComponent,
+        SearchUserComponent,
         MatDialogModule,
         InfiniteScrollModule,
         MatProgressSpinnerModule,
@@ -82,15 +95,32 @@ import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule} from 'angular
         MatBadgeModule,
         SocialLoginModule,
         MatChipsModule,
-        MatSelectModule
+        MatSelectModule,
+        LightboxModule,
+        InvitePeopleJobComponent,
+        InviteOnJobComponent,
+        TranslateModule,
+        InviteOnJobComponent,
+        JobCreateComponent,
+        MatCheckboxModule
     ],
-    declarations: [AbilitySelectorComponent],
+    declarations: [AbilitySelectorComponent, SearchUserComponent, InvitePeopleJobComponent, InviteOnJobComponent, ConfirmDialogComponent, JobCreateComponent, ConfirmDialogComponent], entryComponents:[InviteOnJobComponent],
     providers: [
         {
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
         },
-        AbilitySelectorService, MatNativeDateModule]
+        {
+            provide: InjectableRxStompConfig,
+            useValue: rxStompConfig
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+            deps: [InjectableRxStompConfig]
+        },
+        AbilitySelectorService, RecommendationService, MatNativeDateModule],
+
 })
 export class SharedModule {
 

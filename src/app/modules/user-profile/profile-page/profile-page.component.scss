@@ -6,6 +6,7 @@
 
     object-fit: cover;
     object-position: center right;
+    cursor: pointer;
 }
 
 .user-data {
@@ -35,4 +36,12 @@
     font-weight: 150;
     color: rgba(0, 0, 0, .96);
     margin-left: -2px;
+}
+
+.recommend-button {
+    height: 50%;
+    width:50%;
+    display: table;
+    margin:0 auto;
+    margin-left:5px ;
 }

@@ -7,8 +7,9 @@ import {ProfileService} from '../../shared/services/profile.service';
 import {JsonJobSummary} from '../../shared/models/JsonJobSummary';
 import {AppJobsService} from './app-jobs.service';
 import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import {map, startWith, takeUntil} from 'rxjs/operators';
 import {ArrayHelper} from '../../shared/helpers/array-helper';
+import {NotificationsService} from '../../shared/services/notifications.service';
 
 @Component({
   selector: 'app-app-jobs',
@@ -33,7 +34,8 @@ export class AppJobsComponent implements OnInit, OnDestroy {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private dialog: MatDialog,
-        private jobsService: AppJobsService) {
+        private jobsService: AppJobsService,
+        private notificationService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -104,4 +106,5 @@ export class AppJobsComponent implements OnInit, OnDestroy {
         this.allJobs = [];
         this.getJobs();
     }
+
 }

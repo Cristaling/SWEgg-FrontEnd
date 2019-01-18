@@ -1,0 +1,13 @@
+<div>
+    <h3>{{confirmationData.title}}</h3>
+    <mat-divider></mat-divider>
+    <p>{{confirmationData.message}}</p>
+    <div fxFlex fxLayoutAlign="center">
+        <button mat-raised-button color="accent" (click)="confirm()" style="margin-right: 10px">
+            Ok
+        </button>
+        <button mat-raised-button (click)="closeDialog()">
+            Cancel
+        </button>
+    </div>
+</div>

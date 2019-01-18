@@ -1,0 +1,17 @@
+<mat-card style="margin-bottom: 30px" class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title><h4><strong>{{'recommendationsFromUsers' | translate}}</strong></h4></mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content [ngClass]="emptyRecommendedUsers? 'mat-card-empty':'mat-card-with-elem'">
+        <!--<div *ngIf="!finishedInvitedJobs">-->
+            <!--<mat-spinner style="width: 50%; margin:0 auto;"></mat-spinner>-->
+        <!--</div>-->
+        <div class="mt30" fxLayout="row wrap" style="margin-top: 20px">
+            <div fxFlex="20em" style="margin-bottom: 20px;margin-left:30px" *ngFor="let user of recommendedUsers">
+                <app-user-card [user]="user"></app-user-card>
+            </div>
+            <div *ngIf="emptyRecommendedUsers">{{'noUsers' | translate}}</div>
+        </div>
+    </mat-card-content>
+</mat-card>

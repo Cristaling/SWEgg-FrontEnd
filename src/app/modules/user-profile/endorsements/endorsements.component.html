@@ -1,4 +1,4 @@
-<div class="mt20 col-md-12" style="overflow: scroll;height: 70vh">
+<div class="mt20 col-md-12" style="height: 70vh">
     <div fxLayout="column">
         <div *ngIf="userEmail === currentUser.email" fxLayout="row" fxLayoutAlign="space-around center">
             <app-ability-selector
@@ -12,7 +12,7 @@
                 style="height: 50%"
                 [disabled]="abilitiesToAdd.length == 0"
                 (click)="addAbilities()" >
-                Add
+                {{'add' | translate}}
             </button>
         </div>
         <mat-selection-list class="col-md-12">

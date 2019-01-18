@@ -4,11 +4,20 @@ import { JsonJob } from '../../shared/models/JsonJob';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { urls } from '../../shared/config/urls';
 import { Observable } from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {NotificationsService} from '../../shared/services/notifications.service';
 
 @Injectable()
 export class AppJobsService {
 
-    constructor(private httpClient: HttpClient) {
+    jobStatuses: Array<string>;
+
+    constructor(private httpClient: HttpClient, private notificationService: NotificationsService) {
+        this.getJobStatuses()
+            .subscribe(response => {
+                this.jobStatuses = response;
+                this.notificationService.jobStatusesModified.next();
+            })
     }
 
     /**
@@ -59,6 +68,13 @@ export class AppJobsService {
         return this.httpClient.get(urls.getUserRelatedJobSummaries, { params: params });
     }
 
+
+    public getInvitedJobs(): Observable<any> {
+        return this.httpClient.get(urls.jobsInvites );
+    }
+    public getRelevantUserJobsHttp(): Observable<any> {
+        return this.httpClient.get(urls.getUserRelevantJobSummaries);
+    }
     getJobTypesHttp(): Observable<any> {
         return this.httpClient.get(urls.jobTypesUrl);
     }
@@ -76,11 +92,54 @@ export class AppJobsService {
         return this.httpClient.post(urls.jobApplication, uuidRequest);
     }
 
+    inviteToJob(jobUUID: string , email: string): Observable<any> {
+        const inviteRequest = {
+            jobUUID: jobUUID,
+            email: email
+        };
+        return this.httpClient.post(urls.inviteOnJob, inviteRequest);
+    }
+
     getApplicationsForJob(uuid: string): Observable<any> {
         return this.httpClient.get(`${urls.applicationsByJob}/${uuid}`);
     }
 
     selectEmployeeForJob(jobUUID: string, employeeEmail: string) {
-        return this.httpClient.patch(urls.jobUrl, { jobUUID, email: employeeEmail });
+        return this.httpClient.patch(urls.selectJobForEmployee, { jobUUID, email: employeeEmail });
+    }
+
+    public getOpenJobsForOwnerHttp(email: string): Observable<any> {
+        const params = new HttpParams().set('email', email);
+
+        return this.httpClient.get(urls.getOwnerJobSummaries, { params: params });
+    }
+
+    public getJobStatuses(): Observable<any> {
+        return this.httpClient.get(urls.getJobStatuses);
+    }
+
+    public changeJobStatus(uuidJob: string, status: string): Observable<any> {
+        return this.httpClient.patch(urls.changeStatusJob, {jobId: uuidJob, jobStatus: status});
+    }
+
+    public editJob(uuid: string, title: string, description: string): Observable<any> {
+
+        const jobEditRequest: JsonJob = {
+            'title': title,
+            'description': description,
+        };
+        return this.httpClient.patch(`${urls.jobUrl}/${uuid}`, jobEditRequest);
+    }
+
+    public setJobStatuses(jobStatuses: Array<string>) {
+        this.jobStatuses = jobStatuses;
+    }
+
+    public getJobStatusesField() {
+        return this.jobStatuses;
+    }
+
+    getAbilitiesForJob(uuid: string): Observable<any> {
+        return this.httpClient.get(`${urls.jobUrl}/${uuid}/abilities`);
     }
 }

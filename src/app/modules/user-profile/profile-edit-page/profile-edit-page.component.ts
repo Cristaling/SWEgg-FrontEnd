@@ -115,4 +115,7 @@ export class ProfileEditPageComponent implements OnInit, OnDestroy {
         this.navigateToOtherComponent.complete();
     }
 
+    goToViewProfile() {
+        this.notificationService.changeProfilePage.next();
+    }
 }

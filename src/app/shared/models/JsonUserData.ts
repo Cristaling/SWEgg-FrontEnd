@@ -2,6 +2,11 @@ export interface JsonUserData {
     /**
      *
      */
+    uuid?: string;
+
+    /**
+     *
+     */
     email?: string;
 
     /**
