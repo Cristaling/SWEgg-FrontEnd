@@ -2,8 +2,14 @@
     <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
+    <!--<div class="nav-brand">-->
+        <!--{{ 'applicationName' | translate}}-->
+    <!--</div>-->
     <div class="nav-brand">
-        {{ 'applicationName' | translate}}
+        <img src="../../../../assets/images/logo.png" style=" margin-right:80px;width: auto;
+  max-width: 160px;
+  height: auto;
+  max-height: 100px;">
     </div>
     <app-search-user [userToRecommend]="null"></app-search-user>
     <span class="nav-spacer"></span>
