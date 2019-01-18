@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {NotificationsService} from '../../../shared/services/notifications.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { NotificationsService } from '../../../shared/services/notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -7,13 +7,15 @@ import {NotificationsService} from '../../../shared/services/notifications.servi
   styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
-    constructor(private notificationsService: NotificationsService) { }
+  @Input() notifications: any[];
+
+  constructor(private notificationsService: NotificationsService) { }
 
   ngOnInit() {
   }
 
   hideNotifications() {
-        this.notificationsService.toggleNotifications.next();
+    this.notificationsService.toggleNotifications.next();
   }
 
 }

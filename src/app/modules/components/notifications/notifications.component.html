@@ -9,10 +9,9 @@
     
     <div class="notifications-content">
          <mat-list>
-            <mat-list-item class="notification-item">
+            <mat-list-item *ngFor="let notification of notifications" class="notification-item">
                 <mat-icon mat-list-icon>notifications</mat-icon>
-                <h4 mat-line>Example title</h4>
-                <span style="font-size: 10px" mat-line matTooltip="A modification has occured ! Please check for it !">A modification has occured ! Please check for it ! </span>
+                <span style="font-size: 12px" mat-line>{{notification.text}} </span>
             </mat-list-item>
         </mat-list>
     </div>

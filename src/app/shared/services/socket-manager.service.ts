@@ -1,29 +1,24 @@
 import { Injectable } from '@angular/core';
-import {RxStompService} from '@stomp/ng2-stompjs';
-import {Message} from '@stomp/stompjs';
+import { RxStompService } from '@stomp/ng2-stompjs';
+import { Message } from '@stomp/stompjs';
+import { AuthService } from 'src/app/core/authentication/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SocketManagerService {
 
-  constructor(private rxStompService: RxStompService) { }
+    token;
+    constructor(private rxStompService: RxStompService,
+        private authService: AuthService) {
+            this.token = authService.getToken();
+         }
 
-  subscribeUnsecured(email: string, endpoint: string, callback: any) {
-      console.log('Listening on endpoint: /events/' + email + endpoint);
-      this.rxStompService.watch('/events/' + email + endpoint).subscribe((message: Message) => {
-          console.log('/events/' + email + endpoint + ': ' + message.body);
-          callback(message);
-      });
-  }
 
-    subscribeSecured(endpoint: string, callback: any) {
-      // TODO Replace email with token
-      console.log('Listening on endpoint: /events/' + 'email' + endpoint);
-      this.rxStompService.watch('/events/' + 'email' + endpoint).subscribe((message: Message) => {
-            console.log('/events/' + 'email' + endpoint + ': ' + message.body);
-            callback(message);
-        });
+    subscribeSecured(endpoint: string) {
+        // TODO Replace email with token
+        console.log('Listening on endpoint:' + endpoint);
+        return this.rxStompService.watch(`/events/${this.token}${endpoint}`);
     }
 
 }

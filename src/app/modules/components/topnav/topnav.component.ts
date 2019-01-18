@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../core/authentication/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { JsonUserData } from '../../../shared/models/JsonUserData';
 import { FormControl } from '@angular/forms';
 import { UserProfileService } from '../../user-profile/user-profile.service';
@@ -10,6 +10,8 @@ import { JsonUser } from '../../../shared/models/JsonUser';
 import { urls } from '../../../shared/config/urls';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NotificationsService } from '../../../shared/services/notifications.service';
+import { SocketManagerService } from 'src/app/shared/services/socket-manager.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-topnav',
@@ -30,15 +32,18 @@ import { NotificationsService } from '../../../shared/services/notifications.ser
 })
 export class TopnavComponent implements OnInit {
     menuNotificationsState: string = 'out';
-
+    private navigateToOtherComponent: Subject<any> = new Subject();
     pushRightClass = 'push-right';
     currentUser: JsonUser;
+    notifications = [];
+    unreadCount = 0;
 
     constructor(public router: Router,
         private translate: TranslateService,
         public authService: AuthService,
         public userProfileService: UserProfileService,
-        public notificationService: NotificationsService) {
+        public notificationService: NotificationsService,
+        private socketService: SocketManagerService) {
         this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -53,6 +58,12 @@ export class TopnavComponent implements OnInit {
 
     ngOnInit() {
         this.currentUser = this.authService.getCurrentUser();
+        this.socketService.subscribeSecured('/notifications').pipe(takeUntil(this.navigateToOtherComponent))
+            .subscribe(message => {
+                const body: any = JSON.parse(message.body);
+                this.notifications.splice(0, 0, { text: body.text });
+                this.unreadCount++;
+            });
     }
 
     isToggled(): boolean {
