@@ -64,6 +64,9 @@ export class TopnavComponent implements OnInit {
                 this.notifications.splice(0, 0, { text: body.text });
                 this.unreadCount++;
             });
+        this.notificationService.toggleNotifications.subscribe(response => {
+            this.toggleMenuNotifications();
+        });
     }
 
     isToggled(): boolean {
