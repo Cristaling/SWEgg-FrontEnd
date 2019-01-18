@@ -68,5 +68,7 @@
     "latestReviews":"Ultimele recenzii",
     "leaveReview":"Lasă un comentariu la recenzie(opțional)",
     "viewProfile":"Vizualizeaza profil",
-    "editProfile":"Editeaza profil"
+    "editProfile":"Editeaza profil,",
+    "noReviews":"Nu exista recenzii !",
+    "latest5Reviews": "Ultimele 5 Recenzii"
 }

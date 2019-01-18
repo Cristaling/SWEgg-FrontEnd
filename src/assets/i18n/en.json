@@ -68,5 +68,7 @@
     "latestReviews":"Latest reviews",
     "leaveReview":"Leave review comment(optional)",
     "viewProfile":"View profile",
-    "editProfile":"Edit profile"
+    "editProfile":"Edit profile,",
+    "noReviews": "No reviews available !",
+    "latest5Reviews": "Latest 5 Reviews"
 }

@@ -1,5 +1,5 @@
 <div>
-    <span *ngIf="reviews.length === 0">No reviews available !</span>
+    <span *ngIf="reviews.length === 0">{{'noReviews' | translate}}</span>
     <div *ngIf="userEmail !== currentUser.email" style="height: 30vh;">
         <div style="width: 100%; height: 100%">
             <div style="float:right;display: flex">
