@@ -31,6 +31,7 @@ export const urls = {
     userReviews: [baseEndpoint, 'review'].join('/'),
 
     recommandationUser: [baseEndpoint, 'recommend'].join('/'),
+    ussersRecomendedToYou: [baseEndpoint, 'recommend'].join('/'),
 
     changeStatusJob: [baseEndpoint, 'job', 'update-status'].join('/'),
     getJobStatuses: [baseEndpoint, 'job', 'statuses'].join('/'),
