@@ -56,7 +56,7 @@ export class SidebarComponent implements OnInit {
     }
 
     goToUserProfile() {
-        this.router.navigate(['/user-profile']);
+        this.router.navigate([`/user-profile/${this.currentUser.email}`]);
     }
 
     onLoggedout() {

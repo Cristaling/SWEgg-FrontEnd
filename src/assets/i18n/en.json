@@ -66,5 +66,7 @@
     "changePassword":"Change password",
     "filterByTitle":"Filter by title",
     "latestReviews":"Latest reviews",
-    "leaveReview":"Leave review comment(optional)"
+    "leaveReview":"Leave review comment(optional)",
+    "viewProfile":"View profile",
+    "editProfile":"Edit profile"
 }

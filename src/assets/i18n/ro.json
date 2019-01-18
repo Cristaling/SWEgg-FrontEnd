@@ -66,5 +66,7 @@
     "changePassword":"Schimbare parolă",
     "filterByTitle":"Filtrează după titlu",
     "latestReviews":"Ultimele recenzii",
-    "leaveReview":"Lasă un comentariu la recenzie(opțional)"
+    "leaveReview":"Lasă un comentariu la recenzie(opțional)",
+    "viewProfile":"Vizualizeaza profil",
+    "editProfile":"Editeaza profil"
 }

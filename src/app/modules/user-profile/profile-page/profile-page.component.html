@@ -1,5 +1,5 @@
 <div *ngIf="user" class="mt20 col-md-12">
-
+    <button *ngIf="userEmail === currentUser.email" mat-icon-button style="float:right" matTooltip="{{'editProfile' | translate}}" (click)="goToEditProfile()"><mat-icon>create</mat-icon></button>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="25px">
 
         <div fxLayout="column">

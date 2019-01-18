@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../core/authentication/auth.service';
 import { JsonUserData } from 'src/app/shared/models/JsonUserData';
 import { ActivatedRoute } from '@angular/router';
+import {NotificationsService} from '../../../shared/services/notifications.service';
 
 @Component({
   selector: 'app-profile-handler',
@@ -12,12 +13,20 @@ export class ProfileHandlerComponent implements OnInit {
 
     currentUser: JsonUserData;
     profileEmail: string;
+    editMode = false;
 
     constructor(private authService: AuthService,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute,
+                private notificationService: NotificationsService) { }
 
     ngOnInit() {
         this.checkLoggedUser();
+        this.notificationService.changeProfilePage.subscribe(data => {
+            this.editMode = !this.editMode;
+        });
+        this.notificationService.viewUserProfile.subscribe(data => {
+            this.editMode = false;
+        })
     }
 
     checkLoggedUser() {

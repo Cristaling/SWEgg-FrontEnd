@@ -1,4 +1,5 @@
 <div class="mt20 col-md-12">
+    <button  mat-icon-button style="float:right" matTooltip="{{'viewProfile' | translate}}" (click)="goToViewProfile()"><mat-icon>account_circle</mat-icon></button>
     <form [formGroup]="profileForm" (ngSubmit)="onChangeUserData()">
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div fxFlexFill class="">

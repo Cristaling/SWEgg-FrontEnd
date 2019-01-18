@@ -18,17 +18,18 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
     review: Review = new Review();
     currentUser;
-    reviews: ReviewSummary[] = [
-        {
-            uuid: 'a',
-            reviewerEmail: 'squishymaster12@gmail.com',
-            reviewerLastName: 'fodor',
-            reviewerFirstName: 'ciprian',
-            stars: 4,
-            text: 'blanao',
-            dateGiven: new Date()
-        }
-    ];
+    reviews = [];
+    // reviews: ReviewSummary[] = [
+    //     {
+    //         uuid: 'a',
+    //         reviewerEmail: 'squishymaster12@gmail.com',
+    //         reviewerLastName: 'fodor',
+    //         reviewerFirstName: 'ciprian',
+    //         stars: 4,
+    //         text: 'blanao',
+    //         dateGiven: new Date()
+    //     }
+    // ];
 
     constructor(private authService: AuthService,
                 private router: Router,

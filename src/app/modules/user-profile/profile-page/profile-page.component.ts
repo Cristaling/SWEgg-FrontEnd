@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {Lightbox} from 'ngx-lightbox';
+import {NotificationsService} from '../../../shared/services/notifications.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -23,15 +24,17 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     user: JsonUserData;
     profilePicture: any;
     showDialogInvite = false;
-
+    currentUser;
 
     constructor(private authService: AuthService,
         private profileService: ProfileService,
                 private activatedRoute: ActivatedRoute,
                 private dialogBox: MatDialog,
-                private lightBox: Lightbox) { }
+                private lightBox: Lightbox,
+                private notificationService: NotificationsService) { }
 
     ngOnInit() {
+        this.currentUser = this.authService.getCurrentUser();
         this.activatedRoute.params.subscribe(param => {
             this.userEmail = param.email;
             if (this.userEmail) {
@@ -81,5 +84,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
     closeInviteDialog() {
         this.showDialogInvite = false;
+    }
+
+    goToEditProfile() {
+        this.notificationService.changeProfilePage.next();
     }
 }
