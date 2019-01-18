@@ -4,13 +4,20 @@ import { JsonJob } from '../../shared/models/JsonJob';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { urls } from '../../shared/config/urls';
 import { Observable } from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {NotificationsService} from '../../shared/services/notifications.service';
 
 @Injectable()
 export class AppJobsService {
 
     jobStatuses: Array<string>;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private notificationService: NotificationsService) {
+        this.getJobStatuses()
+            .subscribe(response => {
+                this.jobStatuses = response;
+                this.notificationService.jobStatusesModified.next();
+            }) 
     }
 
     /**

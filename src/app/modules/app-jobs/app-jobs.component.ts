@@ -45,7 +45,6 @@ export class AppJobsComponent implements OnInit, OnDestroy {
                 map(value => this._filter(value))
             );
         this.getJobs();
-        this.getJobStatuses();
     }
 
     onCreateJob() {
@@ -108,11 +107,4 @@ export class AppJobsComponent implements OnInit, OnDestroy {
         this.getJobs();
     }
 
-    private getJobStatuses() {
-        this.jobsService.getJobStatuses().pipe(takeUntil(this.navigateToOtherComponent))
-            .subscribe(response => {
-                this.jobsService.setJobStatuses(response);
-                this.notificationService.jobStatusesModified.next();
-            })
-    }
 }
