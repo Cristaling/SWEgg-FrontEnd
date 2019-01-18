@@ -64,5 +64,7 @@
     "filter":"Filtrează",
     "abilities":"Abilități",
     "changePassword":"Schimbare parolă",
-    "filterByTitle":"Filtrează după titlu"
+    "filterByTitle":"Filtrează după titlu",
+    "latestReviews":"Ultimele recenzii",
+    "leaveReview":"Lasă un comentariu la recenzie(opțional)"
 }

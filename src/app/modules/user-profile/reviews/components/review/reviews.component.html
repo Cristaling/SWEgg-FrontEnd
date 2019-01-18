@@ -5,10 +5,10 @@
                 <app-rating [review]="review" [disabled]="false"></app-rating>
             </div>
             <mat-form-field style="width: 100%">
-                <textarea rows="5" [(ngModel)]="review.text" matInput placeholder="Leave review comment(optional)"></textarea>
+                <textarea rows="5" [(ngModel)]="review.text" matInput placeholder="{{'leaveReview' | translate}}"></textarea>
             </mat-form-field>
             <div style="float:right">
-                <button class="btn-primary btn" (click)="addReview()">Save Review</button>
+                <button class="btn-primary btn" (click)="addReview()">{{'save' | translate'}}</button>
             </div>
         </div>
     </div>

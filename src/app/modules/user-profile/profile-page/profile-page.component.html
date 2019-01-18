@@ -42,9 +42,8 @@
         <!--<button mat-raised-button color="primary" class="recommend-button" (click)="openRecommendDialog()">Recommend to others</button>-->
     <!--</div>-->
 
-    <img src="../../../assets/images/tinsel.png" height="50px" width="100%">
 
-    <h3>Latest 5 Reviews</h3>
+    <h3>{{'latestReviews' | translate}}</h3>
     <app-reviews [userEmail]="user.email"></app-reviews>
 </div>
 
