@@ -24,6 +24,8 @@ import { InviteOnJobComponent } from './modules/invite-on-job/invite-on-job.comp
 import { UserCardComponent } from '../modules/dashboard/components/recommendations-tab/user-card/user-card.component';
 import {InvitePeopleJobComponent} from './modules/invite-people-job/invite-people-job.component';
 import { TranslateModule } from '@ngx-translate/core';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {rxStompConfig} from './config/rx-stomp.config';
 
 @NgModule({
     imports: [
@@ -100,6 +102,15 @@ import { TranslateModule } from '@ngx-translate/core';
         {
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
+        },
+        {
+            provide: InjectableRxStompConfig,
+            useValue: rxStompConfig
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+            deps: [InjectableRxStompConfig]
         },
         AbilitySelectorService, MatNativeDateModule],
 
