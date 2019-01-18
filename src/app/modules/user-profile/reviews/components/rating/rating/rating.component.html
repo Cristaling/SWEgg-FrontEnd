@@ -1,0 +1,16 @@
+<fieldset class="rating">
+    <input type="radio" [name]="inputName" value="5" [checked]="review.stars===5" />
+    <label title="Strongly recommend" (click)='onClick(5)'>5 stars</label>
+
+    <input type="radio" [name]="inputName" value="4" [checked]="review.stars===4" />
+    <label title="Fine" (click)='onClick(4)'>4 stars</label>
+
+    <input type="radio" [name]="inputName" value="3" [checked]="review.stars===3" />
+    <label title="Average" (click)='onClick(3)'>3 stars</label>
+
+    <input type="radio" [name]="inputName" value="2" [checked]="review.stars===2" />
+    <label title="Can work with" (click)='onClick(2)'>2 stars</label>
+
+    <input type="radio" [name]="inputName" value="1" [checked]="review.stars===1" />
+    <label title="Would not recommend" (click)='onClick(1)'>1 star</label>
+</fieldset>

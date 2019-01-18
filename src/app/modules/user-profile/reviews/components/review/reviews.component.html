@@ -1,0 +1,32 @@
+<div>
+    <div style="height: 30vh;">
+        <div style="width: 100%; height: 100%">
+            <div style="float:right;display: flex">
+                <app-rating [review]="review" [disabled]="false"></app-rating>
+            </div>
+            <mat-form-field style="width: 100%">
+                <textarea rows="5" [(ngModel)]="review.text" matInput placeholder="Leave review comment(optional)"></textarea>
+            </mat-form-field>
+            <div style="float:right">
+                <button class="btn-primary btn" (click)="addReview()">Save Review</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="float:left;width: 100%">
+        <mat-card *ngFor="let rev of reviews" class="hover-mat-card job-card">
+            <mat-card-header style="overflow:hidden;display: flex;align-items: center;">
+                <img mat-card-avatar [matTooltip]="rev.reviewerFirstName + rev.reviewerLastName" class="header-user-image"
+                    [src]="getProfilePicture(rev.reviewerEmail)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';"
+                    (click)="goToProfile(rev.reviewerEmail)">
+                <mat-card-title style="text-align: center;">
+                    <app-rating [review]='rev' [disabled]="true"></app-rating>
+                </mat-card-title>
+                <mat-card-subtitle style="font-size: 13px;text-align: justify;">{{rev.dateGiven |
+                    date:'dd-MM-yyyy'}} :
+                    {{rev.text}}
+                </mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    </div>
+</div>
