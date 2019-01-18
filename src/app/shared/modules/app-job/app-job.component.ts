@@ -47,6 +47,7 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     showDialogInvite: boolean = false;
     dialogRef: any;
     jobStatuses: Array<string>;
+    abilities;
 
     constructor(private dialogBox: MatDialog,
         private jobService: AppJobsService,
@@ -78,6 +79,11 @@ export class AppJobComponent implements OnInit, AfterViewInit {
                             });
                             dialog.afterClosed().subscribe(_ => this.closeDialog());
                         });
+                    this.jobService.getAbilitiesForJob(params.job).pipe(takeUntil(this.navigateToOtherComponent))
+                        .subscribe(response => {
+                            this.abilities = response.map(ability => ability.name);
+                            console.log(this.abilities);
+                        });
                 }
             });
         }
@@ -102,6 +108,11 @@ export class AppJobComponent implements OnInit, AfterViewInit {
 
     onJobClick(job) {
         this.router.navigate(['.'], {relativeTo: this.activatedRoute, queryParams: { job: job.uuid }, queryParamsHandling: 'merge' });
+        this.jobService.getAbilitiesForJob(this.job.uuid).pipe(takeUntil(this.navigateToOtherComponent))
+            .subscribe(response => {
+                this.abilities = response.map(ability => ability.name);
+                console.log(this.abilities);
+            });
         // this.jobService.getJobHttp(job.uuid).pipe(takeUntil(this.navigateToOtherComponent)).subscribe((jobResponse: JsonJobSummary) => {
         //     this.selectedJob = jobResponse;
         //     this.jobService.getApplicationsForJob(job.uuid).pipe(

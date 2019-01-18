@@ -138,4 +138,8 @@ export class AppJobsService {
     public getJobStatusesField() {
         return this.jobStatuses;
     }
+
+    getAbilitiesForJob(uuid: string): Observable<any> {
+        return this.httpClient.get(`${urls.jobUrl}/${uuid}/abilities`);
+    }
 }
