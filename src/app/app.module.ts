@@ -14,6 +14,8 @@ import {NotificationsService} from './shared/services/notifications.service';
 import {SharedModule} from './shared/shared.module';
 import {JwtInterceptor} from './core/interceptors/JwtInterceptor';
 import {ProfileService} from './shared/services/profile.service';
+import {UserProfileService} from './modules/user-profile/user-profile.service';
+import {EndorsementsService} from './modules/user-profile/endorsements/endorsements.service';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     // for development
