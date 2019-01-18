@@ -4,7 +4,7 @@
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div class="mb10" fxFlexFill>
                 <label>Job title<b class="text-danger">*</b></label>
-                <input class="form-control" formControlName="jobTitle" [value]="job.title">
+                <input class="form-control" formControlName="jobTitle" [value]="job?.title">
                 <small class="text-danger"
                        *ngIf="jobCreateForm.controls['jobTitle'].touched && jobCreateForm.controls['jobTitle'].hasError('required')">
                     {{'requiredTitle' | translate}}
@@ -14,7 +14,7 @@
         <div fxFlex fxLayout="row" fxLayout.lt-md="column">
             <div class="mb10" fxFlexFill>
                 <label>Job description<b class="text-danger">* Minimum length of 5 characters</b></label>
-                <textarea class="form-control" rows="5" formControlName="jobDescription"  minlength="5" [value]="job.description"></textarea>
+                <textarea class="form-control" rows="5" formControlName="jobDescription"  minlength="5" [value]="job?.description"></textarea>
                 <small class="text-danger"
                        *ngIf="jobCreateForm.controls['jobDescription'].touched && jobCreateForm.controls['jobDescription'].hasError('required')">
                     {{'requiredDescription' | translate}}
