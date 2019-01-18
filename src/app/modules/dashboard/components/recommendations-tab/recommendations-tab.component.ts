@@ -4,6 +4,7 @@ import {JsonUserData} from '../../../../shared/models/JsonUserData';
 import {Router} from '@angular/router';
 import {AppJobsService} from '../../../app-jobs/app-jobs.service';
 import {AuthService} from '../../../../core/authentication/auth.service';
+import {RecommendationService} from '../../../../shared/services/recommendation.service';
 
 @Component({
   selector: 'app-recommendations-tab',
@@ -15,12 +16,13 @@ export class RecommendationsTabComponent implements OnInit, OnDestroy {
     private navigateToOtherComponent: Subject<any> = new Subject();  // destroy all subscriptions when component is destroyed
     finishedRecommendedUsers = false;
     emptyRecommendedUsers = false;
-    recommendedUsers: JsonUserData[] = [];
+    recommendedUsers: any[] = [];
     user: JsonUserData;
     constructor(
         private router: Router,
         private jobsService: AppJobsService,
-        private authService: AuthService) {
+        private authService: AuthService,
+        private recommendationService: RecommendationService) {
     }
 
     ngOnInit() {
@@ -37,13 +39,16 @@ export class RecommendationsTabComponent implements OnInit, OnDestroy {
     }
 
     getAllRecommendedUsers() {
+        this.recommendationService.getUsersRecomended().subscribe(response => {
             if (this.recommendedUsers.length === 0 ) {
                 this.finishedRecommendedUsers = true;
             }
-            this.recommendedUsers.push(this.user);
+            this.recommendedUsers = response;
             if (this.recommendedUsers.length === 0) {
                 this.emptyRecommendedUsers = true;
             }
+        });
+
     }
 
 }

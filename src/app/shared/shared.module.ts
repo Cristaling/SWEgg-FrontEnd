@@ -28,6 +28,7 @@ import {JobCreateComponent} from '../modules/app-jobs/job-create/job-create.comp
 import { TranslateModule } from '@ngx-translate/core';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {rxStompConfig} from './config/rx-stomp.config';
+import {RecommendationService} from './services/recommendation.service';
 
 @NgModule({
     imports: [
@@ -118,7 +119,7 @@ import {rxStompConfig} from './config/rx-stomp.config';
             useFactory: rxStompServiceFactory,
             deps: [InjectableRxStompConfig]
         },
-        AbilitySelectorService, MatNativeDateModule],
+        AbilitySelectorService, RecommendationService, MatNativeDateModule],
 
 })
 export class SharedModule {

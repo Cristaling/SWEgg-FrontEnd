@@ -14,7 +14,7 @@ import {JsonJobSummary} from '../../../../../shared/models/JsonJobSummary';
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent implements OnInit {
-    @Input() user: JsonUserData;
+    @Input() user: any;
   constructor(private dialogBox: MatDialog,
               private jobService: AppJobsService,
               private profileService: ProfileService,
@@ -24,6 +24,7 @@ export class UserCardComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+      console.log(this.user);
   }
 
     goToProfile(email: string) {
