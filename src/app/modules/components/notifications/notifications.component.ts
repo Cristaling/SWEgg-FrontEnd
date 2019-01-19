@@ -29,9 +29,9 @@ export class NotificationsComponent implements OnInit {
           if(!notification.read) {
               this.notificationsService.markRead(notification.uuid).pipe(takeUntil(this.navigateToOtherComponent))
                   .subscribe(response => {
-
                   });
-          }
+                  notification.read = true;
+                }
         }
     }
 
