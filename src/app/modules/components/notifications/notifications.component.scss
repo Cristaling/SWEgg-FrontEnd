@@ -10,7 +10,13 @@
     z-index: 9999;
     box-shadow: 20px 20px 50px grey;
 }
+.mat-list {
+    padding: 0!important;
+}
 
+:host /deep/ .mat-list-item-content {
+    padding: 0!important;
+  }
 .notifications-header {
     height:10%;
     display: flex;
@@ -18,7 +24,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
 }
 
 .notifications-content {
@@ -26,11 +32,17 @@
 }
 
 
-.notification-item:hover {
-    background-color: #dddddd;
+.notification-item-read:hover {
+    background-color: rgba(0,0,0,0.1);
 
 }
 
-.notification-item {
+.notification-item-unread {
     cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.notification-item-read {
+    cursor: pointer;
+    background-color:white;
 }

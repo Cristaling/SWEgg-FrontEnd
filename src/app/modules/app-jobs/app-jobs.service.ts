@@ -15,9 +15,9 @@ export class AppJobsService {
     constructor(private httpClient: HttpClient, private notificationService: NotificationsService) {
         this.getJobStatuses()
             .subscribe(response => {
-                this.jobStatuses = response;
+                this.jobStatuses = response.filter(status=> status !== 'DRAFT' && status !== 'INVITED');
                 this.notificationService.jobStatusesModified.next();
-            })
+            });
     }
 
     /**
