@@ -2,7 +2,7 @@
     <div class="dialog">
         <h2 mat-dialog-title>{{'invitePeopleForYourJob' | translate}}</h2>
 
-        <mat-selection-list [(ngModel)]="selectedJobs">
+        <mat-selection-list *ngIf="allJobs.length > 0" [(ngModel)]="selectedJobs">
             <mat-list-option *ngFor="let job of allJobs"
                              [value]="job">
                 <div style="display:flex">
@@ -10,6 +10,8 @@
                 </div>
             </mat-list-option>
         </mat-selection-list>
+
+        <span *ngIf="allJobs.length == 0">{{'noJobs'|translate}}</span>
 
         <mat-card-actions>
             <div fxFlex fxLayoutAlign="center">

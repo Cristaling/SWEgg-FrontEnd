@@ -212,7 +212,7 @@ export class AppJobComponent implements OnInit, AfterViewInit {
     }
 
     removeJob() {
-
+        this.changeStatusOfJob('DRAFT');
     }
 
     closeInviteDialog() {

@@ -1,4 +1,4 @@
-<mat-card class="hover-mat-card job-card" (click)="onUserClick(user.email)">
+<mat-card class="hover-mat-card job-card" (click)="onUserClick(user.recommendedSummary.email)">
     <mat-card-header style="overflow:hidden;display: flex;align-items: center;">
         <img mat-card-avatar [matTooltip]="user.recommendedSummary.firstName+' '+user.recommendedSummary.lastName" class="header-user-image"
              [src]="getProfilePicture(user.recommendedSummary.email)" onerror="this.src='../../../../assets/images/user-default-image.jpeg';">

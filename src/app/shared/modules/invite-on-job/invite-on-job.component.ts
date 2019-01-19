@@ -66,7 +66,7 @@ export class InviteOnJobComponent implements OnInit, OnDestroy {
                         this.notificationService.showPopupMessage('User invited successfull','OK');
                         this.closeDialog();
                     }
-                });
+                }, err => this.notificationService.showPopupMessage('User already invited!', 'OK'));
         }
     }
 

@@ -53,6 +53,10 @@ export class ReviewsComponent implements OnInit, OnDestroy {
                     this.reviews.push(...reviews);
                 });
         })
+        this.reviewsService.getUserReviews(this.userEmail).pipe(takeUntil(this.navigateToOtherComponent))
+                .subscribe(reviews => {
+                    this.reviews.push(...reviews);
+                });
 
     }
 
