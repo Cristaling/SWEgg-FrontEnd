@@ -29,7 +29,8 @@ export class NotificationsComponent implements OnInit {
     this.notificationsService.markRead(notification.uuid).pipe(takeUntil(this.navigateToOtherComponent))
           .subscribe(response => {
             notification.read = true;
-          });    
+            this.unreadCount.value--;
+          });
   }
   markAllAsRead() {
     this.unreadCount.value = 0;
